@@ -13,7 +13,7 @@ This README assumes the use of [Docker](https://www.docker.com/) for installatio
 
 Next, [clone](https://help.github.com/articles/cloning-a-repository/) this repository to the host machine.
 
-Finally, for a smooth workflow, create a link in your path to the `fenics` executable bash script (assuming *nix operating system).
+Finally, for a smooth workflow, from your working directory, create a link in your path to the `fenics` executable bash script (assuming *nix operating system).
 
 ```bash
 ln fenics /usr/local/bin
