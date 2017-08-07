@@ -33,13 +33,13 @@ To verify that everything is installed correctly, run the Poisson equation demo 
 
 If you installed the `fenics` bash script per the instructions above, you can use the following command (working directory: `spin-transport`).
 
-```shell
+```console
 $ fenics ft01_poisson.py
 ```
 
 If everything is working fine, the output should look something like the following.
 
-```shell
+```console
 $ fenics ft01_poisson.py
 Calling DOLFIN just-in-time (JIT) compiler, this may take some time.
 --- Instant: compiling ---
@@ -57,6 +57,9 @@ Calling FFC just-in-time (JIT) compiler, this may take some time.
 error_L2  = 0.00823509807335
 error_max = 1.33226762955e-15
 ```
+
+The directory `spin-transport/poisson` should have been created and should contain two files: `solution.pvd` and `solution000000.vtu`.
+These files contain the solution data.
 
 ## Acknowledgement
 
