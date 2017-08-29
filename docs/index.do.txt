@@ -18,7 +18,13 @@ label{section:installation}
 ======= Short theoretical introduction =======
 label{section:shorttheory}
 
+Here's some code.
 
+!bc pycod
+x = 5
+if x > 3:
+  print('big!')
+!ec
 
 ======= References =======
 

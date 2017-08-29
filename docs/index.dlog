@@ -66,3 +66,15 @@ translating doconce text in index.do.txt to pdflatex
 
 exporting publish database papers.pub to papers.bib:
 output in index.tex
+translating doconce text in index.do.txt to html
+output in index.html
+translating doconce text in index.do.txt to ipynb
+output in index.ipynb
+translating doconce text in index.do.txt to pdflatex
+
+exporting publish database papers.pub to papers.bib:
+output in index.p.tex
+translating doconce text in index.do.txt to pdflatex
+
+exporting publish database papers.pub to papers.bib:
+output in index.tex

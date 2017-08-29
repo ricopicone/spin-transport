@@ -45,6 +45,12 @@ final,                   % draft: marks overfull hboxes, figures with paths
 
 \usepackage[pdftex]{graphicx}
 
+\usepackage{ptex2tex}
+% #ifdef MINTED
+\usepackage{minted}
+\usemintedstyle{default}
+% #endif
+
 \usepackage[T1]{fontenc}
 %\usepackage[latin1]{inputenc}
 \usepackage{ucs}
@@ -178,7 +184,13 @@ The project is open-source and still in development.
 \section{Short theoretical introduction}
 \label{section:shorttheory}
 
+Here's some code.
 
+\bpycod
+x = 5
+if x > 3:
+  print('big!')
+\epycod
 
 
 

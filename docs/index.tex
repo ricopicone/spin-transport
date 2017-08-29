@@ -21,6 +21,109 @@ final,                   % draft: marks overfull hboxes, figures with paths
 
 \usepackage[pdftex]{graphicx}
 
+% Packages for typesetting blocks of computer code
+\usepackage{fancyvrb,framed,moreverb}
+
+% Define colors
+\definecolor{orange}{cmyk}{0,0.4,0.8,0.2}
+\definecolor{tucorange}{rgb}{1.0,0.64,0}
+\definecolor{darkorange}{rgb}{.71,0.21,0.01}
+\definecolor{darkgreen}{rgb}{.12,.54,.11}
+\definecolor{myteal}{rgb}{.26, .44, .56}
+\definecolor{gray}{gray}{0.45}
+\definecolor{mediumgray}{gray}{.8}
+\definecolor{lightgray}{gray}{.95}
+\definecolor{brown}{rgb}{0.54,0.27,0.07}
+\definecolor{purple}{rgb}{0.5,0.0,0.5}
+\definecolor{darkgray}{gray}{0.25}
+\definecolor{darkblue}{rgb}{0,0.08,0.45}
+\definecolor{darkblue2}{rgb}{0,0,0.8}
+\definecolor{lightred}{rgb}{1.0,0.39,0.28}
+\definecolor{lightgreen}{rgb}{0.48,0.99,0.0}
+\definecolor{lightblue}{rgb}{0.53,0.81,0.92}
+\definecolor{lightblue2}{rgb}{0.3,0.3,1.0}
+\definecolor{lightpurple}{rgb}{0.87,0.63,0.87}
+\definecolor{lightcyan}{rgb}{0.5,1.0,0.83}
+
+\colorlet{comment_green}{green!50!black}
+\colorlet{string_red}{red!60!black}
+\colorlet{keyword_pink}{magenta!70!black}
+\colorlet{indendifier_green}{green!70!white}
+
+% Backgrounds for code
+\definecolor{cbg_gray}{rgb}{.95, .95, .95}
+\definecolor{bar_gray}{rgb}{.92, .92, .92}
+
+\definecolor{cbg_yellowgray}{rgb}{.95, .95, .85}
+\definecolor{bar_yellowgray}{rgb}{.95, .95, .65}
+
+\colorlet{cbg_yellow2}{yellow!10}
+\colorlet{bar_yellow2}{yellow!20}
+
+\definecolor{cbg_yellow1}{rgb}{.98, .98, 0.8}
+\definecolor{bar_yellow1}{rgb}{.98, .98, 0.4}
+
+\definecolor{cbg_red1}{rgb}{1, 0.85, 0.85}
+\definecolor{bar_red1}{rgb}{1, 0.75, 0.85}
+
+\definecolor{cbg_blue1}{rgb}{0.87843, 0.95686, 1.0}
+\definecolor{bar_blue1}{rgb}{0.7,     0.95686, 1}
+
+%\setlength{\fboxsep}{-1.5mm}  % adjust cod_vpad/pro_vpad background box
+
+%% Background for code blocks (parameter is color name)
+
+%% pro/cod_vpad: gives some vertical padding before and after the text
+%% (but has more simplistic code than _cod/pro_tight+cod/pro).
+%% pro/cod_vpad can be used to enclose Verbatim or lst begin/end for code.
+%% pro/cod calls _pro/cod_tight and has very little vertical padding,
+%% used to enclose Verbatim and other begin/end for code.
+%% (pro/cod is what the ptex2tex program could produce with the
+%% Blue/BlueBar definitions in .ptex2tex.cfg.)
+
+\newenvironment{cod_vpad}[1]{
+   \def\FrameCommand{\colorbox{#1}}
+   \MakeFramed{\FrameRestore}}
+   {\endMakeFramed}
+
+\newenvironment{_cod_tight}[1]{
+   \def\FrameCommand{\colorbox{#1}}
+   \FrameRule0.6pt\MakeFramed {\FrameRestore}\vskip3mm}
+   {\vskip0mm\endMakeFramed}
+
+\newenvironment{cod}[1]{
+\bgroup\rmfamily
+\fboxsep=0mm\relax
+\begin{_cod_tight}{#1}
+\list{}{\parsep=-2mm\parskip=0mm\topsep=0pt\leftmargin=2mm
+\rightmargin=2\leftmargin\leftmargin=4pt\relax}
+\item\relax}
+{\endlist\end{_cod_tight}\egroup}
+
+%% Background for complete program blocks (parameter 1 is color name
+%% for background, parameter 2 is color for left bar)
+\newenvironment{pro_vpad}[2]{
+   \def\FrameCommand{\color{#2}\vrule width 1mm\normalcolor\colorbox{#1}}
+   \MakeFramed{\FrameRestore}}
+   {\endMakeFramed}
+
+\newenvironment{_pro_tight}[2]{
+   \def\FrameCommand{\color{#2}\vrule width 1mm\normalcolor\colorbox{#1}}
+   \FrameRule0.6pt\MakeFramed {\advance\hsize-2mm\FrameRestore}\vskip3mm}
+   {\vskip0mm\endMakeFramed}
+
+\newenvironment{pro}[2]{
+\bgroup\rmfamily
+\fboxsep=0mm\relax
+\begin{_pro_tight}{#1}{#2}
+\list{}{\parsep=-2mm\parskip=0mm\topsep=0pt\leftmargin=2mm
+\rightmargin=2\leftmargin\leftmargin=4pt\relax}
+\item\relax}
+{\endlist\end{_pro_tight}\egroup}
+
+\usepackage{minted}
+\usemintedstyle{friendly}
+
 \usepackage[T1]{fontenc}
 %\usepackage[latin1]{inputenc}
 \usepackage{ucs}
@@ -203,7 +306,15 @@ The project is open-source and still in development.
 \section{Short theoretical introduction}
 \label{section:shorttheory}
 
+Here's some code.
 
+\begin{cod}{cbg_gray}\begin{minted}[fontsize=\fontsize{9pt}{9pt},linenos=false,mathescape,baselinestretch=1.0,fontfamily=tt,xleftmargin=2mm]{python}
+x = 5
+if x > 3:
+  print('big!')
+\end{minted}
+\end{cod}
+\noindent
 
 
 
