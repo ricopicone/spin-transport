@@ -1,0 +1,25 @@
+TITLE: The *spin-transport* documentation
+AUTHOR: Rico A.R. Picone {copyright|CC BY} Email:rpicone@stmartin.edu at Department of Mechanical Engineering, Saint Martin's University
+DATE: today
+
+__Summary.__
+The *spin-transport* software ("GitHub": "https://github.com/ricopicone/spin-transport") is for the dynamic simulation of bulk spin transport---diffusion and separation---in solid media.
+The project is open-source and still in development.
+
+TOC: on
+
+
+!split
+======= Installation =======
+label{section:installation}
+
+# #include "../README.md"
+
+======= Short theoretical introduction =======
+label{section:shorttheory}
+
+
+
+======= References =======
+
+BIBFILE: papers.pub

@@ -280,7 +280,7 @@ def main():
     Produce various formats from the doconce source.
     """
 
-    dofile = "doc"
+    dofile = "index"
     format = "pdflatex"
 
     # convert bib to publish, blech

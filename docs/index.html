@@ -1,0 +1,265 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="The *spin-transport* documentation">
+
+<title>The *spin-transport* documentation</title>
+
+<!-- Bootstrap style: bootswatch_readable -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+/* Let pre tags for code blocks have the same color as the surroundings */
+pre { color: inherit; background-color: transparent; }
+
+/* Add scrollbar to dropdown menus in bootstrap navigation bar */
+.dropdown-menu {
+   height: auto;
+   max-height: 400px;
+   overflow-x: hidden;
+}
+
+/* Adds an invisible element before each target to offset for the navigation
+   bar */
+.anchor::before {
+  content:"";
+  display:block;
+  height:64px;      /* fixed header height for style bootswatch_readable */
+  margin:-64px 0 0; /* negative fixed header height */
+}
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [('Table of contents',
+               1,
+               'table_of_contents',
+               'table_of_contents'),
+              ('Installation',
+               1,
+               'section:installation',
+               'section:installation'),
+              ('Short theoretical introduction',
+               1,
+               'section:shorttheory',
+               'section:shorttheory'),
+              ('References', 1, None, '___sec2')]}
+end of tocinfo -->
+
+<body>
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="index.html">The *spin-transport* documentation</a>
+  </div>
+
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
+     <!-- navigation toc: --> <li><a href="#section:installation" style="font-size: 80%;"><b>Installation</b></a></li>
+     <!-- navigation toc: --> <li><a href="#section:shorttheory" style="font-size: 80%;"><b>Short theoretical introduction</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec2" style="font-size: 80%;"><b>References</b></a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<!-- ------------------- main content ---------------------- -->
+
+
+
+<div class="jumbotron">
+<center><h1>The <em>spin-transport</em> documentation</h1></center>  <!-- document title -->
+
+<p>
+<!-- author(s): Rico A.R. Picone -->
+
+<center>
+<b>Rico A.R. Picone</b>  (<tt>rpicone at stmartin.edu</tt>)
+</center>
+
+<p>
+<!-- institution -->
+
+<center><b>Department of Mechanical Engineering, Saint Martin's University</b></center>
+<br>
+<p>
+<center><h4>Aug 29, 2017</h4></center> <!-- date -->
+<br>
+<p>
+<b>Summary.</b> The <em>spin-transport</em> software (<a href="https://github.com/ricopicone/spin-transport" target="_self">GitHub</a>) is for the dynamic simulation of bulk spin transport&mdash;diffusion and separation&mdash;in solid media.
+The project is open-source and still in development.
+
+<p>
+</div> <!-- end jumbotron -->
+
+<h1 id="table_of_contents">
+Table of contents</h2>
+
+<p>
+<a href="#section:installation"> Installation </a><br>
+<a href="#section:shorttheory"> Short theoretical introduction </a><br>
+<a href="#___sec2"> References </a><br>
+</p>
+<p>
+<!-- !split -->
+
+<h1 id="section:installation" class="anchor">Installation</h1>
+
+<p>
+<!-- spin-transport -->
+
+<p>
+This repository contains the (developing) open-source code for simulating bulk spin transport&mdash;diffusion and separation&mdash;in solid media. Multi-spin-species and magnetic resonance simulations are in development.
+
+<p>
+This is a [Python](https://www.python.org/) and [FEniCS](https://fenicsproject.org/) project. FEniCS is used to numerically solve the spin transport governing partial differential equations.
+
+<p>
+End users of this project write Python code to interface with FEniCS.
+
+<p>
+One must first have a working installation of FEniCS.
+This README assumes the use of [Docker](https://www.docker.com/) for installation, which is documented [here](http://fenics.readthedocs.io/projects/containers/en/latest/).
+
+<p>
+Then [clone](https://help.github.com/articles/cloning-a-repository/) this repository to the host machine.
+
+<p>
+The FEniCS docs have a section on [workflow](http://fenics.readthedocs.io/projects/containers/en/latest/work_flows.html).
+There are many ways to instantiate these good practices, but if you're using a *nix system, the following may be the easiest.
+
+<p>
+With the cloned <code>spin-transport</code> repository as your working directory, create a link in your path to <b>spin-transport</b>'s <code>fenics</code> executable bash script.
+
+<p>
+```bash
+ln fenics /usr/local/bin
+```
+
+<p>
+Now a FEniCS Python script <code>foo.py</code> can be started with the command <code>fenics foo.py</code> <b>from the host</b> instead of manually starting it from a Docker container.
+This has several advantages, including that there is no need to move scripts into the container and that the complicated syntax need not be remembered.
+
+<p>
+To verify that everything is installed correctly, run the Poisson equation demo <code>ft01_poisson.py</code> ([source](https://fenicsproject.org/pub/tutorial/html/._ftut1004.html)) in your container.
+
+<p>
+If you installed the <code>fenics</code> bash script per the instructions above, you can use the following command (working directory: <code>spin-transport</code>).
+
+<p>
+```console
+$ fenics ft01_poisson.py
+```
+
+<p>
+If everything is working fine, the output should look something like the following.
+
+<p>
+```console
+$ fenics ft01_poisson.py
+Calling DOLFIN just-in-time (JIT) compiler, this may take some time.
+--- Instant: compiling ---
+Calling FFC just-in-time (JIT) compiler, this may take some time.
+Calling FFC just-in-time (JIT) compiler, this may take some time.
+Calling FFC just-in-time (JIT) compiler, this may take some time.
+Solving linear variational problem.
+<em>*</em> Warning: Degree of exact solution may be inadequate for accurate result in errornorm.
+Calling FFC just-in-time (JIT) compiler, this may take some time.
+Calling FFC just-in-time (JIT) compiler, this may take some time.
+  Ignoring precision in integral metadata compiled using quadrature representation. Not implemented.
+Calling FFC just-in-time (JIT) compiler, this may take some time.
+Calling FFC just-in-time (JIT) compiler, this may take some time.
+Calling FFC just-in-time (JIT) compiler, this may take some time.
+error_L2  = 0.00823509807335
+error_max = 1.33226762955e-15
+```
+
+<p>
+The directory <code>spin-transport/poisson</code> should have been created and should contain two files: <code>solution.pvd</code> and <code>solution000000.vtu</code>.
+These files contain the solution data.
+
+<p>
+This work is supported by a grant from the Army Research Office, Materials Science Division under grant proposal <b>Nanoscale Spin Hyperpolarization and Imaging</b> <!-- TODO: grant number -->
+with PI [John Marohn, PhD](http://marohn.chem.cornell.edu/).
+
+<p>
+This project stems from a collaboration among three institutions:
+
+<p>
+
+<dl>
+<dt>%s<dd>
+  [Cornell University](http://www.cornell.edu/), 
+<dt>%s<dd>
+  [Saint Martin's University](https://www.stmartin.edu/), and the
+<dt>%s<dd>
+  [University of Washington](http://www.washington.edu/).
+</dl>
+
+The lead contributor to this project is [Rico Picone, PhD](http://ricopic.one) of Saint Martin's University, co-PI on the ARO grant.
+Other contributors include [John Marohn, PhD](http://marohn.chem.cornell.edu/) (Cornell, PI), John A. Sidles, PhD (Washington), Joseph L. Garbini, PhD (Washington), and Corinne Isaac (Cornell).
+
+<h1 id="section:shorttheory" class="anchor">Short theoretical introduction</h1>
+
+<h1 id="___sec2" class="anchor">References </h1>
+
+<p>
+<!-- begin bibliography -->
+
+<p>
+<!-- end bibliography -->
+
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+<center style="font-size:80%">
+<!-- copyright --> &copy; 2017, Rico A.R. Picone. Released under CC Attribution 4.0 license
+</center>
+
+
+</body>
+</html>
+    
+
