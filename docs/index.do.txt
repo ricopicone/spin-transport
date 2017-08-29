@@ -13,7 +13,7 @@ TOC: on
 ======= Installation =======
 label{section:installation}
 
-# #include "../README.md"
+#include "../README.md"
 
 ======= Short theoretical introduction =======
 label{section:shorttheory}
