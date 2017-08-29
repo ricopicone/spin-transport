@@ -1,0 +1,19 @@
+TITLE: A Title AUTHOR: Rico R. Picone Email:rpicone@ at Department of Mechanical Engineering, Saint Martin's University. DATE: today
+
+Summary.
+
+This is a paragraph with the heading Summary.
+
+
+
+
+A Foo Section 
+
+
+
+
+
+
+
+
+We address making things up where and are maths.
