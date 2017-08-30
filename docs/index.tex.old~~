@@ -280,7 +280,7 @@ final,                   % draft: marks overfull hboxes, figures with paths
 
 % ----------------- end author(s) -------------------------
 
-\date{Aug 29, 2017}
+\date{Aug 30, 2017}
 \maketitle
 
 \begin{abstract}
@@ -301,7 +301,98 @@ The project is open-source and still in development.
 \section{Installation}
 \label{section:installation}
 
-% include "../README.md"
+\section{spin-transport: introduction}
+
+This repository contains the (developing) open-source code for simulating bulk spin transport---diffusion and separation---in solid media. Multi-spin-species and magnetic resonance simulations are in development.
+
+This is a \href{{https://www.python.org/}}{Python} and \href{{https://fenicsproject.org/}}{FEniCS} project. FEniCS is used to numerically solve the spin transport governing partial differential equations.
+
+End users of this project write Python code to interface with FEniCS.
+
+\subsection{Installation}
+
+One must first have a working installation of FEniCS.
+This README assumes the use of \href{{https://www.docker.com/}}{Docker} for installation, which is documented \href{{http://fenics.readthedocs.io/projects/containers/en/latest/}}{here}.
+
+Then \href{{https://help.github.com/articles/cloning-a-repository/}}{clone} this repository to the host machine.
+
+\subsection{Workflow}
+
+The FEniCS docs have a section on \href{{http://fenics.readthedocs.io/projects/containers/en/latest/work_flows.html}}{workflow}.
+There are many ways to instantiate these good practices, but if you're using a \*nix system, the following may be the easiest.
+
+With the cloned \texttt{spin-transport} repository as your working directory, create a link in your path to \textbf{spin-transport}'s \texttt{fenics} executable bash script.
+
+\begin{cod}{cbg_gray}\begin{minted}[fontsize=\fontsize{9pt}{9pt},linenos=false,baselinestretch=1.0,fontfamily=tt,xleftmargin=2mm]{bash}
+ln fenics /usr/local/bin
+\end{minted}
+\end{cod}
+\noindent
+
+Now a FEniCS Python script \texttt{foo.py} can be started with the command \texttt{fenics foo.py} \textbf{from the host} instead of manually starting it from a Docker container.
+This has several advantages, including that there is no need to move scripts into the container and that the complicated syntax need not be remembered.
+
+\subsection{Testing the installation}
+
+To verify that everything is installed correctly, run the Poisson equation demo \Verb!ft01_poisson.py! (\href{{https://fenicsproject.org/pub/tutorial/html/._ftut1004.html}}{source}) in your container.
+
+If you installed the \texttt{fenics} bash script per the instructions above, you can use the following command (working directory: \texttt{spin-transport}).
+
+\begin{cod}{cbg_gray}\begin{minted}[fontsize=\fontsize{9pt}{9pt},linenos=false,baselinestretch=1.0,fontfamily=tt,xleftmargin=2mm]{bash}
+$ fenics ft01_poisson.py
+\end{minted}
+\end{cod}
+\noindent
+
+If everything is working fine, the output should look something like the following.
+
+\begin{cod}{cbg_gray}\begin{minted}[fontsize=\fontsize{9pt}{9pt},linenos=false,baselinestretch=1.0,fontfamily=tt,xleftmargin=2mm]{bash}
+$ fenics ft01_poisson.py
+Calling DOLFIN just-in-time (JIT) compiler, this may take some time.
+--- Instant: compiling ---
+Calling FFC just-in-time (JIT) compiler, this may take some time.
+Calling FFC just-in-time (JIT) compiler, this may take some time.
+Calling FFC just-in-time (JIT) compiler, this may take some time.
+Solving linear variational problem.
+*** Warning: Degree of exact solution may be inadequate for accurate result in errornorm.
+Calling FFC just-in-time (JIT) compiler, this may take some time.
+Calling FFC just-in-time (JIT) compiler, this may take some time.
+  Ignoring precision in integral metadata compiled using quadrature representation. Not implemented.
+Calling FFC just-in-time (JIT) compiler, this may take some time.
+Calling FFC just-in-time (JIT) compiler, this may take some time.
+Calling FFC just-in-time (JIT) compiler, this may take some time.
+error_L2  = 0.00823509807335
+error_max = 1.33226762955e-15
+\end{minted}
+\end{cod}
+\noindent
+
+The directory \texttt{spin-transport/poisson} should have been created and should contain two files: \texttt{solution.pvd} and \texttt{solution000000.vtu}.
+These files contain the solution data.
+
+\subsection{Acknowledgement}
+
+This work is supported by a grant from the Army Research Office, Materials Science Division under grant proposal \textbf{Nanoscale Spin Hyperpolarization and Imaging}
+with PI \href{{http://marohn.chem.cornell.edu/}}{John Marohn, PhD}.
+
+\subsection{Contributors}
+
+This project stems from a collaboration among three institutions:
+
+\begin{description}
+\item[%s]
+  [Cornell University](http://www.cornell.edu/),
+
+\item[%s]
+  [Saint Martin's University](https://www.stmartin.edu/), and the
+
+\item[%s]
+  [University of Washington](http://www.washington.edu/).
+\end{description}
+
+\noindent
+The lead contributor to this project is \href{{http://ricopic.one}}{Rico Picone, PhD} of Saint Martin's University, co-PI on the ARO grant.
+Other contributors include \href{{http://marohn.chem.cornell.edu/}}{John Marohn, PhD} (Cornell, PI), John A. Sidles, PhD (Washington), Joseph L. Garbini, PhD (Washington), and Corinne Isaac (Cornell).
 
 \section{Short theoretical introduction}
 \label{section:shorttheory}
