@@ -10,8 +10,8 @@ TOC: on
 
 
 !split
-======= Installation =======
-label{section:installation}
+# ======= Installation =======
+# label{section:installation}
 
 ======= spin-transport: introduction =======
 
@@ -62,10 +62,12 @@ Calling FFC just-in-time (JIT) compiler, this may take some time.
 Calling FFC just-in-time (JIT) compiler, this may take some time.
 Calling FFC just-in-time (JIT) compiler, this may take some time.
 Solving linear variational problem.
-*** Warning: Degree of exact solution may be inadequate for accurate result in errornorm.
+*** Warning: Degree of exact solution may be inadequate for accurate 
+	result in errornorm.
 Calling FFC just-in-time (JIT) compiler, this may take some time.
 Calling FFC just-in-time (JIT) compiler, this may take some time.
-  Ignoring precision in integral metadata compiled using quadrature representation. Not implemented.
+  Ignoring precision in integral metadata compiled using quadrature 
+  representation. Not implemented.
 Calling FFC just-in-time (JIT) compiler, this may take some time.
 Calling FFC just-in-time (JIT) compiler, this may take some time.
 Calling FFC just-in-time (JIT) compiler, this may take some time.
@@ -85,9 +87,9 @@ with PI "John Marohn, PhD": "http://marohn.chem.cornell.edu/".
 
 This project stems from a collaboration among three institutions:
 
-- [Cornell University](http://www.cornell.edu/),
-- [Saint Martin's University](https://www.stmartin.edu/), and the
-- [University of Washington](http://www.washington.edu/).
+* "Cornell University": "http://www.cornell.edu/",
+* "Saint Martin's University": "https://www.stmartin.edu/", and the
+* "University of Washington": "http://www.washington.edu/".
 
 The lead contributor to this project is "Rico Picone, PhD": "http://ricopic.one" of Saint Martin's University, co-PI on the ARO grant.
 Other contributors include "John Marohn, PhD": "http://marohn.chem.cornell.edu/" (Cornell, PI), John A. Sidles, PhD (Washington), Joseph L. Garbini, PhD (Washington), and Corinne Isaac (Cornell).
@@ -95,13 +97,95 @@ Other contributors include "John Marohn, PhD": "http://marohn.chem.cornell.edu/"
 ======= Short theoretical introduction =======
 label{section:shorttheory}
 
-Here's some code.
+The simulation is based on the two spin-species transport equations presented by Picone cite{Picone2014b}.
+These equations present the transport---diffusion and separation---of three conserved quantities represented by the vector-valued function $\bm{\rho}$ of time and a single spatial dimension, taken to be the direction of a background magnetic field $B$ we call *longitudinal*.
+The three conserved quantities are represented in the ``polarization thermodynamic covector basis'' $e$ by the components cite{Picone2014b}
 
-!bc pycod
-x = 5
-if x > 3:
-  print('big!')
-!ec
+* $\rho_1$: a dimensionless dipole-energy density,
+* $\rho_2$: longitudinal nuclear polarization, and
+* $\rho_3$: longitudinal electron polarization.
+
+Several parameters require definition and are summarized in the following list (note that a ``\textasciitilde{}'' over a function denotes that it is a function of the dimensionless spatial coordinate). 
+See cite{Picone2014b} for details.
+
+* $B_d$: maximum dipole-dipole magnetic field.
+* $\gamma_2$, $\gamma_3$: gyromagnetic ratio for nuclei and electrons, respectively.
+* $\overline{\gamma}$: dimensionless ratio $\gamma_3/\gamma_2$.
+* $\Gamma_2$, $\Gamma_3$: transport coefficients for nuclear and electron polarization, respectively.
+* $\overline{\Gamma}$: dimensionless ratio $\Gamma_3/\Gamma_2$.
+* $\Delta_2$, $\Delta_3$: constant spin densities in solid medium for nuclei and electrons, respectively.
+* $\overline{\Delta}$: dimensionless ratio $\Delta_3/\Delta_2$.
+* $\overline{r}$: dimensionless spatial coordinate $(\partial_r B(r)|_{r=0}/B_d) r$.
+* $\overline{t}$: dimensionless time $\Gamma_2 (\partial_r B(r)|_{r=0}/B_d)^2 t$.
+* $\overline{B}$: ratio of magnetic fields $\partial_{\overline{r}} \tilde{B}/B_d$.
+* $\overline{c}$: ratio of ratios $\overline{B} (1+\overline{\Delta})/(1+\overline{\gamma}\overline{\Delta})$.
+
+__two-species magnetization transport equations.__
+The preferred form of the continuity equation is in the polarization basis with the dimensionless spatial coordinate and time variable, which we call the *two-species magnetization transport equations*:
+
+
+!bt
+\begin{align} 
+	\partial_{\tbar} \rho_1 
+	&=
+	-\frac{\cratio^2}{1+\Deltar}
+	\left(
+		\left(
+			1 - \rho_2^2
+		\right)
+		+
+		\Gammar\Deltar\overline{\gamma}^2
+		\left(
+			1 - \rho_3^3
+		\right)
+	\right)
+	\arctanh\rho_1 + 
+	\nonumber\\
+	&-\frac{\cratio}{1+\Deltar}
+	\left(
+		\partial_{\rbar} \rho_2 - \Gammar\Deltar\overline{\gamma} \partial_{\rbar} \rho_3
+	\right)
+	+ ( 1 + \Gammar )\, \partial_{\overline{r}}^2 \rho_1 \\
+	%
+	\partial_{\tbar} \rho_2 
+	&=
+	\partial_{\rbar}
+	\left(
+		\cratio
+		\left( 1 - \rho_2^2 \right)
+		\arctanh\rho_1
+	\right)
+	+ \partial_{\overline{r}}^2 \rho_2 \\
+	\partial_{\tbar} \rho_3
+	&=
+	- 
+	\Gammar\overline{\gamma}
+	\partial_{\rbar}
+	\left(
+		\cratio
+		\left( 1 - \rho_3^2 \right)
+		\arctanh\rho_1
+	\right)
+	+ \Gammar \partial_{\overline{r}}^2 \rho_3 .
+\end{align}
+!et
+
+Bloch equation dynamics for a each species and $T_1 \gg T_2$ can be approximated without the transverse dynamics as cite{Picone2010}
+
+!bt
+\begin{align}
+	\partial_t \rho_2 &= \frac{\rho_{20}}{T_{1p}} - \frac{\rho_2}{\tau_p} \\
+	\partial_t \rho_3 &= \frac{\rho_{30}}{T_{1e}} - \frac{\rho_3}{\tau_e}.
+\end{align}
+!et
+
+where, for each species,
+
+!bt
+\begin{align}
+	\tau = \frac{1}{\frac{1}{T_1} + \frac{T_2 \omega_1^2}{1+T_2^2 \delta^2}}.
+\end{align}
+!et
 
 ======= References =======
 

@@ -2,13 +2,9 @@
 
 % fonts
 \usepackage[scaled=.92]{helvet}
-%\usepackage[urw-garamond]{mathdesign}
-%\usepackage[osf,sc]{mathpazo}
-\usepackage{palatino}
-\usepackage[T1]{fontenc}
+\usepackage[sc]{mathpazo}
 \usepackage{eucal}  % nice mathcal fonts
 \usepackage[small,euler-digits]{eulervm}
-\usepackage{amsmath,amssymb}
 \usepackage{tensor}
 \usepackage{array} % for better arrays (eg matrices) in maths
 \usepackage{inconsolata} % typewriter
@@ -18,6 +14,7 @@
 \allsectionsfont{\normalfont\sffamily\bfseries}
 % \renewcommand{\abstractnamefont}{\normalfont\sffamily\bfseries}
 \renewcommand{\abstractname}{\normalfont\sffamily\bfseries Abstract}
+\renewcommand{\familydefault}{\rmdefault}
 
 % title style ... this throws weird error
 % \usepackage{titling}
@@ -32,7 +29,7 @@
 % TOC style
 % \renewcommand{\cftsectionfont}{\normalfont\sffamily}
 \let\oldtoc\tableofcontents
-\renewcommand{\tableofcontents}{\sffamily\oldtoc}
+\renewcommand{\tableofcontents}{{\sffamily\oldtoc}}
 
 % headers/footers
 \fancypagestyle{fancy1}{%
@@ -46,3 +43,4 @@
 	\lfoot{}\cfoot{}\rfoot{p~\thepage{}}
 }%
 \pagestyle{fancy2}
+

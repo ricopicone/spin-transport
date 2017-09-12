@@ -204,13 +204,9 @@ final,                   % draft: marks overfull hboxes, figures with paths
 
 % fonts
 \usepackage[scaled=.92]{helvet}
-%\usepackage[urw-garamond]{mathdesign}
-%\usepackage[osf,sc]{mathpazo}
-\usepackage{palatino}
-\usepackage[T1]{fontenc}
+\usepackage[sc]{mathpazo}
 \usepackage{eucal}  % nice mathcal fonts
 \usepackage[small,euler-digits]{eulervm}
-\usepackage{amsmath,amssymb}
 \usepackage{tensor}
 \usepackage{array} % for better arrays (eg matrices) in maths
 \usepackage{inconsolata} % typewriter
@@ -220,6 +216,7 @@ final,                   % draft: marks overfull hboxes, figures with paths
 \allsectionsfont{\normalfont\sffamily\bfseries}
 % \renewcommand{\abstractnamefont}{\normalfont\sffamily\bfseries}
 \renewcommand{\abstractname}{\normalfont\sffamily\bfseries Abstract}
+\renewcommand{\familydefault}{\rmdefault}
 
 % title style ... this throws weird error
 % \usepackage{titling}
@@ -234,7 +231,7 @@ final,                   % draft: marks overfull hboxes, figures with paths
 % TOC style
 % \renewcommand{\cftsectionfont}{\normalfont\sffamily}
 \let\oldtoc\tableofcontents
-\renewcommand{\tableofcontents}{\sffamily\oldtoc}
+\renewcommand{\tableofcontents}{{\sffamily\oldtoc}}
 
 % headers/footers
 \fancypagestyle{fancy1}{%
@@ -248,6 +245,7 @@ final,                   % draft: marks overfull hboxes, figures with paths
 	\lfoot{}\cfoot{}\rfoot{p~\thepage{}}
 }%
 \pagestyle{fancy2}
+
 
 % insert custom LaTeX commands...
 
@@ -265,6 +263,7 @@ final,                   % draft: marks overfull hboxes, figures with paths
 
 \newcommand{\exercisesection}[1]{\subsection*{#1}}
 
+\input{newcommands_keep}
 
 % ------------------- main content ----------------------
 
@@ -280,7 +279,7 @@ final,                   % draft: marks overfull hboxes, figures with paths
 
 % ----------------- end author(s) -------------------------
 
-\date{Aug 30, 2017}
+\date{Sep 12, 2017}
 \maketitle
 
 \begin{abstract}
@@ -298,8 +297,8 @@ The project is open-source and still in development.
 
 
 % !split
-\section{Installation}
-\label{section:installation}
+% ======= Installation =======
+% \label{section:installation}
 
 \section{spin-transport: introduction}
 
@@ -354,10 +353,12 @@ Calling FFC just-in-time (JIT) compiler, this may take some time.
 Calling FFC just-in-time (JIT) compiler, this may take some time.
 Calling FFC just-in-time (JIT) compiler, this may take some time.
 Solving linear variational problem.
-*** Warning: Degree of exact solution may be inadequate for accurate result in errornorm.
+*** Warning: Degree of exact solution may be inadequate for accurate 
+	result in errornorm.
 Calling FFC just-in-time (JIT) compiler, this may take some time.
 Calling FFC just-in-time (JIT) compiler, this may take some time.
-  Ignoring precision in integral metadata compiled using quadrature representation. Not implemented.
+  Ignoring precision in integral metadata compiled using quadrature 
+  representation. Not implemented.
 Calling FFC just-in-time (JIT) compiler, this may take some time.
 Calling FFC just-in-time (JIT) compiler, this may take some time.
 Calling FFC just-in-time (JIT) compiler, this may take some time.
@@ -379,16 +380,13 @@ with PI \href{{http://marohn.chem.cornell.edu/}}{John Marohn, PhD}.
 
 This project stems from a collaboration among three institutions:
 
-\begin{description}
-\item[%s]
-  [Cornell University](http://www.cornell.edu/),
+\begin{itemize}
+\item \href{{http://www.cornell.edu/}}{Cornell University},
 
-\item[%s]
-  [Saint Martin's University](https://www.stmartin.edu/), and the
+\item \href{{https://www.stmartin.edu/}}{Saint Martin's University}, and the
 
-\item[%s]
-  [University of Washington](http://www.washington.edu/).
-\end{description}
+\item \href{{http://www.washington.edu/}}{University of Washington}.
+\end{itemize}
 
 \noindent
 The lead contributor to this project is \href{{http://ricopic.one}}{Rico Picone, PhD} of Saint Martin's University, co-PI on the ARO grant.
@@ -397,15 +395,107 @@ Other contributors include \href{{http://marohn.chem.cornell.edu/}}{John Marohn,
 \section{Short theoretical introduction}
 \label{section:shorttheory}
 
-Here's some code.
+The simulation is based on the two spin-species transport equations presented by Picone \cite{Picone2014b}.
+These equations present the transport---diffusion and separation---of three conserved quantities represented by the vector-valued function $\bm{\rho}$ of time and a single spatial dimension, taken to be the direction of a background magnetic field $B$ we call \emph{longitudinal}.
+The three conserved quantities are represented in the ``polarization thermodynamic covector basis'' $e$ by the components \cite{Picone2014b}
 
-\begin{cod}{cbg_gray}\begin{minted}[fontsize=\fontsize{9pt}{9pt},linenos=false,mathescape,baselinestretch=1.0,fontfamily=tt,xleftmargin=2mm]{python}
-x = 5
-if x > 3:
-  print('big!')
-\end{minted}
-\end{cod}
+\begin{itemize}
+\item $\rho_1$: a dimensionless dipole-energy density,
+
+\item $\rho_2$: longitudinal nuclear polarization, and
+
+\item $\rho_3$: longitudinal electron polarization.
+\end{itemize}
+
 \noindent
+Several parameters require definition and are summarized in the following list (note that a ``\textasciitilde{}'' over a function denotes that it is a function of the dimensionless spatial coordinate). 
+See \cite{Picone2014b} for details.
+
+\begin{itemize}
+\item $B_d$: maximum dipole-dipole magnetic field.
+
+\item $\gamma_2$, $\gamma_3$: gyromagnetic ratio for nuclei and electrons, respectively.
+
+\item $\overline{\gamma}$: dimensionless ratio $\gamma_3/\gamma_2$.
+
+\item $\Gamma_2$, $\Gamma_3$: transport coefficients for nuclear and electron polarization, respectively.
+
+\item $\overline{\Gamma}$: dimensionless ratio $\Gamma_3/\Gamma_2$.
+
+\item $\Delta_2$, $\Delta_3$: constant spin densities in solid medium for nuclei and electrons, respectively.
+
+\item $\overline{\Delta}$: dimensionless ratio $\Delta_3/\Delta_2$.
+
+\item $\overline{r}$: dimensionless spatial coordinate $(\partial_r B(r)|_{r=0}/B_d) r$.
+
+\item $\overline{t}$: dimensionless time $\Gamma_2 (\partial_r B(r)|_{r=0}/B_d)^2 t$.
+
+\item $\overline{B}$: ratio of magnetic fields $\partial_{\overline{r}} \tilde{B}/B_d$.
+
+\item $\overline{c}$: ratio of ratios $\overline{B} (1+\overline{\Delta})/(1+\overline{\gamma}\overline{\Delta})$.
+\end{itemize}
+
+\noindent
+\paragraph{two-species magnetization transport equations.}
+The preferred form of the continuity equation is in the polarization basis with the dimensionless spatial coordinate and time variable, which we call the \emph{two-species magnetization transport equations}:
+
+
+\begin{align} 
+	\partial_{\tbar} \rho_1 
+	&=
+	-\frac{\cratio^2}{1+\Deltar}
+	\left(
+		\left(
+			1 - \rho_2^2
+		\right)
+		+
+		\Gammar\Deltar\overline{\gamma}^2
+		\left(
+			1 - \rho_3^3
+		\right)
+	\right)
+	\arctanh\rho_1 + 
+	\nonumber\\
+	&-\frac{\cratio}{1+\Deltar}
+	\left(
+		\partial_{\rbar} \rho_2 - \Gammar\Deltar\overline{\gamma} \partial_{\rbar} \rho_3
+	\right)
+	+ ( 1 + \Gammar )\, \partial_{\overline{r}}^2 \rho_1 \\
+	%
+	\partial_{\tbar} \rho_2 
+	&=
+	\partial_{\rbar}
+	\left(
+		\cratio
+		\left( 1 - \rho_2^2 \right)
+		\arctanh\rho_1
+	\right)
+	+ \partial_{\overline{r}}^2 \rho_2 \\
+	\partial_{\tbar} \rho_3
+	&=
+	- 
+	\Gammar\overline{\gamma}
+	\partial_{\rbar}
+	\left(
+		\cratio
+		\left( 1 - \rho_3^2 \right)
+		\arctanh\rho_1
+	\right)
+	+ \Gammar \partial_{\overline{r}}^2 \rho_3 .
+\end{align}
+
+Bloch equation dynamics for a each species and $T_1 \gg T_2$ can be approximated without the transverse dynamics as \cite{Picone2010}
+
+\begin{align}
+	\partial_t \rho_2 &= \frac{\rho_{20}}{T_{1p}} - \frac{\rho_2}{\tau_p} \\
+	\partial_t \rho_3 &= \frac{\rho_{30}}{T_{1e}} - \frac{\rho_3}{\tau_e}.
+\end{align}
+
+where, for each species,
+
+\begin{align}
+	\tau = \frac{1}{\frac{1}{T_1} + \frac{T_2 \omega_1^2}{1+T_2^2 \delta^2}}.
+\end{align}
 
 
 

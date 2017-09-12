@@ -46,7 +46,7 @@ def spellcheck():
 
 def latex(name,
           latex_program='pdflatex',    # or 'latex'
-          options='--latex_code_style=pyg',
+          options='--latex_code_style=pyg --latex_font=palatino',
           version='paper',             # or 'screen', '2up', 'A4', 'A4-2up'
           postfix='',                  # or 'auto'
           ptex2tex=None,               # only for ptex2tex step
@@ -123,9 +123,11 @@ def latex(name,
     if 'idx{' in text:
         cmd = 'makeindex %(name)s' % vars()
         system(cmd)
-    if 'BIBFILE:' in text:
-        cmd = 'bibtex %(name)s' % vars()
-        system(cmd)
+    # if 'BIBFILE:' in text:
+    #     cmd = 'bibtex %(name)s' % vars()
+    #     system(cmd)
+    cmd = 'bibtex %(name)s' % vars()
+    system(cmd)
 
     system(cmd_latex)
     system(cmd_latex)
@@ -284,7 +286,7 @@ def main():
     format = "pdflatex"
 
     # convert bib to publish, blech
-    # system('publish import doc.bib')
+    # system('publish import papers.bib')
 
     # spellcheck()
 

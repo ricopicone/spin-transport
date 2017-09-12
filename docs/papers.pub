@@ -14,3 +14,20 @@
    annote:    Bloch equations simulation
    entrytype: article
    keywords:  nuclear magnetic resonance; simulation; numerical solution; block equations; magnetization; spin; precession; relaxation time
+* theses
+** {Separative Magnetization Transport: Theory, Model, and Experiment}
+   key:        Picone2014b
+   author:     Rico A. R. Picone
+   year:       2014
+   status:     published
+   entrytype:  phdthesis
+   school:     University of Washington
+   thesistype: phd
+** {Investigating the Effects of Polarizing Diffusion in Magnetic Resonance Force Microscopy}
+   key:        Picone2010
+   author:     Rico A. R. Picone
+   year:       2010
+   status:     published
+   entrytype:  mastersthesis
+   school:     University of Washington
+   thesistype: msc

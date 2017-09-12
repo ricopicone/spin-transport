@@ -48,24 +48,47 @@ pre { color: inherit; background-color: transparent; }
                1,
                'table_of_contents',
                'table_of_contents'),
-              ('Installation',
-               1,
-               'section:installation',
-               'section:installation'),
-              ('spin-transport: introduction', 1, None, '___sec1'),
-              ('Installation', 2, None, '___sec2'),
-              ('Workflow', 2, None, '___sec3'),
-              ('Testing the installation', 2, None, '___sec4'),
-              ('Acknowledgement', 2, None, '___sec5'),
-              ('Contributors', 2, None, '___sec6'),
+              ('spin-transport: introduction', 1, None, '___sec0'),
+              ('Installation', 2, None, '___sec1'),
+              ('Workflow', 2, None, '___sec2'),
+              ('Testing the installation', 2, None, '___sec3'),
+              ('Acknowledgement', 2, None, '___sec4'),
+              ('Contributors', 2, None, '___sec5'),
               ('Short theoretical introduction',
                1,
                'section:shorttheory',
                'section:shorttheory'),
-              ('References', 1, None, '___sec8')]}
+              ('References', 1, None, '___sec7')]}
 end of tocinfo -->
 
 <body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "AMS"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript" async
+ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\rbar}{\overline{r}}
+\newcommand{\tbar}{\overline{t}}
+\newcommand{\Gammar}{\overline{\Gamma}}
+\newcommand{\Deltar}{\overline{\Delta}}
+\newcommand{\cratio}{\overline{c}}
+\newcommand{\arctanh}{\text{arctanh }}
+$$
+
+
+
 
     
 <!-- Bootstrap navigation bar -->
@@ -85,15 +108,14 @@ end of tocinfo -->
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
      <!-- navigation toc: --> <li><a href="#table_of_contents" style="font-size: 80%;"><b>Table of contents</b></a></li>
-     <!-- navigation toc: --> <li><a href="#section:installation" style="font-size: 80%;"><b>Installation</b></a></li>
-     <!-- navigation toc: --> <li><a href="#___sec1" style="font-size: 80%;"><b>spin-transport: introduction</b></a></li>
-     <!-- navigation toc: --> <li><a href="#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Installation</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Workflow</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Testing the installation</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Acknowledgement</a></li>
-     <!-- navigation toc: --> <li><a href="#___sec6" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Contributors</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec0" style="font-size: 80%;"><b>spin-transport: introduction</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec1" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Installation</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec2" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Workflow</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec3" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Testing the installation</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Acknowledgement</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Contributors</a></li>
      <!-- navigation toc: --> <li><a href="#section:shorttheory" style="font-size: 80%;"><b>Short theoretical introduction</b></a></li>
-     <!-- navigation toc: --> <li><a href="#___sec8" style="font-size: 80%;"><b>References</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec7" style="font-size: 80%;"><b>References</b></a></li>
 
         </ul>
       </li>
@@ -126,7 +148,7 @@ end of tocinfo -->
 <center><b>Department of Mechanical Engineering, Saint Martin's University</b></center>
 <br>
 <p>
-<center><h4>Aug 30, 2017</h4></center> <!-- date -->
+<center><h4>Sep 12, 2017</h4></center> <!-- date -->
 <br>
 <p>
 <b>Summary.</b> The <em>spin-transport</em> software (<a href="https://github.com/ricopicone/spin-transport" target="_self">GitHub</a>) is for the dynamic simulation of bulk spin transport&mdash;diffusion and separation&mdash;in solid media.
@@ -139,22 +161,21 @@ The project is open-source and still in development.
 Table of contents</h2>
 
 <p>
-<a href="#section:installation"> Installation </a><br>
-<a href="#___sec1"> spin-transport: introduction </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec2"> Installation </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec3"> Workflow </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec4"> Testing the installation </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec5"> Acknowledgement </a><br>
-&nbsp; &nbsp; &nbsp; <a href="#___sec6"> Contributors </a><br>
+<a href="#___sec0"> spin-transport: introduction </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec1"> Installation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec2"> Workflow </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec3"> Testing the installation </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec4"> Acknowledgement </a><br>
+&nbsp; &nbsp; &nbsp; <a href="#___sec5"> Contributors </a><br>
 <a href="#section:shorttheory"> Short theoretical introduction </a><br>
-<a href="#___sec8"> References </a><br>
+<a href="#___sec7"> References </a><br>
 </p>
 <p>
 <!-- !split -->
+<!-- ======= Installation  <div id="___sec1"></div>======= -->
+<!-- <div id="section:installation"></div> -->
 
-<h1 id="section:installation" class="anchor">Installation</h1>
-
-<h1 id="___sec1" class="anchor">spin-transport: introduction </h1>
+<h1 id="___sec0" class="anchor">spin-transport: introduction </h1>
 
 <p>
 This repository contains the (developing) open-source code for simulating bulk spin transport&mdash;diffusion and separation&mdash;in solid media. Multi-spin-species and magnetic resonance simulations are in development.
@@ -165,7 +186,7 @@ This is a <a href="https://www.python.org/" target="_self">Python</a> and <a hre
 <p>
 End users of this project write Python code to interface with FEniCS.
 
-<h2 id="___sec2" class="anchor">Installation </h2>
+<h2>Installation</h2>
 
 <p>
 One must first have a working installation of FEniCS.
@@ -174,7 +195,7 @@ This README assumes the use of <a href="https://www.docker.com/" target="_self">
 <p>
 Then <a href="https://help.github.com/articles/cloning-a-repository/" target="_self">clone</a> this repository to the host machine.
 
-<h2 id="___sec3" class="anchor">Workflow </h2>
+<h2 id="___sec2" class="anchor">Workflow </h2>
 
 <p>
 The FEniCS docs have a section on <a href="http://fenics.readthedocs.io/projects/containers/en/latest/work_flows.html" target="_self">workflow</a>.
@@ -192,7 +213,7 @@ With the cloned <code>spin-transport</code> repository as your working directory
 Now a FEniCS Python script <code>foo.py</code> can be started with the command <code>fenics foo.py</code> <b>from the host</b> instead of manually starting it from a Docker container.
 This has several advantages, including that there is no need to move scripts into the container and that the complicated syntax need not be remembered.
 
-<h2 id="___sec4" class="anchor">Testing the installation </h2>
+<h2 id="___sec3" class="anchor">Testing the installation </h2>
 
 <p>
 To verify that everything is installed correctly, run the Poisson equation demo <code>ft01_poisson.py</code> (<a href="https://fenicsproject.org/pub/tutorial/html/._ftut1004.html" target="_self">source</a>) in your container.
@@ -218,10 +239,12 @@ Calling FFC just-in-time <span style="color: #666666">(</span>JIT<span style="co
 Calling FFC just-in-time <span style="color: #666666">(</span>JIT<span style="color: #666666">)</span> compiler, this may take some time.
 Calling FFC just-in-time <span style="color: #666666">(</span>JIT<span style="color: #666666">)</span> compiler, this may take some time.
 Solving linear variational problem.
-*** Warning: Degree of exact solution may be inadequate <span style="color: #008000; font-weight: bold">for</span> accurate result in errornorm.
+*** Warning: Degree of exact solution may be inadequate <span style="color: #008000; font-weight: bold">for</span> accurate 
+	result in errornorm.
 Calling FFC just-in-time <span style="color: #666666">(</span>JIT<span style="color: #666666">)</span> compiler, this may take some time.
 Calling FFC just-in-time <span style="color: #666666">(</span>JIT<span style="color: #666666">)</span> compiler, this may take some time.
-  Ignoring precision in integral metadata compiled using quadrature representation. Not implemented.
+  Ignoring precision in integral metadata compiled using quadrature 
+  representation. Not implemented.
 Calling FFC just-in-time <span style="color: #666666">(</span>JIT<span style="color: #666666">)</span> compiler, this may take some time.
 Calling FFC just-in-time <span style="color: #666666">(</span>JIT<span style="color: #666666">)</span> compiler, this may take some time.
 Calling FFC just-in-time <span style="color: #666666">(</span>JIT<span style="color: #666666">)</span> compiler, this may take some time.
@@ -232,27 +255,22 @@ Calling FFC just-in-time <span style="color: #666666">(</span>JIT<span style="co
 The directory <code>spin-transport/poisson</code> should have been created and should contain two files: <code>solution.pvd</code> and <code>solution000000.vtu</code>.
 These files contain the solution data.
 
-<h2 id="___sec5" class="anchor">Acknowledgement </h2>
+<h2 id="___sec4" class="anchor">Acknowledgement </h2>
 
 <p>
 This work is supported by a grant from the Army Research Office, Materials Science Division under grant proposal <b>Nanoscale Spin Hyperpolarization and Imaging</b>
 with PI <a href="http://marohn.chem.cornell.edu/" target="_self">John Marohn, PhD</a>.
 
-<h2 id="___sec6" class="anchor">Contributors </h2>
+<h2 id="___sec5" class="anchor">Contributors </h2>
 
 <p>
 This project stems from a collaboration among three institutions:
 
-<p>
-
-<dl>
-<dt>%s<dd>
-  [Cornell University](http://www.cornell.edu/),
-<dt>%s<dd>
-  [Saint Martin's University](https://www.stmartin.edu/), and the
-<dt>%s<dd>
-  [University of Washington](http://www.washington.edu/).
-</dl>
+<ul>
+<li> <a href="http://www.cornell.edu/" target="_self">Cornell University</a>,</li>
+<li> <a href="https://www.stmartin.edu/" target="_self">Saint Martin's University</a>, and the</li>
+<li> <a href="http://www.washington.edu/" target="_self">University of Washington</a>.</li>
+</ul>
 
 The lead contributor to this project is <a href="http://ricopic.one" target="_self">Rico Picone, PhD</a> of Saint Martin's University, co-PI on the ARO grant.
 Other contributors include <a href="http://marohn.chem.cornell.edu/" target="_self">John Marohn, PhD</a> (Cornell, PI), John A. Sidles, PhD (Washington), Joseph L. Garbini, PhD (Washington), and Corinne Isaac (Cornell).
@@ -260,22 +278,125 @@ Other contributors include <a href="http://marohn.chem.cornell.edu/" target="_se
 <h1 id="section:shorttheory" class="anchor">Short theoretical introduction</h1>
 
 <p>
-Here's some code.
+The simulation is based on the two spin-species transport equations presented by Picone <a href="#Picone2014b">[1]</a>.
+These equations present the transport&mdash;diffusion and separation&mdash;of three conserved quantities represented by the vector-valued function \( \boldsymbol{\rho} \) of time and a single spatial dimension, taken to be the direction of a background magnetic field \( B \) we call <em>longitudinal</em>.
+The three conserved quantities are represented in the &quot;polarization thermodynamic covector basis&quot; \( e \) by the components <a href="#Picone2014b">[1]</a>
+
+<ul>
+<li> \( \rho_1 \): a dimensionless dipole-energy density,</li>
+<li> \( \rho_2 \): longitudinal nuclear polarization, and</li>
+<li> \( \rho_3 \): longitudinal electron polarization.</li>
+</ul>
+
+Several parameters require definition and are summarized in the following list (note that a &quot;\textasciitilde{}&quot; over a function denotes that it is a function of the dimensionless spatial coordinate). 
+See <a href="#Picone2014b">[1]</a> for details.
+
+<ul>
+<li> \( B_d \): maximum dipole-dipole magnetic field.</li>
+<li> \( \gamma_2 \), \( \gamma_3 \): gyromagnetic ratio for nuclei and electrons, respectively.</li>
+<li> \( \overline{\gamma} \): dimensionless ratio \( \gamma_3/\gamma_2 \).</li>
+<li> \( \Gamma_2 \), \( \Gamma_3 \): transport coefficients for nuclear and electron polarization, respectively.</li>
+<li> \( \overline{\Gamma} \): dimensionless ratio \( \Gamma_3/\Gamma_2 \).</li>
+<li> \( \Delta_2 \), \( \Delta_3 \): constant spin densities in solid medium for nuclei and electrons, respectively.</li>
+<li> \( \overline{\Delta} \): dimensionless ratio \( \Delta_3/\Delta_2 \).</li>
+<li> \( \overline{r} \): dimensionless spatial coordinate \( (\partial_r B(r)|_{r=0}/B_d) r \).</li>
+<li> \( \overline{t} \): dimensionless time \( \Gamma_2 (\partial_r B(r)|_{r=0}/B_d)^2 t \).</li>
+<li> \( \overline{B} \): ratio of magnetic fields \( \partial_{\overline{r}} \tilde{B}/B_d \).</li>
+<li> \( \overline{c} \): ratio of ratios \( \overline{B} (1+\overline{\Delta})/(1+\overline{\gamma}\overline{\Delta}) \).</li>
+</ul>
+
+<b>two-species magnetization transport equations.</b>
+The preferred form of the continuity equation is in the polarization basis with the dimensionless spatial coordinate and time variable, which we call the <em>two-species magnetization transport equations</em>:
+
+$$
+\begin{align} 
+	\partial_{\tbar} \rho_1 
+	&=
+	-\frac{\cratio^2}{1+\Deltar}
+	\left(
+		\left(
+			1 - \rho_2^2
+		\right)
+		+
+		\Gammar\Deltar\overline{\gamma}^2
+		\left(
+			1 - \rho_3^3
+		\right)
+	\right)
+	\arctanh\rho_1 + 
+	\nonumber\\
+	&-\frac{\cratio}{1+\Deltar}
+	\left(
+		\partial_{\rbar} \rho_2 - \Gammar\Deltar\overline{\gamma} \partial_{\rbar} \rho_3
+	\right)
+	+ ( 1 + \Gammar )\, \partial_{\overline{r}}^2 \rho_1 
+\label{_auto1}\\
+	%
+	\partial_{\tbar} \rho_2 
+	&=
+	\partial_{\rbar}
+	\left(
+		\cratio
+		\left( 1 - \rho_2^2 \right)
+		\arctanh\rho_1
+	\right)
+	+ \partial_{\overline{r}}^2 \rho_2 
+\label{_auto2}\\
+	\partial_{\tbar} \rho_3
+	&=
+	- 
+	\Gammar\overline{\gamma}
+	\partial_{\rbar}
+	\left(
+		\cratio
+		\left( 1 - \rho_3^2 \right)
+		\arctanh\rho_1
+	\right)
+	+ \Gammar \partial_{\overline{r}}^2 \rho_3 .
+\label{_auto3}
+\end{align}
+$$
 
 <p>
+Bloch equation dynamics for a each species and \( T_1 \gg T_2 \) can be approximated without the transverse dynamics as <a href="#Picone2010">[2]</a>
 
-<!-- code=python (!bc pycod) typeset with pygments style "default" -->
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>x <span style="color: #666666">=</span> <span style="color: #666666">5</span>
-<span style="color: #008000; font-weight: bold">if</span> x <span style="color: #666666">&gt;</span> <span style="color: #666666">3</span>:
-  <span style="color: #008000; font-weight: bold">print</span>(<span style="color: #BA2121">&#39;big!&#39;</span>)
-</pre></div>
+$$
+\begin{align}
+	\partial_t \rho_2 &= \frac{\rho_{20}}{T_{1p}} - \frac{\rho_2}{\tau_p} 
+\label{_auto4}\\
+	\partial_t \rho_3 &= \frac{\rho_{30}}{T_{1e}} - \frac{\rho_3}{\tau_e}.
+\label{_auto5}
+\end{align}
+$$
 
-<h1 id="___sec8" class="anchor">References </h1>
+<p>
+where, for each species,
+
+$$
+\begin{align}
+	\tau = \frac{1}{\frac{1}{T_1} + \frac{T_2 \omega_1^2}{1+T_2^2 \delta^2}}.
+\label{_auto6}
+\end{align}
+$$
+
+<h1 id="___sec7" class="anchor">References </h1>
 
 <p>
 <!-- begin bibliography -->
 
-<p>
+<ol>
+ <li> <div id="Picone2014b"></div> <b>R. A. R. Picone</b>. 
+    Separative Magnetization Transport: Theory, Model, and Experiment,
+    Ph.D. Thesis,
+    University of Washington,
+    2014.</li>
+ <li> <div id="Picone2010"></div> <b>R. A. R. Picone</b>. 
+    Investigating the Effects of Polarizing Diffusion in Magnetic Resonance Force Microscopy,
+    M.Sc. Thesis,
+    University of Washington,
+    2010.</li>
+</ol>
+
 <!-- end bibliography -->
 
 <!-- ------------------- end of main content --------------- -->
