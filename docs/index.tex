@@ -166,14 +166,14 @@ final,                   % draft: marks overfull hboxes, figures with paths
 % Ensure copyright on titlepage (article style) and chapter pages (book style)
 \fancypagestyle{plain}{
   \fancyhf{}
-  \fancyfoot[C]{{\footnotesize \copyright\ 2017, Rico A.R. Picone. Released under CC Attribution 4.0 license}}
+  \fancyfoot[C]{{\footnotesize \copyright\ 2018, Rico A.R. Picone. Released under CC Attribution 4.0 license}}
 %  \renewcommand{\footrulewidth}{0mm}
   \renewcommand{\headrulewidth}{0mm}
 }
 % Ensure copyright on titlepages with \thispagestyle{empty}
 \fancypagestyle{empty}{
   \fancyhf{}
-  \fancyfoot[C]{{\footnotesize \copyright\ 2017, Rico A.R. Picone. Released under CC Attribution 4.0 license}}
+  \fancyfoot[C]{{\footnotesize \copyright\ 2018, Rico A.R. Picone. Released under CC Attribution 4.0 license}}
   \renewcommand{\footrulewidth}{0mm}
   \renewcommand{\headrulewidth}{0mm}
 }
@@ -279,7 +279,7 @@ final,                   % draft: marks overfull hboxes, figures with paths
 
 % ----------------- end author(s) -------------------------
 
-\date{\sffamily{}Sep 12, 2017}
+\date{\sffamily{}Jan 2, 2018}
 \maketitle
 
 \begin{abstract}
@@ -484,18 +484,26 @@ The preferred form of the continuity equation is in the polarization basis with 
 	+ \Gammar \partial_{\overline{r}}^2 \rho_3 .
 \end{align}
 
-Bloch equation dynamics for a each species and $T_1 \gg T_2$ can be approximated without the transverse dynamics as \cite{Picone2010}
+Bloch equation dynamics for a each species and $T_1 \gg T_2$ can be approximated without the transverse dynamics as \cite{Picone2010,Grivet1993}
 
 \begin{align}
-	\partial_t \rho_2 &= \frac{\rho_{20}}{T_{1p}} - \frac{\rho_2}{\tau_p} \\
-	\partial_t \rho_3 &= \frac{\rho_{30}}{T_{1e}} - \frac{\rho_3}{\tau_e}.
+	\partial_{\overline{t}} \rho_2 &= \frac{\rho_{20}}{\overline{T}_{1p}} - \frac{\rho_2}{\overline{\tau}_p} \\
+	\partial_{\overline{t}} \rho_3 &= \frac{\rho_{30}}{\overline{T}_{1e}} - \frac{\rho_3}{\overline{\tau}_e}.
 \end{align}
 
 where, for each species,
 
 \begin{align}
-	\tau = \frac{1}{\frac{1}{T_1} + \frac{T_2 \omega_1^2}{1+T_2^2 \delta^2}}.
+	\overline{\tau} = \frac{1}{\frac{1}{\overline{T}_1} + \frac{\overline{T}_2 \omega_1^2}{1+\overline{T}_2^2 \tilde{\delta}^2}}
 \end{align}
+
+where it is important to use dimensionless time constants and where we define (again, for each species)
+
+\begin{align}
+	\omega_1 &= -\gamma B_1 \quad \text{and} \quad
+	\tilde{\delta} = \gamma B_d \overline{r}.
+\end{align}
+
 
 
 

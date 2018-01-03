@@ -148,7 +148,7 @@ $$
 <center><b>Department of Mechanical Engineering, Saint Martin's University</b></center>
 <br>
 <p>
-<center><h4>Sep 12, 2017</h4></center> <!-- date -->
+<center><h4>Jan 2, 2018</h4></center> <!-- date -->
 <br>
 <p>
 <b>Summary.</b> The <em>spin-transport</em> software (<a href="https://github.com/ricopicone/spin-transport" target="_self">GitHub</a>) is for the dynamic simulation of bulk spin transport&mdash;diffusion and separation&mdash;in solid media.
@@ -358,13 +358,13 @@ $$
 $$
 
 <p>
-Bloch equation dynamics for a each species and \( T_1 \gg T_2 \) can be approximated without the transverse dynamics as <a href="#Picone2010">[2]</a>
+Bloch equation dynamics for a each species and \( T_1 \gg T_2 \) can be approximated without the transverse dynamics as <a href="#Picone2010">[2]</a> <a href="#Grivet1993">[3]</a>
 
 $$
 \begin{align}
-	\partial_t \rho_2 &= \frac{\rho_{20}}{T_{1p}} - \frac{\rho_2}{\tau_p} 
+	\partial_{\overline{t}} \rho_2 &= \frac{\rho_{20}}{\overline{T}_{1p}} - \frac{\rho_2}{\overline{\tau}_p} 
 \label{_auto4}\\
-	\partial_t \rho_3 &= \frac{\rho_{30}}{T_{1e}} - \frac{\rho_3}{\tau_e}.
+	\partial_{\overline{t}} \rho_3 &= \frac{\rho_{30}}{\overline{T}_{1e}} - \frac{\rho_3}{\overline{\tau}_e}.
 \label{_auto5}
 \end{align}
 $$
@@ -374,8 +374,19 @@ where, for each species,
 
 $$
 \begin{align}
-	\tau = \frac{1}{\frac{1}{T_1} + \frac{T_2 \omega_1^2}{1+T_2^2 \delta^2}}.
+	\overline{\tau} = \frac{1}{\frac{1}{\overline{T}_1} + \frac{\overline{T}_2 \omega_1^2}{1+\overline{T}_2^2 \tilde{\delta}^2}}
 \label{_auto6}
+\end{align}
+$$
+
+<p>
+where it is important to use dimensionless time constants and where we define (again, for each species)
+
+$$
+\begin{align}
+	\omega_1 &= -\gamma B_1 \quad \text{and} \quad
+	\tilde{\delta} = \gamma B_d \overline{r}.
+\label{_auto7}
 \end{align}
 $$
 
@@ -395,6 +406,14 @@ $$
     M.Sc. Thesis,
     University of Washington,
     2010.</li>
+ <li> <div id="Grivet1993"></div> <b>J.-P. Grivet</b>. 
+    Simulation of Magnetic Resonance Experiments,
+    <em>American Journal of Physics</em>,
+    61(12),
+    pp. 1133-1139,
+    <a href="http://dx.doi.org/10.1119/1.17309" target="_self">doi: 10.1119/1.17309</a>,
+    1993,
+    <a href="http://link.aip.org/link/?AJP/61/1133/1" target="_self"><tt>http://link.aip.org/link/?AJP/61/1133/1</tt></a>.</li>
 </ol>
 
 <!-- end bibliography -->
@@ -414,7 +433,7 @@ $$
 
 
 <center style="font-size:80%">
-<!-- copyright --> &copy; 2017, Rico A.R. Picone. Released under CC Attribution 4.0 license
+<!-- copyright --> &copy; 2018, Rico A.R. Picone. Released under CC Attribution 4.0 license
 </center>
 
 

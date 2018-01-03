@@ -2097,3 +2097,93 @@ translating doconce text in tmp_preprocess__index.do.txt to pdflatex
 
 exporting publish database papers.pub to papers.bib:
 output in index.tex
+running preprocess -DFORMAT=html -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to html
+*** replacing \bm{...} by \boldsymbol{...} (\bm is not supported by MathJax)
+output in index.html
+running preprocess -DFORMAT=ipynb -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to ipynb
+*** replacing \bm{...} by \boldsymbol{...} (\bm is not supported by MathJax)
+output in index.ipynb
+running preprocess -DFORMAT=pdflatex -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to pdflatex
+
+exporting publish database papers.pub to papers.bib:
+output in index.p.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to pdflatex
+
+exporting publish database papers.pub to papers.bib:
+output in index.tex
+running preprocess -DFORMAT=html -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to html
+*** replacing \bm{...} by \boldsymbol{...} (\bm is not supported by MathJax)
+output in index.html
+running preprocess -DFORMAT=ipynb -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to ipynb
+*** replacing \bm{...} by \boldsymbol{...} (\bm is not supported by MathJax)
+output in index.ipynb
+running preprocess -DFORMAT=pdflatex -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to pdflatex
+
+exporting publish database papers.pub to papers.bib:
+output in index.p.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to pdflatex
+
+exporting publish database papers.pub to papers.bib:
+output in index.tex
+running preprocess -DFORMAT=html -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to html
+*** replacing \bm{...} by \boldsymbol{...} (\bm is not supported by MathJax)
+output in index.html
+running preprocess -DFORMAT=ipynb -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to ipynb
+*** replacing \bm{...} by \boldsymbol{...} (\bm is not supported by MathJax)
+output in index.ipynb
+running preprocess -DFORMAT=pdflatex -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to pdflatex
+
+exporting publish database papers.pub to papers.bib:
+output in index.p.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to pdflatex
+
+exporting publish database papers.pub to papers.bib:
+output in index.tex
+running preprocess -DFORMAT=html -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to html
+*** replacing \bm{...} by \boldsymbol{...} (\bm is not supported by MathJax)
+output in index.html
+running preprocess -DFORMAT=ipynb -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to ipynb
+*** replacing \bm{...} by \boldsymbol{...} (\bm is not supported by MathJax)
+output in index.ipynb
+running preprocess -DFORMAT=pdflatex -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to pdflatex
+
+exporting publish database papers.pub to papers.bib:
+output in index.p.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to pdflatex
+
+exporting publish database papers.pub to papers.bib:
+output in index.tex
+running preprocess -DFORMAT=html -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to html
+*** replacing \bm{...} by \boldsymbol{...} (\bm is not supported by MathJax)
+output in index.html
+running preprocess -DFORMAT=ipynb -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to ipynb
+*** replacing \bm{...} by \boldsymbol{...} (\bm is not supported by MathJax)
+output in index.ipynb
+running preprocess -DFORMAT=pdflatex -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to pdflatex
+
+exporting publish database papers.pub to papers.bib:
+output in index.p.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to pdflatex
+
+exporting publish database papers.pub to papers.bib:
+output in index.tex
