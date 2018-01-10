@@ -57,7 +57,7 @@ The preferred form of the continuity equation is in the polarization basis with 
 		+
 		\Gammar\Deltar\overline{\gamma}^2
 		\left(
-			1 - \rho_3^3
+			1 - \rho_3^2
 		\right)
 	\right)
 	\arctanh\rho_1 + 
