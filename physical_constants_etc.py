@@ -1,37 +1,40 @@
 # physical constants and basic rules
 
-'''
-Old Mathematica usage messages ...
-eventually, should turn these defs into classes or something
+"""Physical Constants and Basic Rules
 
-suf = "\nSee script physicalConstantsEtc.m."
-physRules::usage = "Fundamental physical rules (list of substitution rules)." <> suf;
-physConstants::usage = "Fundamental physical constants (list of numerical substitution rules)." <> suf;
-BHrules::usage = "List of replacement rules for converting B- to H-fields" <> suf;
-HBrules::usage = "List of replacement rules for converting H- to B-fields" <> suf;
-μ::usage = "T m/A ... magnetic constant." <> suf;
-μB::usage = "J/T ... Bohr magneton." <> suf;
-μN::usage = "J/T ... Nuclear magneton." <> suf;
-μe::usage = "J/T ... Magnetic moment of an electron spin." <> suf;
-μp::usage = "J/T ... Magnetic moment of a nuclear spin." <> suf;
-ge::usage = "Electron spin g-factor: the g-factor associated with the spin of an electron." <> suf;
-gp::usage = "Proton spin g-factor: gp ≡ 2μp/μN the g-factor associated with the spin of a proton." <> suf;
-γe::usage = "rad/(sec Tesla) ... Electron spin gyromagnetic ratio." <> suf;
-γp::usage = "rad/(sec Tesla) ... Proton spin gyromagnetic ratio." <> suf;
-kB::usage = "J/K ... Bolzmann constant." <> suf;
-hb::usage = "m**2 kg/sec ... Reduced Planck constant." <> suf;
-NA::usage = "mol**-1 ... Avogadro constant." <> suf;
-'''
+Constants:
+	μ (T m/A) ... magnetic constant.
+	μB (J/T) ... Bohr magneton.
+	μN (J/T) ... Nuclear magneton.
+	μe (J/T) ... Magnetic moment of an electron spin.
+	μp (J/T) ... Magnetic moment of a nuclear spin.
+	ge ... Electron spin g-factor: the g-factor associated with the spin of an electron.
+	gp ... Proton spin g-factor: gp ≡ 2μp/μN the g-factor associated with the spin of a proton.
+	γe (rad/(sec Tesla)) ... Electron spin gyromagnetic ratio.
+	γp (rad/(sec Tesla)) ... Proton spin gyromagnetic ratio.
+	kB (J/K) ... Bolzmann constant.
+	hb (m**2 kg/sec) ... Reduced Planck constant.
+	NA (mol**-1) ... Avogadro constant.
 
-π = 3.14159265359
+Todo:
+	* Implement "suf" See script physicalConstantsEtc.m.
+	* Implement "physRules" Fundamental physical rules (list of substitution rules).
+	* Implement "physConstants" Fundamental physical constants (list of numerical substitution rules).
+	* Implement "BHrules" List of replacement rules for converting B- to H-fields.
+	* Implement "HBrules" List of replacement rules for converting H- to B-fields.
+"""
+
+import math
+
+π = math.pi
 ge = -2.00231930436153
 gp = 5.585694713
-hb = 1.054571726 10**-34   	# m**2*kg/sec 
-γe = 1.760859708 10**11    	# rad/(sec Tesla)
-γp = 2.675222005 10**8     	# rad/(sec Tesla) 
-μ = 4*π*10**-7             	# T*m/A ... magnetic constant 
-kB = 1.3806488 10**-23     	# J/K ... Boltzmann constant 
-NA = 6.02214129 10**23     	# mol**-1 ... Avogadro constant  
+hb = 1.054571726e-34   	# m**2*kg/sec 
+γe = 1.760859708e11    	# rad/(sec Tesla)
+γp = 2.675222005e8     	# rad/(sec Tesla) 
+μ = 4*π*10e7             	# T*m/A ... magnetic constant 
+kB = 1.3806488e-23     	# J/K ... Boltzmann constant 
+NA = 6.02214129e23     	# mol**-1 ... Avogadro constant  
 
 μB = -hb*γe/ge          		# Bohr magneton 
 μe = -hb*γe/2            		# mag moment of electron spin 
@@ -39,7 +42,9 @@ NA = 6.02214129 10**23     	# mol**-1 ... Avogadro constant
 μp = hb*γp/2             		# nuclear spin magnetic moment 
 
 def magnetization(magnetic_moment,spin_density):
+	"""Calculate magnetization from magnetic moment and spin density"""
 	return magnetic_moment*spin_density
 
 def energy_density(magnetization,B):
+	"""Calculate energy density from magnetization and B field"""
 	return magnetization*B
