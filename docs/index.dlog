@@ -2187,3 +2187,687 @@ translating doconce text in tmp_preprocess__index.do.txt to pdflatex
 
 exporting publish database papers.pub to papers.bib:
 output in index.tex
+running preprocess -DFORMAT=html -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to html
+*** replacing \bm{...} by \boldsymbol{...} (\bm is not supported by MathJax)
+output in index.html
+running preprocess -DFORMAT=ipynb -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to ipynb
+*** replacing \bm{...} by \boldsymbol{...} (\bm is not supported by MathJax)
+*** warning: latex envir \begin{subequations} does not work well in Markdown.
+    Stick to \[ ... \], equation, equation*, align, or align*
+    environments in math environments.
+
+output in index.ipynb
+running preprocess -DFORMAT=pdflatex -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to pdflatex
+
+exporting publish database papers.pub to papers.bib:
+output in index.p.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to pdflatex
+
+exporting publish database papers.pub to papers.bib:
+output in index.tex
+running preprocess -DFORMAT=html -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to html
+*** replacing \bm{...} by \boldsymbol{...} (\bm is not supported by MathJax)
+output in index.html
+running preprocess -DFORMAT=ipynb -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to ipynb
+*** replacing \bm{...} by \boldsymbol{...} (\bm is not supported by MathJax)
+output in index.ipynb
+running preprocess -DFORMAT=pdflatex -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to pdflatex
+
+exporting publish database papers.pub to papers.bib:
+output in index.p.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to pdflatex
+
+exporting publish database papers.pub to papers.bib:
+output in index.tex
+running preprocess -DFORMAT=html -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to html
+*** error: reference to equation label "eq:transport_1" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport_1})
+... ynamics of Equations  ref{eq:transport_1}--ref{eq:transport_3}
+
+=======  ...
+*** error: reference to equation label "eq:transport_3" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport_3})
+... ref{eq:transport_1}- -ref{eq:transport_3}
+
+======= References =======
+
+B ...
+avoided abortion because of --no-abort
+*** warning: found reference "Equations ref{eq:transport_1}" with unexpected word "Equations" in front
+
+    (expected Section/Chapter/Figure ref{eq:transport_1}, or could it be a reference to an equation, but missing parenthesis in (ref{eq:transport_1})?)
+*** replacing \bm{...} by \boldsymbol{...} (\bm is not supported by MathJax)
+output in index.html
+running preprocess -DFORMAT=ipynb -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to ipynb
+*** error: reference to equation label "eq:transport_1" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport_1})
+... ynamics of Equations  ref{eq:transport_1}--ref{eq:transport_3}
+
+=======  ...
+*** error: reference to equation label "eq:transport_3" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport_3})
+... ref{eq:transport_1}- -ref{eq:transport_3}
+
+======= References =======
+
+B ...
+avoided abortion because of --no-abort
+*** warning: found reference "Equations ref{eq:transport_1}" with unexpected word "Equations" in front
+
+    (expected Section/Chapter/Figure ref{eq:transport_1}, or could it be a reference to an equation, but missing parenthesis in (ref{eq:transport_1})?)
+*** replacing \bm{...} by \boldsymbol{...} (\bm is not supported by MathJax)
+output in index.ipynb
+running preprocess -DFORMAT=pdflatex -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to pdflatex
+*** error: reference to equation label "eq:transport_1" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport_1})
+... ynamics of Equations  ref{eq:transport_1}--ref{eq:transport_3}
+
+=======  ...
+*** error: reference to equation label "eq:transport_3" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport_3})
+... ref{eq:transport_1}- -ref{eq:transport_3}
+
+======= References =======
+
+B ...
+avoided abortion because of --no-abort
+*** warning: found reference "Equations ref{eq:transport_1}" with unexpected word "Equations" in front
+
+    (expected Section/Chapter/Figure ref{eq:transport_1}, or could it be a reference to an equation, but missing parenthesis in (ref{eq:transport_1})?)
+
+exporting publish database papers.pub to papers.bib:
+output in index.p.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to pdflatex
+*** error: reference to equation label "eq:transport_1" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport_1})
+... ynamics of Equations  ref{eq:transport_1}--ref{eq:transport_3}
+
+=======  ...
+*** error: reference to equation label "eq:transport_3" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport_3})
+... ref{eq:transport_1}- -ref{eq:transport_3}
+
+======= References =======
+
+B ...
+avoided abortion because of --no-abort
+*** warning: found reference "Equations ref{eq:transport_1}" with unexpected word "Equations" in front
+
+    (expected Section/Chapter/Figure ref{eq:transport_1}, or could it be a reference to an equation, but missing parenthesis in (ref{eq:transport_1})?)
+
+exporting publish database papers.pub to papers.bib:
+output in index.tex
+running preprocess -DFORMAT=html -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to html
+*** error: reference to equation label "eq:transport_1" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport_1})
+... ynamics of Equations  ref{eq:transport_1} -- ref{eq:transport_3}
+
+====== ...
+*** error: reference to equation label "eq:transport_3" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport_3})
+... f{eq:transport_1} --  ref{eq:transport_3}
+
+======= References =======
+
+B ...
+avoided abortion because of --no-abort
+*** warning: found reference "Equations ref{eq:transport_1}" with unexpected word "Equations" in front
+
+    (expected Section/Chapter/Figure ref{eq:transport_1}, or could it be a reference to an equation, but missing parenthesis in (ref{eq:transport_1})?)
+*** replacing \bm{...} by \boldsymbol{...} (\bm is not supported by MathJax)
+output in index.html
+running preprocess -DFORMAT=ipynb -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to ipynb
+*** error: reference to equation label "eq:transport_1" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport_1})
+... ynamics of Equations  ref{eq:transport_1} -- ref{eq:transport_3}
+
+====== ...
+*** error: reference to equation label "eq:transport_3" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport_3})
+... f{eq:transport_1} --  ref{eq:transport_3}
+
+======= References =======
+
+B ...
+avoided abortion because of --no-abort
+*** warning: found reference "Equations ref{eq:transport_1}" with unexpected word "Equations" in front
+
+    (expected Section/Chapter/Figure ref{eq:transport_1}, or could it be a reference to an equation, but missing parenthesis in (ref{eq:transport_1})?)
+*** replacing \bm{...} by \boldsymbol{...} (\bm is not supported by MathJax)
+output in index.ipynb
+running preprocess -DFORMAT=pdflatex -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to pdflatex
+*** error: reference to equation label "eq:transport_1" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport_1})
+... ynamics of Equations  ref{eq:transport_1} -- ref{eq:transport_3}
+
+====== ...
+*** error: reference to equation label "eq:transport_3" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport_3})
+... f{eq:transport_1} --  ref{eq:transport_3}
+
+======= References =======
+
+B ...
+avoided abortion because of --no-abort
+*** warning: found reference "Equations ref{eq:transport_1}" with unexpected word "Equations" in front
+
+    (expected Section/Chapter/Figure ref{eq:transport_1}, or could it be a reference to an equation, but missing parenthesis in (ref{eq:transport_1})?)
+
+exporting publish database papers.pub to papers.bib:
+output in index.p.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to pdflatex
+*** error: reference to equation label "eq:transport_1" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport_1})
+... ynamics of Equations  ref{eq:transport_1} -- ref{eq:transport_3}
+
+====== ...
+*** error: reference to equation label "eq:transport_3" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport_3})
+... f{eq:transport_1} --  ref{eq:transport_3}
+
+======= References =======
+
+B ...
+avoided abortion because of --no-abort
+*** warning: found reference "Equations ref{eq:transport_1}" with unexpected word "Equations" in front
+
+    (expected Section/Chapter/Figure ref{eq:transport_1}, or could it be a reference to an equation, but missing parenthesis in (ref{eq:transport_1})?)
+
+exporting publish database papers.pub to papers.bib:
+output in index.tex
+running preprocess -DFORMAT=html -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to html
+*** error: reference to equation label "eq:transport1" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport1})
+... ynamics of Equations  ref{eq:transport1} -- ref{eq:transport3}
+
+======= ...
+*** error: reference to equation label "eq:transport3" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport3})
+... ef{eq:transport1} --  ref{eq:transport3}
+
+======= References =======
+
+B ...
+avoided abortion because of --no-abort
+*** warning: found reference "Equations ref{eq:transport1}" with unexpected word "Equations" in front
+
+    (expected Section/Chapter/Figure ref{eq:transport1}, or could it be a reference to an equation, but missing parenthesis in (ref{eq:transport1})?)
+*** replacing \bm{...} by \boldsymbol{...} (\bm is not supported by MathJax)
+output in index.html
+running preprocess -DFORMAT=ipynb -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to ipynb
+*** error: reference to equation label "eq:transport1" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport1})
+... ynamics of Equations  ref{eq:transport1} -- ref{eq:transport3}
+
+======= ...
+*** error: reference to equation label "eq:transport3" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport3})
+... ef{eq:transport1} --  ref{eq:transport3}
+
+======= References =======
+
+B ...
+avoided abortion because of --no-abort
+*** warning: found reference "Equations ref{eq:transport1}" with unexpected word "Equations" in front
+
+    (expected Section/Chapter/Figure ref{eq:transport1}, or could it be a reference to an equation, but missing parenthesis in (ref{eq:transport1})?)
+*** replacing \bm{...} by \boldsymbol{...} (\bm is not supported by MathJax)
+output in index.ipynb
+running preprocess -DFORMAT=pdflatex -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to pdflatex
+*** error: reference to equation label "eq:transport1" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport1})
+... ynamics of Equations  ref{eq:transport1} -- ref{eq:transport3}
+
+======= ...
+*** error: reference to equation label "eq:transport3" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport3})
+... ef{eq:transport1} --  ref{eq:transport3}
+
+======= References =======
+
+B ...
+avoided abortion because of --no-abort
+*** warning: found reference "Equations ref{eq:transport1}" with unexpected word "Equations" in front
+
+    (expected Section/Chapter/Figure ref{eq:transport1}, or could it be a reference to an equation, but missing parenthesis in (ref{eq:transport1})?)
+
+exporting publish database papers.pub to papers.bib:
+output in index.p.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to pdflatex
+*** error: reference to equation label "eq:transport1" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport1})
+... ynamics of Equations  ref{eq:transport1} -- ref{eq:transport3}
+
+======= ...
+*** error: reference to equation label "eq:transport3" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport3})
+... ef{eq:transport1} --  ref{eq:transport3}
+
+======= References =======
+
+B ...
+avoided abortion because of --no-abort
+*** warning: found reference "Equations ref{eq:transport1}" with unexpected word "Equations" in front
+
+    (expected Section/Chapter/Figure ref{eq:transport1}, or could it be a reference to an equation, but missing parenthesis in (ref{eq:transport1})?)
+
+exporting publish database papers.pub to papers.bib:
+output in index.tex
+running preprocess -DFORMAT=html -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to html
+*** error: reference to equation label "eq:transport1" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport1})
+... namics of Equations  \ref{eq:transport1} -- ref{eq:transport3}
+
+======= ...
+*** error: reference to equation label "eq:transport3" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport3})
+... ef{eq:transport1} --  ref{eq:transport3}
+
+======= References =======
+
+B ...
+avoided abortion because of --no-abort
+
+*** warning: found \ref{...} with backslash
+    (ref{...} has no backslash in DocOnce syntax)
+\ref{eq:transport1}
+*** replacing \bm{...} by \boldsymbol{...} (\bm is not supported by MathJax)
+output in index.html
+running preprocess -DFORMAT=ipynb -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to ipynb
+*** error: reference to equation label "eq:transport1" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport1})
+... namics of Equations  \ref{eq:transport1} -- ref{eq:transport3}
+
+======= ...
+*** error: reference to equation label "eq:transport3" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport3})
+... ef{eq:transport1} --  ref{eq:transport3}
+
+======= References =======
+
+B ...
+avoided abortion because of --no-abort
+
+*** warning: found \ref{...} with backslash
+    (ref{...} has no backslash in DocOnce syntax)
+\ref{eq:transport1}
+*** replacing \bm{...} by \boldsymbol{...} (\bm is not supported by MathJax)
+output in index.ipynb
+running preprocess -DFORMAT=pdflatex -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to pdflatex
+*** error: reference to equation label "eq:transport1" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport1})
+... namics of Equations  \ref{eq:transport1} -- ref{eq:transport3}
+
+======= ...
+*** error: reference to equation label "eq:transport3" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport3})
+... ef{eq:transport1} --  ref{eq:transport3}
+
+======= References =======
+
+B ...
+avoided abortion because of --no-abort
+
+*** warning: found \ref{...} with backslash
+    (ref{...} has no backslash in DocOnce syntax)
+\ref{eq:transport1}
+
+exporting publish database papers.pub to papers.bib:
+output in index.p.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to pdflatex
+*** error: reference to equation label "eq:transport1" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport1})
+... namics of Equations  \ref{eq:transport1} -- ref{eq:transport3}
+
+======= ...
+*** error: reference to equation label "eq:transport3" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport3})
+... ef{eq:transport1} --  ref{eq:transport3}
+
+======= References =======
+
+B ...
+avoided abortion because of --no-abort
+
+*** warning: found \ref{...} with backslash
+    (ref{...} has no backslash in DocOnce syntax)
+\ref{eq:transport1}
+
+exporting publish database papers.pub to papers.bib:
+output in index.tex
+running preprocess -DFORMAT=html -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to html
+*** error: reference to equation label "eq:transport1" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport1})
+... namics of Equations  \ref{eq:transport1}--\ref{eq:transport3}
+
+=======  ...
+*** error: reference to equation label "eq:transport3" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport3})
+... ref{eq:transport1}-- \ref{eq:transport3}
+
+======= References =======
+
+B ...
+avoided abortion because of --no-abort
+
+*** warning: found \ref{...} with backslash
+    (ref{...} has no backslash in DocOnce syntax)
+\ref{eq:transport1}
+\ref{eq:transport3}
+*** replacing \bm{...} by \boldsymbol{...} (\bm is not supported by MathJax)
+output in index.html
+running preprocess -DFORMAT=ipynb -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to ipynb
+*** error: reference to equation label "eq:transport1" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport1})
+... namics of Equations  \ref{eq:transport1}--\ref{eq:transport3}
+
+=======  ...
+*** error: reference to equation label "eq:transport3" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport3})
+... ref{eq:transport1}-- \ref{eq:transport3}
+
+======= References =======
+
+B ...
+avoided abortion because of --no-abort
+
+*** warning: found \ref{...} with backslash
+    (ref{...} has no backslash in DocOnce syntax)
+\ref{eq:transport1}
+\ref{eq:transport3}
+*** replacing \bm{...} by \boldsymbol{...} (\bm is not supported by MathJax)
+output in index.ipynb
+running preprocess -DFORMAT=pdflatex -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to pdflatex
+*** error: reference to equation label "eq:transport1" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport1})
+... namics of Equations  \ref{eq:transport1}--\ref{eq:transport3}
+
+=======  ...
+*** error: reference to equation label "eq:transport3" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport3})
+... ref{eq:transport1}-- \ref{eq:transport3}
+
+======= References =======
+
+B ...
+avoided abortion because of --no-abort
+
+*** warning: found \ref{...} with backslash
+    (ref{...} has no backslash in DocOnce syntax)
+\ref{eq:transport1}
+\ref{eq:transport3}
+
+exporting publish database papers.pub to papers.bib:
+output in index.p.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to pdflatex
+*** error: reference to equation label "eq:transport1" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport1})
+... namics of Equations  \ref{eq:transport1}--\ref{eq:transport3}
+
+=======  ...
+*** error: reference to equation label "eq:transport3" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport3})
+... ref{eq:transport1}-- \ref{eq:transport3}
+
+======= References =======
+
+B ...
+avoided abortion because of --no-abort
+
+*** warning: found \ref{...} with backslash
+    (ref{...} has no backslash in DocOnce syntax)
+\ref{eq:transport1}
+\ref{eq:transport3}
+
+exporting publish database papers.pub to papers.bib:
+output in index.tex
+running preprocess -DFORMAT=html -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to html
+*** error: reference to equation label "eq:transport1" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport1})
+... namics of Equations  \ref{eq:transport1} -- \ref{eq:transport3}
+
+====== ...
+*** error: reference to equation label "eq:transport3" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport3})
+... f{eq:transport1} --  \ref{eq:transport3}
+
+======= References =======
+
+B ...
+avoided abortion because of --no-abort
+
+*** warning: found \ref{...} with backslash
+    (ref{...} has no backslash in DocOnce syntax)
+\ref{eq:transport1}
+\ref{eq:transport3}
+*** replacing \bm{...} by \boldsymbol{...} (\bm is not supported by MathJax)
+output in index.html
+running preprocess -DFORMAT=ipynb -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to ipynb
+*** error: reference to equation label "eq:transport1" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport1})
+... namics of Equations  \ref{eq:transport1} -- \ref{eq:transport3}
+
+====== ...
+*** error: reference to equation label "eq:transport3" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport3})
+... f{eq:transport1} --  \ref{eq:transport3}
+
+======= References =======
+
+B ...
+avoided abortion because of --no-abort
+
+*** warning: found \ref{...} with backslash
+    (ref{...} has no backslash in DocOnce syntax)
+\ref{eq:transport1}
+\ref{eq:transport3}
+*** replacing \bm{...} by \boldsymbol{...} (\bm is not supported by MathJax)
+output in index.ipynb
+running preprocess -DFORMAT=pdflatex -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to pdflatex
+*** error: reference to equation label "eq:transport1" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport1})
+... namics of Equations  \ref{eq:transport1} -- \ref{eq:transport3}
+
+====== ...
+*** error: reference to equation label "eq:transport3" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport3})
+... f{eq:transport1} --  \ref{eq:transport3}
+
+======= References =======
+
+B ...
+avoided abortion because of --no-abort
+
+*** warning: found \ref{...} with backslash
+    (ref{...} has no backslash in DocOnce syntax)
+\ref{eq:transport1}
+\ref{eq:transport3}
+
+exporting publish database papers.pub to papers.bib:
+output in index.p.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to pdflatex
+*** error: reference to equation label "eq:transport1" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport1})
+... namics of Equations  \ref{eq:transport1} -- \ref{eq:transport3}
+
+====== ...
+*** error: reference to equation label "eq:transport3" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport3})
+... f{eq:transport1} --  \ref{eq:transport3}
+
+======= References =======
+
+B ...
+avoided abortion because of --no-abort
+
+*** warning: found \ref{...} with backslash
+    (ref{...} has no backslash in DocOnce syntax)
+\ref{eq:transport1}
+\ref{eq:transport3}
+
+exporting publish database papers.pub to papers.bib:
+output in index.tex
+running preprocess -DFORMAT=html -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to html
+*** error: reference to equation label "eq:transport1" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport1})
+... namics of Equations  \ref{eq:transport1} -- \ref{eq:transport3} such th ...
+*** error: reference to equation label "eq:transport3" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport3})
+... f{eq:transport1} --  \ref{eq:transport3} such that the *two-species Blo ...
+avoided abortion because of --no-abort
+
+*** warning: found \ref{...} with backslash
+    (ref{...} has no backslash in DocOnce syntax)
+\ref{eq:transport1}
+\ref{eq:transport3}
+*** replacing \bm{...} by \boldsymbol{...} (\bm is not supported by MathJax)
+output in index.html
+running preprocess -DFORMAT=ipynb -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to ipynb
+*** error: reference to equation label "eq:transport1" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport1})
+... namics of Equations  \ref{eq:transport1} -- \ref{eq:transport3} such th ...
+*** error: reference to equation label "eq:transport3" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport3})
+... f{eq:transport1} --  \ref{eq:transport3} such that the *two-species Blo ...
+avoided abortion because of --no-abort
+
+*** warning: found \ref{...} with backslash
+    (ref{...} has no backslash in DocOnce syntax)
+\ref{eq:transport1}
+\ref{eq:transport3}
+*** replacing \bm{...} by \boldsymbol{...} (\bm is not supported by MathJax)
+output in index.ipynb
+running preprocess -DFORMAT=pdflatex -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to pdflatex
+*** error: reference to equation label "eq:transport1" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport1})
+... namics of Equations  \ref{eq:transport1} -- \ref{eq:transport3} such th ...
+*** error: reference to equation label "eq:transport3" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport3})
+... f{eq:transport1} --  \ref{eq:transport3} such that the *two-species Blo ...
+avoided abortion because of --no-abort
+
+*** warning: found \ref{...} with backslash
+    (ref{...} has no backslash in DocOnce syntax)
+\ref{eq:transport1}
+\ref{eq:transport3}
+
+exporting publish database papers.pub to papers.bib:
+output in index.p.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to pdflatex
+*** error: reference to equation label "eq:transport1" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport1})
+... namics of Equations  \ref{eq:transport1} -- \ref{eq:transport3} such th ...
+*** error: reference to equation label "eq:transport3" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport3})
+... f{eq:transport1} --  \ref{eq:transport3} such that the *two-species Blo ...
+avoided abortion because of --no-abort
+
+*** warning: found \ref{...} with backslash
+    (ref{...} has no backslash in DocOnce syntax)
+\ref{eq:transport1}
+\ref{eq:transport3}
+
+exporting publish database papers.pub to papers.bib:
+output in index.tex
+running preprocess -DFORMAT=html -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to html
+*** error: reference to equation label "eq:transport1" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport1})
+... namics of Equations  \ref{eq:transport1} -- \ref{eq:transport3} such th ...
+*** error: reference to equation label "eq:transport3" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport3})
+... f{eq:transport1} --  \ref{eq:transport3} such that the *two-species Blo ...
+avoided abortion because of --no-abort
+
+*** warning: found \ref{...} with backslash
+    (ref{...} has no backslash in DocOnce syntax)
+\ref{eq:transport1}
+\ref{eq:transport3}
+*** replacing \bm{...} by \boldsymbol{...} (\bm is not supported by MathJax)
+output in index.html
+running preprocess -DFORMAT=ipynb -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to ipynb
+*** error: reference to equation label "eq:transport1" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport1})
+... namics of Equations  \ref{eq:transport1} -- \ref{eq:transport3} such th ...
+*** error: reference to equation label "eq:transport3" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport3})
+... f{eq:transport1} --  \ref{eq:transport3} such that the *two-species Blo ...
+avoided abortion because of --no-abort
+
+*** warning: found \ref{...} with backslash
+    (ref{...} has no backslash in DocOnce syntax)
+\ref{eq:transport1}
+\ref{eq:transport3}
+*** replacing \bm{...} by \boldsymbol{...} (\bm is not supported by MathJax)
+output in index.ipynb
+running preprocess -DFORMAT=pdflatex -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to pdflatex
+*** error: reference to equation label "eq:transport1" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport1})
+... namics of Equations  \ref{eq:transport1} -- \ref{eq:transport3} such th ...
+*** error: reference to equation label "eq:transport3" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport3})
+... f{eq:transport1} --  \ref{eq:transport3} such that the *two-species Blo ...
+avoided abortion because of --no-abort
+
+*** warning: found \ref{...} with backslash
+    (ref{...} has no backslash in DocOnce syntax)
+\ref{eq:transport1}
+\ref{eq:transport3}
+
+exporting publish database papers.pub to papers.bib:
+output in index.p.tex
+running preprocess -DFORMAT=pdflatex -DDEVICE=screen  index.do.txt > tmp_preprocess__index.do.txt
+translating doconce text in tmp_preprocess__index.do.txt to pdflatex
+*** error: reference to equation label "eq:transport1" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport1})
+... namics of Equations  \ref{eq:transport1} -- \ref{eq:transport3} such th ...
+*** error: reference to equation label "eq:transport3" is without parentheses
+    the equation reference should be typeset as (ref{eq:transport3})
+... f{eq:transport1} --  \ref{eq:transport3} such that the *two-species Blo ...
+avoided abortion because of --no-abort
+
+*** warning: found \ref{...} with backslash
+    (ref{...} has no backslash in DocOnce syntax)
+\ref{eq:transport1}
+\ref{eq:transport3}
+
+exporting publish database papers.pub to papers.bib:
+output in index.tex

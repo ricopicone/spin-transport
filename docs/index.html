@@ -148,7 +148,7 @@ $$
 <center><b>Department of Mechanical Engineering, Saint Martin's University</b></center>
 <br>
 <p>
-<center><h4>Jan 2, 2018</h4></center> <!-- date -->
+<center><h4>Jan 16, 2018</h4></center> <!-- date -->
 <br>
 <p>
 <b>Summary.</b> The <em>spin-transport</em> software (<a href="https://github.com/ricopicone/spin-transport" target="_self">GitHub</a>) is for the dynamic simulation of bulk spin transport&mdash;diffusion and separation&mdash;in solid media.
@@ -320,7 +320,7 @@ $$
 		+
 		\Gammar\Deltar\overline{\gamma}^2
 		\left(
-			1 - \rho_3^3
+			1 - \rho_3^2
 		\right)
 	\right)
 	\arctanh\rho_1 + 
@@ -329,8 +329,8 @@ $$
 	\left(
 		\partial_{\rbar} \rho_2 - \Gammar\Deltar\overline{\gamma} \partial_{\rbar} \rho_3
 	\right)
-	+ ( 1 + \Gammar )\, \partial_{\overline{r}}^2 \rho_1 
-\label{_auto1}\\
+	+ ( 1 + \Gammar )\, \partial_{\overline{r}}^2 \rho_1
+	\label{eq:transport1} \\
 	%
 	\partial_{\tbar} \rho_2 
 	&=
@@ -340,8 +340,8 @@ $$
 		\left( 1 - \rho_2^2 \right)
 		\arctanh\rho_1
 	\right)
-	+ \partial_{\overline{r}}^2 \rho_2 
-\label{_auto2}\\
+	+ \partial_{\overline{r}}^2 \rho_2
+	\label{eq:transport2} \\
 	\partial_{\tbar} \rho_3
 	&=
 	- 
@@ -353,7 +353,7 @@ $$
 		\arctanh\rho_1
 	\right)
 	+ \Gammar \partial_{\overline{r}}^2 \rho_3 .
-\label{_auto3}
+	\label{eq:transport3}
 \end{align}
 $$
 
@@ -363,9 +363,9 @@ Bloch equation dynamics for a each species and \( T_1 \gg T_2 \) can be approxim
 $$
 \begin{align}
 	\partial_{\overline{t}} \rho_2 &= \frac{\rho_{20}}{\overline{T}_{1p}} - \frac{\rho_2}{\overline{\tau}_p} 
-\label{_auto4}\\
+\label{_auto1}\\
 	\partial_{\overline{t}} \rho_3 &= \frac{\rho_{30}}{\overline{T}_{1e}} - \frac{\rho_3}{\overline{\tau}_e}.
-\label{_auto5}
+\label{_auto2}
 \end{align}
 $$
 
@@ -375,7 +375,7 @@ where, for each species,
 $$
 \begin{align}
 	\overline{\tau} = \frac{1}{\frac{1}{\overline{T}_1} + \frac{\overline{T}_2 \omega_1^2}{1+\overline{T}_2^2 \tilde{\delta}^2}}
-\label{_auto6}
+\label{_auto3}
 \end{align}
 $$
 
@@ -386,7 +386,63 @@ $$
 \begin{align}
 	\omega_1 &= -\gamma B_1 \quad \text{and} \quad
 	\tilde{\delta} = \gamma B_d \overline{r}.
-\label{_auto7}
+\label{_auto4}
+\end{align}
+$$
+
+<p>
+The Block equation dynamics can be combined with the transport dynamics of Equations \ref{eq:transport1} &ndash; \ref{eq:transport3} such that the <em>two-species Block-transport</em> equations can be written
+
+$$
+\begin{align} 
+	\partial_{\tbar} \rho_1 
+	&=
+	-\frac{\cratio^2}{1+\Deltar}
+	\left(
+		\left(
+			1 - \rho_2^2
+		\right)
+		+
+		\Gammar\Deltar\overline{\gamma}^2
+		\left(
+			1 - \rho_3^2
+		\right)
+	\right)
+	\arctanh\rho_1 + 
+	\nonumber\\
+	&-\frac{\cratio}{1+\Deltar}
+	\left(
+		\partial_{\rbar} \rho_2 - \Gammar\Deltar\overline{\gamma} \partial_{\rbar} \rho_3
+	\right)
+	+ ( 1 + \Gammar )\, \partial_{\overline{r}}^2 \rho_1
+	\label{eq:btransport1} \\
+	%
+	\partial_{\tbar} \rho_2 
+	&=
+	\partial_{\rbar}
+	\left(
+		\cratio
+		\left( 1 - \rho_2^2 \right)
+		\arctanh\rho_1
+	\right)
+	+ \partial_{\overline{r}}^2 \rho_2
+	+ \frac{\rho_{20}}{\overline{T}_{1p}} 
+	- \frac{\rho_2}{\overline{\tau}_p}
+	\label{eq:btransport2} \\
+	\partial_{\tbar} \rho_3
+	&=
+	- 
+	\Gammar\overline{\gamma}
+	\partial_{\rbar}
+	\left(
+		\cratio
+		\left( 1 - \rho_3^2 \right)
+		\arctanh\rho_1
+	\right)
+	+ \Gammar \partial_{\overline{r}}^2 \rho_3
+	+ \frac{\rho_{30}}{\overline{T}_{1e}} 
+	- \frac{\rho_3}{\overline{\tau}_e} .
+	\label{eq:btransport3}
 \end{align}
 $$
 

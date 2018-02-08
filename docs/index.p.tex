@@ -157,7 +157,7 @@ The \emph{spin-transport} documentation
 
 % --- begin date ---
 \begin{center}
-Jan 2, 2018
+Jan 16, 2018
 \end{center}
 % --- end date ---
 
@@ -314,7 +314,6 @@ See \cite{Picone2014b} for details.
 \paragraph{two-species magnetization transport equations.}
 The preferred form of the continuity equation is in the polarization basis with the dimensionless spatial coordinate and time variable, which we call the \emph{two-species magnetization transport equations}:
 
-
 \begin{align} 
 	\partial_{\tbar} \rho_1 
 	&=
@@ -326,7 +325,7 @@ The preferred form of the continuity equation is in the polarization basis with 
 		+
 		\Gammar\Deltar\overline{\gamma}^2
 		\left(
-			1 - \rho_3^3
+			1 - \rho_3^2
 		\right)
 	\right)
 	\arctanh\rho_1 + 
@@ -335,7 +334,8 @@ The preferred form of the continuity equation is in the polarization basis with 
 	\left(
 		\partial_{\rbar} \rho_2 - \Gammar\Deltar\overline{\gamma} \partial_{\rbar} \rho_3
 	\right)
-	+ ( 1 + \Gammar )\, \partial_{\overline{r}}^2 \rho_1 \\
+	+ ( 1 + \Gammar )\, \partial_{\overline{r}}^2 \rho_1
+	\label{eq:transport1} \\
 	%
 	\partial_{\tbar} \rho_2 
 	&=
@@ -345,7 +345,8 @@ The preferred form of the continuity equation is in the polarization basis with 
 		\left( 1 - \rho_2^2 \right)
 		\arctanh\rho_1
 	\right)
-	+ \partial_{\overline{r}}^2 \rho_2 \\
+	+ \partial_{\overline{r}}^2 \rho_2
+	\label{eq:transport2} \\
 	\partial_{\tbar} \rho_3
 	&=
 	- 
@@ -357,6 +358,7 @@ The preferred form of the continuity equation is in the polarization basis with 
 		\arctanh\rho_1
 	\right)
 	+ \Gammar \partial_{\overline{r}}^2 \rho_3 .
+	\label{eq:transport3}
 \end{align}
 
 Bloch equation dynamics for a each species and $T_1 \gg T_2$ can be approximated without the transverse dynamics as \cite{Picone2010,Grivet1993}
@@ -379,6 +381,60 @@ where it is important to use dimensionless time constants and where we define (a
 	\tilde{\delta} = \gamma B_d \overline{r}.
 \end{align}
 
+The Block equation dynamics can be combined with the transport dynamics of Equations \ref{eq:transport1} -- \ref{eq:transport3} such that the \emph{two-species Block-transport} equations can be written
+
+
+
+\begin{align} 
+	\partial_{\tbar} \rho_1 
+	&=
+	-\frac{\cratio^2}{1+\Deltar}
+	\left(
+		\left(
+			1 - \rho_2^2
+		\right)
+		+
+		\Gammar\Deltar\overline{\gamma}^2
+		\left(
+			1 - \rho_3^2
+		\right)
+	\right)
+	\arctanh\rho_1 + 
+	\nonumber\\
+	&-\frac{\cratio}{1+\Deltar}
+	\left(
+		\partial_{\rbar} \rho_2 - \Gammar\Deltar\overline{\gamma} \partial_{\rbar} \rho_3
+	\right)
+	+ ( 1 + \Gammar )\, \partial_{\overline{r}}^2 \rho_1
+	\label{eq:btransport1} \\
+	%
+	\partial_{\tbar} \rho_2 
+	&=
+	\partial_{\rbar}
+	\left(
+		\cratio
+		\left( 1 - \rho_2^2 \right)
+		\arctanh\rho_1
+	\right)
+	+ \partial_{\overline{r}}^2 \rho_2
+	+ \frac{\rho_{20}}{\overline{T}_{1p}} 
+	- \frac{\rho_2}{\overline{\tau}_p}
+	\label{eq:btransport2} \\
+	\partial_{\tbar} \rho_3
+	&=
+	- 
+	\Gammar\overline{\gamma}
+	\partial_{\rbar}
+	\left(
+		\cratio
+		\left( 1 - \rho_3^2 \right)
+		\arctanh\rho_1
+	\right)
+	+ \Gammar \partial_{\overline{r}}^2 \rho_3
+	+ \frac{\rho_{30}}{\overline{T}_{1e}} 
+	- \frac{\rho_3}{\overline{\tau}_e} .
+	\label{eq:btransport3}
+\end{align}
 
 
 
