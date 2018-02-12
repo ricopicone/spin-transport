@@ -57,4 +57,4 @@ print('error_L2  =', error_L2)
 print('error_max =', error_max)
 
 # Hold plot
-interactive()
+#interactive()
