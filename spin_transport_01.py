@@ -7,11 +7,12 @@ dt = T / num_steps # time step size
 L = 1	# The length of the mesh
 n = 20	# The number of cells in the mesh
 
+# Initial Conditions
+rho1_ic = Expression(('0.5 * sin(pi * x[0])', '0.15', '0.35'), degree = 1)
+
 mesh = IntervalMesh(n, 0, L) # A 1d mesh with n cells from 0 to L
 
 # Define function space for system of concentrations
-#element = VectorElement('P', triangle, 1, dim = 3) # Vector of three linear lagrangian finite elements for the three variable we are trying to solve for
-#V = FunctionSpace(mesh, element) # Creating the function space
 V = VectorFunctionSpace(mesh, 'CG', 1, dim = 3)
 
 # Define test functions
@@ -25,6 +26,11 @@ rho_n2 = Function(V)
 rho1, rho2, rho3 = split(rho)
 rho1_n1, rho2_n1, rho3_n1 = split(rho_n1)
 rho1_n2, rho2_n2, rho3_n2 = split(rho_n2)
+
+# Set initial conditions
+rho.assign(rho1_ic)
+rho_n1.assign(rho1_ic)
+rho_n2.assign(rho1_ic)
 
 # Define variational problem
 _dt = Constant(dt)
