@@ -1,7 +1,7 @@
 from fenics import *
 
-T = 0.5            # final time
-num_steps = 500    # number of time steps
+T = 2.0            # final time
+num_steps = 1000    # number of time steps
 dt = T / num_steps # time step size
 
 dbcl = [0.5, 0.2, 0.3] # The value of the left Dirichlet BC
