@@ -5,10 +5,12 @@ num_steps = 500    # number of time steps
 dt = T / num_steps # time step size
 
 L = 1	# The length of the mesh
-n = 20	# The number of cells in the mesh
+n = 2000	# The number of cells in the mesh
 
 # Initial Conditions
-rho1_ic = Expression(('0.5 * sin(pi * x[0])', '0.15', '0.35'), degree = 1)
+#rho1_ic = Expression(('0.5 * sin(pi * x[0])', '0.15 * sin(pi * x[0])', '0.35 * sin(pi * x[0])'), degree = 1)
+#rho1_ic = Expression(('0.25 + 0.5 * x[0]', '0.15 - 0.1 * x[0]', '0.35 - 0.2 * x[0]'), degree = 1)
+rho1_ic = Expression(('0.5', 'tanh(0.5 * x[0])', 'tanh(0.2 * x[0])'), degree = 1)
 
 mesh = IntervalMesh(n, 0, L) # A 1d mesh with n cells from 0 to L
 
@@ -73,3 +75,4 @@ for n in range(num_steps):
 
 	# Update progress bar
 	progress.update(t / T)
+	break
