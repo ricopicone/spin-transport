@@ -1,21 +1,33 @@
 from fenics import *
 
-T = 5.0            # final time
+T = 0.5            # final time
 num_steps = 500    # number of time steps
 dt = T / num_steps # time step size
 
+dbcl = [0.5, 0.2, 0.3] # The value of the left Dirichlet BC
+dbcr = [0.5, 0.1, 0.4] # The value of the right Dirichlet BC
+
 L = 1	# The length of the mesh
-n = 2000	# The number of cells in the mesh
+n = 200	# The number of cells in the mesh
 
 # Initial Conditions
-#rho1_ic = Expression(('0.5 * sin(pi * x[0])', '0.15 * sin(pi * x[0])', '0.35 * sin(pi * x[0])'), degree = 1)
-#rho1_ic = Expression(('0.25 + 0.5 * x[0]', '0.15 - 0.1 * x[0]', '0.35 - 0.2 * x[0]'), degree = 1)
-rho1_ic = Expression(('0.5', 'tanh(0.5 * x[0])', 'tanh(0.2 * x[0])'), degree = 1)
+rho1_ic = Expression(('0.5 * sin(pi * x[0])', '0.15 * sin(pi * x[0])', '0.35 * sin(pi * x[0])'), degree = 1)
 
 mesh = IntervalMesh(n, 0, L) # A 1d mesh with n cells from 0 to L
 
 # Define function space for system of concentrations
 V = VectorFunctionSpace(mesh, 'CG', 1, dim = 3)
+
+# Define the boundary conditions
+def left(x, on_boundary):
+	return near(x[0], 0) and on_boundary
+def right(x, on_boundary):
+	return near(x[0], L) and on_boundary
+
+dbc = [
+	DirichletBC(V, Constant(dbcl), left),
+	DirichletBC(V, Constant(dbcr), right)
+]
 
 # Define test functions
 v_1, v_2, v_3 = TestFunctions(V)
@@ -61,7 +73,7 @@ for n in range(num_steps):
 	t += dt
 
 	# Solve variational problem for time step
-	solve(F == 0, rho)
+	solve(F == 0, rho, bcs = dbc)
 
 	# Save solution to file (VTK)
 	_rho1, _rho2, _rho3 = rho.split()
@@ -75,4 +87,3 @@ for n in range(num_steps):
 
 	# Update progress bar
 	progress.update(t / T)
-	break
