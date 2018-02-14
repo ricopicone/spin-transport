@@ -10,14 +10,17 @@ PlotOverLine(reader)
 Show()
 Render()
 
-outfile = None
+avifile = None
+mp4file = None
 try:
-	outfile = sys.argv[2]
+	avifile = sys.argv[2] + '.avi'
+	mp4file = sys.argv[2] + '.mp4'
 except:
 	pass
-AnimateReader(reader, filename = '{}.avi'.format(outfile))
 
-if outfile is not None:
+AnimateReader(reader, filename = avifile)
+
+if avifile is not None:
 	import subprocess, os
-	subprocess.call('mencoder -speed 45 -o {0}.mp4 -ovc lavc {0}.avi'.format(outfile).split(' '))
-	os.remove('{}.avi'.format(outfile))
+	subprocess.call('mencoder -speed 45 -o {} -ovc lavc {}'.format(mp4file, avifile).split(' '))
+	os.remove(avifile)
