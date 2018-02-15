@@ -4,6 +4,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
+import sys
 
 L = 1
 
@@ -32,6 +33,7 @@ def update_plot(num, lines, time):
 	for i in range(len(lines)):
 		lines[i][0].set_data(np.linspace(0, L, rho.shape[2]), rho[i,num,:])
 	time.set_text('t={:.3f} s'.format(t[num]))
+	return lines[0]
 
 Writer = animation.writers['ffmpeg']
 writer = Writer(fps=15, metadata={}, bitrate=1800)
@@ -62,6 +64,7 @@ line_ani = animation.FuncAnimation(fig1,
 	update_plot,
 	t.shape[0],
 	fargs=(lines, time_label),
-	interval = 100)
+	interval = 100,
+	blit = True)
 
-line_ani.save('spin_transport_soln.mp4', writer=writer)
+line_ani.save('spin_transport_soln.mp4', writer = writer)
