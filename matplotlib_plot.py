@@ -4,10 +4,11 @@ try:
 	filename = sys.argv[1]
 except:
 	pass
+import os
 import xml.etree.ElementTree as ET
 import numpy as np
 import matplotlib
-if filename is not None:
+if 'DISPLAY' not in os.environ:
 	matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
