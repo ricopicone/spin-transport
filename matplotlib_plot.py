@@ -1,7 +1,14 @@
+import sys
+filename = None
+try:
+	filename = sys.argv[1]
+except:
+	pass
 import xml.etree.ElementTree as ET
 import numpy as np
 import matplotlib
-matplotlib.use('Agg')
+if filename is not None:
+	matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import sys
@@ -33,10 +40,6 @@ def update_plot(num, lines, time):
 	for i in range(len(lines)):
 		lines[i][0].set_data(np.linspace(0, L, rho.shape[2]), rho[i,num,:])
 	time.set_text('t={:.3f} s'.format(t[num]))
-	return lines[0]
-
-Writer = animation.writers['ffmpeg']
-writer = Writer(fps=15, metadata={}, bitrate=1800)
 
 fig1 = plt.figure()
 
@@ -64,7 +67,15 @@ line_ani = animation.FuncAnimation(fig1,
 	update_plot,
 	t.shape[0],
 	fargs=(lines, time_label),
-	interval = 100,
-	blit = True)
+	interval = 100)
 
-line_ani.save('spin_transport_soln.mp4', writer = writer)
+if filename is not None:
+	if filename.split('.')[-1] == 'mp4':
+		Writer = animation.writers['ffmpeg']
+		writer = Writer(fps=15, metadata={}, bitrate=1800)
+	elif filename.split('.')[-1] == 'gif':
+		Writer = animation.writers['imagemagick']
+		writer = Writer(fps=15)
+	line_ani.save(filename, writer = writer)
+else:
+	plt.show()
