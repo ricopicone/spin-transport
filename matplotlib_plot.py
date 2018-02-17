@@ -2,6 +2,7 @@ import sys
 filename = None
 try:
 	filename = sys.argv[1]
+	extension = filename.split('.')[-1]
 except:
 	pass
 import os
@@ -41,6 +42,7 @@ def update_plot(num, lines, time):
 	for i in range(len(lines)):
 		lines[i][0].set_data(np.linspace(0, L, rho.shape[2]), rho[i,num,:])
 	time.set_text('t={:.3f} s'.format(t[num]))
+	return lines[0]
 
 fig1 = plt.figure()
 
@@ -71,12 +73,17 @@ line_ani = animation.FuncAnimation(fig1,
 	interval = 100)
 
 if filename is not None:
-	if filename.split('.')[-1] == 'mp4':
+	if extension == 'mp4':
 		Writer = animation.writers['ffmpeg']
 		writer = Writer(fps=15, metadata={}, bitrate=1800)
-	elif filename.split('.')[-1] == 'gif':
+	elif extension == 'gif':
 		Writer = animation.writers['imagemagick']
 		writer = Writer(fps=15)
+	elif extension == 'html':
+		from JSAnimation import HTMLWriter
+		writer = HTMLWriter()
+	else:
+		raise ValueError('"{}" is not a known file extension'.format(filename.split('.')[-1]))
 	line_ani.save(filename, writer = writer)
 else:
 	plt.show()
