@@ -137,7 +137,7 @@ final,                   % draft: marks overfull hboxes, figures with paths
 \begin{center}
 {\LARGE\bf
 \begin{spacing}{1.25}
-The \emph{spin-transport} documentation
+The spin-transport documentation
 \end{spacing}
 }
 \end{center}
@@ -157,7 +157,7 @@ The \emph{spin-transport} documentation
 
 % --- begin date ---
 \begin{center}
-Jan 16, 2018
+Feb 18, 2018
 \end{center}
 % --- end date ---
 
@@ -311,7 +311,7 @@ See \cite{Picone2014b} for details.
 \end{itemize}
 
 \noindent
-\paragraph{two-species magnetization transport equations.}
+\paragraph{Two-species Bloch-transport equations.}
 The preferred form of the continuity equation is in the polarization basis with the dimensionless spatial coordinate and time variable, which we call the \emph{two-species magnetization transport equations}:
 
 \begin{align} 
@@ -381,9 +381,7 @@ where it is important to use dimensionless time constants and where we define (a
 	\tilde{\delta} = \gamma B_d \overline{r}.
 \end{align}
 
-The Block equation dynamics can be combined with the transport dynamics of Equations \ref{eq:transport1} -- \ref{eq:transport3} such that the \emph{two-species Block-transport} equations can be written
-
-
+The Bloch equation dynamics can be combined with the transport dynamics of Equations \ref{eq:transport1} -- \ref{eq:transport3} such that the \emph{two-species Bloch-transport} equations can be written
 
 \begin{align} 
 	\partial_{\tbar} \rho_1 
@@ -406,7 +404,7 @@ The Block equation dynamics can be combined with the transport dynamics of Equat
 		\partial_{\rbar} \rho_2 - \Gammar\Deltar\overline{\gamma} \partial_{\rbar} \rho_3
 	\right)
 	+ ( 1 + \Gammar )\, \partial_{\overline{r}}^2 \rho_1
-	\label{eq:btransport1} \\
+	\label{eq:btransport1b} \\
 	%
 	\partial_{\tbar} \rho_2 
 	&=
@@ -419,7 +417,7 @@ The Block equation dynamics can be combined with the transport dynamics of Equat
 	+ \partial_{\overline{r}}^2 \rho_2
 	+ \frac{\rho_{20}}{\overline{T}_{1p}} 
 	- \frac{\rho_2}{\overline{\tau}_p}
-	\label{eq:btransport2} \\
+	\label{eq:btransport2b} \\
 	\partial_{\tbar} \rho_3
 	&=
 	- 
@@ -433,7 +431,93 @@ The Block equation dynamics can be combined with the transport dynamics of Equat
 	+ \Gammar \partial_{\overline{r}}^2 \rho_3
 	+ \frac{\rho_{30}}{\overline{T}_{1e}} 
 	- \frac{\rho_3}{\overline{\tau}_e} .
-	\label{eq:btransport3}
+	\label{eq:btransport3b}
+\end{align}
+
+This system of equations is that which is explored, numerically, by the \emph{spin-transport} software.
+
+\section{Variational formulation for mixed boundary conditions}
+\label{variational_form}
+
+The FEniCS solver requires the system of equations be expressed in \emph{variational form}, also called \emph{weak form}.
+
+Furthermore, the system must be discretized in time. The backward Euler method yields time derivative approximations, for a time-index $n$ and time-step $T$,
+
+\begin{align}
+	\partial_{\overline{t}} \rho_i = 
+	\frac{\rho_i^{n+1} - \rho_i^n}{T}.
+\end{align}
+
+For variational form, each $\partial_{\overline{r}}^2 \rho_i$ term is integrated by parts---with test functions $v_i(\overline{r})$ over the spatial domain $\Omega$ with boundary $\partial\Omega$, subsets of which, $\Gamma_D$ and $\Gamma_N$, satisfy \emph{Dirichlet} and \emph{Neumann} boundary conditions $\rho_i = \rho_{i0}$ on $\Gamma_D$ and $-\partial_{\overline{r}} \rho_i = G_i$ (for no-flow $G_i = 0$) on $\Gamma_N$---as follows \cite[\S~4.1.1--4.1.2]{Langtangen2017}:
+
+\begin{align}
+	\int_\Omega \partial_{\overline{r}}^2 \rho_i
+	&=
+	-\int_\Omega \partial_{\overline{r}} \rho_i \cdot \partial_{\overline{r}} v_i d\overline{r} +
+	\int_{\partial\Omega} v_i \partial_{\overline{r}} \rho_i ds
+	\\
+	&= 
+	-\int_\Omega \partial_{\overline{r}} \rho_i \cdot \partial_{\overline{r}} v_i d\overline{r} -
+	\int_{\Gamma_N} v_i G_i ds.
+\end{align}
+
+This yields the weak formulation
+
+\begin{align}
+	\int_\Omega \bigg( 
+		&T^{-1} (\rho_1^{n+1}-\rho_1^n) v_1 +
+		(1+\overline{\Gamma}) 
+		\partial_{\overline{r}} \rho_1^{n+1} \cdot \partial_{\overline{r}} v_1 \nonumber \\
+		&+ \frac{\cratio^2}{1+\Deltar}
+		\left(
+			\left(
+				1 - (\rho_2^{n+1})^2
+			\right)
+			+
+			\Gammar\Deltar\overline{\gamma}^2
+			\left(
+				1 - (\rho_3^{n+1})^2
+			\right)
+		\right)
+		v_1
+		\arctanh\rho_1^{n+1} + 
+		\nonumber\\
+		&-\frac{\cratio}{1+\Deltar}
+		\left(
+			\partial_{\rbar} \rho_2^{n+1} - \Gammar\Deltar\overline{\gamma} \partial_{\rbar} \rho_3^{n+1}
+		\right) v_1 
+	\bigg) d\overline{r} + \nonumber\\
+	\int_\Omega \Bigg(
+		&T^{-1} (\rho_2^{n+1}-\rho_2^n) v_2
+		+\partial_{\overline{r}} \rho_2^{n+1} \cdot \partial_{\overline{r}} v_2 \nonumber \\
+		&\bigg(
+		  -\overline{c} \frac{1-(\rho_2^{n+1})^2}{1-(\rho_1^{n+1})^2} \partial_{\overline{r}}\rho_1^{n+1}
+		  + 2 \overline{c} \rho_2^{n+1} \arctanh\rho_1^{n+1} \partial_{\overline{r}}\rho_2^{n+1}
+		  + \dfrac{\rho_2^{n+1}}{\overline{\tau}_p}
+		\bigg)
+		v_2
+	\Bigg) d\overline{r} + \nonumber\\
+	\int_\Omega \Bigg(
+		&T^{-1} (\rho_3^{n+1}-\rho_3^n) v_3 
+		+\overline{\Gamma}\partial_{\overline{r}} \rho_3^{n+1} \cdot \partial_{\overline{r}} v_3 \nonumber \\
+		&\bigg(
+		  -\overline{c} \frac{1-(\rho_3^{n+1})^2}{1-(\rho_1^{n+1})^2} \partial_{\overline{r}}\rho_1^{n+1}
+		  + 2 \overline{c} \rho_3^{n+1} \arctanh\rho_1^{n+1} \partial_{\overline{r}}\rho_3^{n+1} 
+		  + \dfrac{\rho_3^{n+1}}{\overline{\tau}_e}
+		\bigg)
+		v_3 
+	\Bigg)
+	d\overline{r} + \nonumber\\
+	-\int_\Omega \bigg(
+		&\dfrac{\rho_{20}}{\overline{T}_{1p}} v_2 +
+		\dfrac{\rho_{30}}{\overline{T}_{1e}} v_3	
+	\bigg)
+	d\overline{r}
+	+\int_{\Gamma_N} \bigg(
+		v_1 G_1 + v_2 G_2 + v_3 G_3
+	\bigg)
+	ds
+	= 0.
 \end{align}
 
 

@@ -14,16 +14,6 @@
    annote:    Bloch equations simulation
    entrytype: article
    keywords:  nuclear magnetic resonance; simulation; numerical solution; block equations; magnetization; spin; precession; relaxation time
-* books
-** Solving {PDE}s in Python: the {FEniCS} Tutorial I
-   key:       Langtangen2017
-   author:    H.P. Langtangen, A. Logg
-   year:      2017
-   publisher: Springer
-   status:    published
-   entrytype: book
-   isbn:      9783319524610
-   series:    Simula SpringerBriefs on Computing
 * theses
 ** {Separative Magnetization Transport: Theory, Model, and Experiment}
    key:        Picone2014b
