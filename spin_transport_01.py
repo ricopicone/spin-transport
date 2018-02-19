@@ -1,4 +1,16 @@
 from fenics import *
+import numpy as np
+import physical_constants_etc as constants
+import argparse
+
+parser = argparse.ArgumentParser(
+	description = 'Spin Transport Simulation',
+	add_help = False)
+parser.add_argument('-s',
+	type = str,
+	help = 'The file to save the solution to.',
+	default = 'spin_transport_soln/soln.npz')
+args = parser.parse_args()
 
 T = 2.0            # final time
 num_steps = 1000    # number of time steps
@@ -9,6 +21,13 @@ dbcr = [0.5, 0.1, 0.4] # The value of the right Dirichlet BC
 
 L = 1	# The length of the mesh
 n = 200	# The number of cells in the mesh
+
+# Initialize data arrays
+x = np.linspace(0, L, n + 1)
+t = np.arange(dt, T + dt, dt)
+_rho1 = np.ndarray([num_steps, n + 1])
+_rho2 = np.ndarray([num_steps, n + 1])
+_rho3 = np.ndarray([num_steps, n + 1])
 
 # Initial Conditions
 rho1_ic = Expression(('0.5 * sin(pi * x[0])', '0.15 * sin(pi * x[0])', '0.35 * sin(pi * x[0])'), degree = 1)
@@ -56,34 +75,31 @@ F = ((rho1 - 2 * rho1_n1 + rho1_n2) / _dt**2) * v_1 * dr \
   + ((rho3 - 2 * rho3_n1 + rho3_n2) / _dt**2) * v_3 * dr \
   + ((rho3 - rho3_n1) / _dt) * nabla_grad(v_3)[0] * dr
 
-# Create VTK files for visualization output
-vtkfile_rho1 = File('spin_transport_soln/rho_1.pvd')
-vtkfile_rho2 = File('spin_transport_soln/rho_2.pvd')
-vtkfile_rho3 = File('spin_transport_soln/rho_3.pvd')
-
 # Create progress bar
 progress = Progress('Time-stepping')
 set_log_level(PROGRESS)
 
 # Time-stepping
-t = 0
+_t = 0
 for n in range(num_steps):
 
 	# Update current time
-	t += dt
+	_t += dt
 
 	# Solve variational problem for time step
 	solve(F == 0, rho, bcs = dbc)
 
-	# Save solution to file (VTK)
-	_rho1, _rho2, _rho3 = rho.split()
-	vtkfile_rho1 << (_rho1, t)
-	vtkfile_rho2 << (_rho2, t)
-	vtkfile_rho3 << (_rho3, t)
+	# Add the data
+	_rho = rho.vector().get_local().reshape([x.shape[0], len(rho.split())])
+	_rho1[n,:] = _rho[:,0]
+	_rho2[n,:] = _rho[:,1]
+	_rho3[n,:] = _rho[:,2]
 
 	# Update previous solution
 	rho_n2.assign(rho_n1)
 	rho_n1.assign(rho)
 
 	# Update progress bar
-	progress.update(t / T)
+	progress.update(_t / T)
+
+np.savez(args.s, rho1 = _rho1, rho2 = _rho2, rho3 = _rho3, t = t, x = x)
