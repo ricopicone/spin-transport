@@ -123,11 +123,11 @@ def latex(name,
     if 'idx{' in text:
         cmd = 'makeindex %(name)s' % vars()
         system(cmd)
-    # if 'BIBFILE:' in text:
-    #     cmd = 'bibtex %(name)s' % vars()
-    #     system(cmd)
-    cmd = 'bibtex %(name)s' % vars()
-    system(cmd)
+    if 'BIBFILE:' in text:
+        cmd = 'bibtex %(name)s' % vars()
+        system(cmd)
+    # cmd = 'bibtex %(name)s' % vars()
+    # system(cmd)
 
     system(cmd_latex)
     system(cmd_latex)

@@ -6,9 +6,9 @@ Automatically generated HTML file from DocOnce source
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
-<meta name="description" content="The *spin-transport* documentation">
+<meta name="description" content="The spin-transport documentation">
 
-<title>The *spin-transport* documentation</title>
+<title>The spin-transport documentation</title>
 
 <!-- Bootstrap style: bootswatch_readable -->
 <link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css" rel="stylesheet">
@@ -58,7 +58,11 @@ pre { color: inherit; background-color: transparent; }
                1,
                'section:shorttheory',
                'section:shorttheory'),
-              ('References', 1, None, '___sec7')]}
+              ('Variational formulation for mixed boundary conditions',
+               1,
+               'variational_form',
+               'variational_form'),
+              ('References', 1, None, '___sec8')]}
 end of tocinfo -->
 
 <body>
@@ -99,7 +103,7 @@ $$
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="index.html">The *spin-transport* documentation</a>
+    <a class="navbar-brand" href="index.html">The spin-transport documentation</a>
   </div>
 
   <div class="navbar-collapse collapse navbar-responsive-collapse">
@@ -115,7 +119,8 @@ $$
      <!-- navigation toc: --> <li><a href="#___sec4" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Acknowledgement</a></li>
      <!-- navigation toc: --> <li><a href="#___sec5" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Contributors</a></li>
      <!-- navigation toc: --> <li><a href="#section:shorttheory" style="font-size: 80%;"><b>Short theoretical introduction</b></a></li>
-     <!-- navigation toc: --> <li><a href="#___sec7" style="font-size: 80%;"><b>References</b></a></li>
+     <!-- navigation toc: --> <li><a href="#variational_form" style="font-size: 80%;"><b>Variational formulation for mixed boundary conditions</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec8" style="font-size: 80%;"><b>References</b></a></li>
 
         </ul>
       </li>
@@ -133,7 +138,7 @@ $$
 
 
 <div class="jumbotron">
-<center><h1>The <em>spin-transport</em> documentation</h1></center>  <!-- document title -->
+<center><h1>The spin-transport documentation</h1></center>  <!-- document title -->
 
 <p>
 <!-- author(s): Rico A.R. Picone -->
@@ -148,7 +153,7 @@ $$
 <center><b>Department of Mechanical Engineering, Saint Martin's University</b></center>
 <br>
 <p>
-<center><h4>Jan 16, 2018</h4></center> <!-- date -->
+<center><h4>Feb 19, 2018</h4></center> <!-- date -->
 <br>
 <p>
 <b>Summary.</b> The <em>spin-transport</em> software (<a href="https://github.com/ricopicone/spin-transport" target="_self">GitHub</a>) is for the dynamic simulation of bulk spin transport&mdash;diffusion and separation&mdash;in solid media.
@@ -168,7 +173,8 @@ Table of contents</h2>
 &nbsp; &nbsp; &nbsp; <a href="#___sec4"> Acknowledgement </a><br>
 &nbsp; &nbsp; &nbsp; <a href="#___sec5"> Contributors </a><br>
 <a href="#section:shorttheory"> Short theoretical introduction </a><br>
-<a href="#___sec7"> References </a><br>
+<a href="#variational_form"> Variational formulation for mixed boundary conditions </a><br>
+<a href="#___sec8"> References </a><br>
 </p>
 <p>
 <!-- !split -->
@@ -305,7 +311,7 @@ See <a href="#Picone2014b">[1]</a> for details.
 <li> \( \overline{c} \): ratio of ratios \( \overline{B} (1+\overline{\Delta})/(1+\overline{\gamma}\overline{\Delta}) \).</li>
 </ul>
 
-<b>two-species magnetization transport equations.</b>
+<b>Two-species Bloch-transport equations.</b>
 The preferred form of the continuity equation is in the polarization basis with the dimensionless spatial coordinate and time variable, which we call the <em>two-species magnetization transport equations</em>:
 
 $$
@@ -323,7 +329,7 @@ $$
 			1 - \rho_3^2
 		\right)
 	\right)
-	\arctanh\rho_1 + 
+	\arctanh(\rho_1) + 
 	\nonumber\\
 	&-\frac{\cratio}{1+\Deltar}
 	\left(
@@ -338,7 +344,7 @@ $$
 	\left(
 		\cratio
 		\left( 1 - \rho_2^2 \right)
-		\arctanh\rho_1
+		\arctanh(\rho_1)
 	\right)
 	+ \partial_{\overline{r}}^2 \rho_2
 	\label{eq:transport2} \\
@@ -350,7 +356,7 @@ $$
 	\left(
 		\cratio
 		\left( 1 - \rho_3^2 \right)
-		\arctanh\rho_1
+		\arctanh(\rho_1)
 	\right)
 	+ \Gammar \partial_{\overline{r}}^2 \rho_3 .
 	\label{eq:transport3}
@@ -391,7 +397,7 @@ $$
 $$
 
 <p>
-The Block equation dynamics can be combined with the transport dynamics of Equations \ref{eq:transport1} &ndash; \ref{eq:transport3} such that the <em>two-species Block-transport</em> equations can be written
+The Bloch equation dynamics can be combined with the transport dynamics of Equations \ref{eq:transport1} &ndash; \ref{eq:transport3} such that the <em>two-species Bloch-transport</em> equations can be written
 
 $$
 \begin{align} 
@@ -408,14 +414,14 @@ $$
 			1 - \rho_3^2
 		\right)
 	\right)
-	\arctanh\rho_1 + 
+	\arctanh(\rho_1) + 
 	\nonumber\\
 	&-\frac{\cratio}{1+\Deltar}
 	\left(
 		\partial_{\rbar} \rho_2 - \Gammar\Deltar\overline{\gamma} \partial_{\rbar} \rho_3
 	\right)
 	+ ( 1 + \Gammar )\, \partial_{\overline{r}}^2 \rho_1
-	\label{eq:btransport1} \\
+	\label{eq:btransport1b} \\
 	%
 	\partial_{\tbar} \rho_2 
 	&=
@@ -423,12 +429,12 @@ $$
 	\left(
 		\cratio
 		\left( 1 - \rho_2^2 \right)
-		\arctanh\rho_1
+		\arctanh(\rho_1)
 	\right)
 	+ \partial_{\overline{r}}^2 \rho_2
 	+ \frac{\rho_{20}}{\overline{T}_{1p}} 
 	- \frac{\rho_2}{\overline{\tau}_p}
-	\label{eq:btransport2} \\
+	\label{eq:btransport2b} \\
 	\partial_{\tbar} \rho_3
 	&=
 	- 
@@ -437,16 +443,116 @@ $$
 	\left(
 		\cratio
 		\left( 1 - \rho_3^2 \right)
-		\arctanh\rho_1
+		\arctanh(\rho_1)
 	\right)
 	+ \Gammar \partial_{\overline{r}}^2 \rho_3
 	+ \frac{\rho_{30}}{\overline{T}_{1e}} 
 	- \frac{\rho_3}{\overline{\tau}_e} .
-	\label{eq:btransport3}
+	\label{eq:btransport3b}
 \end{align}
 $$
 
-<h1 id="___sec7" class="anchor">References </h1>
+<p>
+This system of equations is that which is explored, numerically, by the <em>spin-transport</em> software.
+
+<h1 id="variational_form" class="anchor">Variational formulation for mixed boundary conditions</h1>
+
+<p>
+The FEniCS solver requires the system of equations be expressed in <em>variational form</em>, also called <em>weak form</em>.
+
+<p>
+Furthermore, the system must be discretized in time. The backward Euler method yields time derivative approximations, for a time-index \( n \) and time-step \( T \),
+
+$$
+\begin{align}
+	\partial_{\overline{t}} \rho_i = 
+	\frac{\rho_i^{n+1} - \rho_i^n}{T}.
+\label{_auto5}
+\end{align}
+$$
+
+<p>
+For variational form, each \( \partial_{\overline{r}}^2 \rho_i \) term is integrated by parts&mdash;with test functions \( v_i(\overline{r}) \) over the spatial domain \( \Omega \) with boundary \( \partial\Omega \), subsets of which, \( \Gamma_D \) and \( \Gamma_N \), satisfy <em>Dirichlet</em> and <em>Neumann</em> boundary conditions \( \rho_i = \rho_{i0} \) on \( \Gamma_D \) and \( -\partial_{\overline{r}} \rho_i = G_i \) (for no-flow \( G_i = 0 \)) on \( \Gamma_N \)---as follows <a href="#Langtangen2017">[4]</a> (\S&nbsp;4.1.1&ndash;4.1.2):
+
+$$
+\begin{align}
+	\int_\Omega \partial_{\overline{r}}^2 \rho_i
+	&=
+	-\int_\Omega \partial_{\overline{r}} \rho_i \cdot \partial_{\overline{r}} v_i d\overline{r} +
+	\int_{\partial\Omega} v_i \partial_{\overline{r}} \rho_i ds
+	
+\label{_auto6}\\
+	&= 
+	-\int_\Omega \partial_{\overline{r}} \rho_i \cdot \partial_{\overline{r}} v_i d\overline{r} -
+	\int_{\Gamma_N} v_i G_i ds.
+\label{_auto7}
+\end{align}
+$$
+
+<p>
+This yields the weak formulation
+
+$$
+\begin{align}
+	\int_\Omega \bigg( 
+		&T^{-1} (\rho_1^{n+1}-\rho_1^n) v_1 +
+		(1+\overline{\Gamma}) 
+		\partial_{\overline{r}} \rho_1^{n+1} \cdot \partial_{\overline{r}} v_1 \nonumber \\
+		&+ \frac{\cratio^2}{1+\Deltar}
+		\left(
+			\left(
+				1 - (\rho_2^{n+1})^2
+			\right)
+			+
+			\Gammar\Deltar\overline{\gamma}^2
+			\left(
+				1 - (\rho_3^{n+1})^2
+			\right)
+		\right)
+		v_1
+		\arctanh(\rho_1^{n+1}) + 
+		\nonumber\\
+		&-\frac{\cratio}{1+\Deltar}
+		\left(
+			\partial_{\rbar} \rho_2^{n+1} - \Gammar\Deltar\overline{\gamma} \partial_{\rbar} \rho_3^{n+1}
+		\right) v_1 
+	\bigg) d\overline{r} + \nonumber\\
+	\int_\Omega \Bigg(
+		&T^{-1} (\rho_2^{n+1}-\rho_2^n) v_2
+		+\partial_{\overline{r}} \rho_2^{n+1} \cdot \partial_{\overline{r}} v_2 \nonumber \\
+		&\bigg(
+		  -\overline{c} \frac{1-(\rho_2^{n+1})^2}{1-(\rho_1^{n+1})^2} \partial_{\overline{r}}\rho_1^{n+1}
+		  + 2 \overline{c} \rho_2^{n+1} \arctanh(\rho_1^{n+1}) \partial_{\overline{r}}\rho_2^{n+1}
+		  + \dfrac{\rho_2^{n+1}}{\overline{\tau}_p}
+		\bigg)
+		v_2
+	\Bigg) d\overline{r} + \nonumber\\
+	\int_\Omega \Bigg(
+		&T^{-1} (\rho_3^{n+1}-\rho_3^n) v_3 
+		+\overline{\Gamma}\partial_{\overline{r}} \rho_3^{n+1} \cdot \partial_{\overline{r}} v_3 \nonumber \\
+		&\bigg(
+		  -\overline{c} \frac{1-(\rho_3^{n+1})^2}{1-(\rho_1^{n+1})^2} \partial_{\overline{r}}\rho_1^{n+1}
+		  + 2 \overline{c} \rho_3^{n+1} \arctanh(\rho_1^{n+1}) \partial_{\overline{r}}\rho_3^{n+1} 
+		  + \dfrac{\rho_3^{n+1}}{\overline{\tau}_e}
+		\bigg)
+		v_3 
+	\Bigg)
+	d\overline{r} + \nonumber\\
+	-\int_\Omega \bigg(
+		&\dfrac{\rho_{20}}{\overline{T}_{1p}} v_2 +
+		\dfrac{\rho_{30}}{\overline{T}_{1e}} v_3	
+	\bigg)
+	d\overline{r}
+	+\int_{\Gamma_N} \bigg(
+		v_1 G_1 + v_2 G_2 + v_3 G_3
+	\bigg)
+	ds
+	= 0.
+\label{_auto8}
+\end{align}
+$$
+
+<h1 id="___sec8" class="anchor">References </h1>
 
 <p>
 <!-- begin bibliography -->
@@ -470,6 +576,11 @@ $$
     <a href="http://dx.doi.org/10.1119/1.17309" target="_self">doi: 10.1119/1.17309</a>,
     1993,
     <a href="http://link.aip.org/link/?AJP/61/1133/1" target="_self"><tt>http://link.aip.org/link/?AJP/61/1133/1</tt></a>.</li>
+ <li> <div id="Langtangen2017"></div> <b>H. Langtangen and A. Logg</b>. 
+    <em>Solving PDEs in Python: the FEniCS Tutorial I</em>,
+    <em>Simula SpringerBriefs on Computing</em>,
+    Springer,
+    2017.</li>
 </ol>
 
 <!-- end bibliography -->
