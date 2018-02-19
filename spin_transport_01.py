@@ -13,14 +13,14 @@ parser.add_argument('-s',
 args = parser.parse_args()
 
 T = 2.0            # final time
-num_steps = 1000    # number of time steps
+num_steps = 500    # number of time steps
 dt = T / num_steps # time step size
 
 dbcl = [0.5, 0.2, 0.3] # The value of the left Dirichlet BC
 dbcr = [0.5, 0.1, 0.4] # The value of the right Dirichlet BC
 
 L = 1	# The length of the mesh
-n = 200	# The number of cells in the mesh
+n = 100	# The number of cells in the mesh
 
 # Initialize data arrays
 x = np.linspace(0, L, n + 1)
