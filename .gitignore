@@ -131,3 +131,4 @@ pythontex-files-*/
 
 .python-version
 spin_transport_soln
+*.pyc
