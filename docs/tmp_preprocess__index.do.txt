@@ -138,7 +138,7 @@ The preferred form of the continuity equation is in the polarization basis with 
 			1 - \rho_3^2
 		\right)
 	\right)
-	\arctanh\rho_1 + 
+	\arctanh(\rho_1) + 
 	\nonumber\\
 	&-\frac{\cratio}{1+\Deltar}
 	\left(
@@ -153,7 +153,7 @@ The preferred form of the continuity equation is in the polarization basis with 
 	\left(
 		\cratio
 		\left( 1 - \rho_2^2 \right)
-		\arctanh\rho_1
+		\arctanh(\rho_1)
 	\right)
 	+ \partial_{\overline{r}}^2 \rho_2
 	\label{eq:transport2} \\
@@ -165,7 +165,7 @@ The preferred form of the continuity equation is in the polarization basis with 
 	\left(
 		\cratio
 		\left( 1 - \rho_3^2 \right)
-		\arctanh\rho_1
+		\arctanh(\rho_1)
 	\right)
 	+ \Gammar \partial_{\overline{r}}^2 \rho_3 .
 	\label{eq:transport3}
@@ -215,7 +215,7 @@ The Bloch equation dynamics can be combined with the transport dynamics of Equat
 			1 - \rho_3^2
 		\right)
 	\right)
-	\arctanh\rho_1 + 
+	\arctanh(\rho_1) + 
 	\nonumber\\
 	&-\frac{\cratio}{1+\Deltar}
 	\left(
@@ -230,7 +230,7 @@ The Bloch equation dynamics can be combined with the transport dynamics of Equat
 	\left(
 		\cratio
 		\left( 1 - \rho_2^2 \right)
-		\arctanh\rho_1
+		\arctanh(\rho_1)
 	\right)
 	+ \partial_{\overline{r}}^2 \rho_2
 	+ \frac{\rho_{20}}{\overline{T}_{1p}} 
@@ -244,7 +244,7 @@ The Bloch equation dynamics can be combined with the transport dynamics of Equat
 	\left(
 		\cratio
 		\left( 1 - \rho_3^2 \right)
-		\arctanh\rho_1
+		\arctanh(\rho_1)
 	\right)
 	+ \Gammar \partial_{\overline{r}}^2 \rho_3
 	+ \frac{\rho_{30}}{\overline{T}_{1e}} 
@@ -304,7 +304,7 @@ This yields the weak formulation
 			\right)
 		\right)
 		v_1
-		\arctanh\rho_1^{n+1} + 
+		\arctanh(\rho_1^{n+1}) + 
 		\nonumber\\
 		&-\frac{\cratio}{1+\Deltar}
 		\left(
@@ -316,7 +316,7 @@ This yields the weak formulation
 		+\partial_{\overline{r}} \rho_2^{n+1} \cdot \partial_{\overline{r}} v_2 \nonumber \\
 		&\bigg(
 		  -\overline{c} \frac{1-(\rho_2^{n+1})^2}{1-(\rho_1^{n+1})^2} \partial_{\overline{r}}\rho_1^{n+1}
-		  + 2 \overline{c} \rho_2^{n+1} \arctanh\rho_1^{n+1} \partial_{\overline{r}}\rho_2^{n+1}
+		  + 2 \overline{c} \rho_2^{n+1} \arctanh(\rho_1^{n+1}) \partial_{\overline{r}}\rho_2^{n+1}
 		  + \dfrac{\rho_2^{n+1}}{\overline{\tau}_p}
 		\bigg)
 		v_2
@@ -326,7 +326,7 @@ This yields the weak formulation
 		+\overline{\Gamma}\partial_{\overline{r}} \rho_3^{n+1} \cdot \partial_{\overline{r}} v_3 \nonumber \\
 		&\bigg(
 		  -\overline{c} \frac{1-(\rho_3^{n+1})^2}{1-(\rho_1^{n+1})^2} \partial_{\overline{r}}\rho_1^{n+1}
-		  + 2 \overline{c} \rho_3^{n+1} \arctanh\rho_1^{n+1} \partial_{\overline{r}}\rho_3^{n+1} 
+		  + 2 \overline{c} \rho_3^{n+1} \arctanh(\rho_1^{n+1}) \partial_{\overline{r}}\rho_3^{n+1} 
 		  + \dfrac{\rho_3^{n+1}}{\overline{\tau}_e}
 		\bigg)
 		v_3 
