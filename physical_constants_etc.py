@@ -32,7 +32,7 @@ gp = 5.585694713
 hb = 1.054571726e-34   	# m**2*kg/sec 
 γe = 1.760859708e11    	# rad/(sec Tesla)
 γp = 2.675222005e8     	# rad/(sec Tesla) 
-μ = 4*π*10e7             	# T*m/A ... magnetic constant 
+μ = 4*π*1e-7             	# T*m/A ... magnetic constant 
 kB = 1.3806488e-23     	# J/K ... Boltzmann constant 
 NA = 6.02214129e23     	# mol**-1 ... Avogadro constant  
 
