@@ -1,36 +1,22 @@
 from fenics import *
 import numpy as np
-import physical_constants_etc as constants
+from physical_constants_etc import *
+from experimental_constants import *
 import argparse
 
-# Parameters
-gamma2 = 1 # gyromagnetic ratio for nuclei
-gamma3 = 1 # gyromagnetic ratio for electrons
-Gamma2 = 1 # transport coefficients for nuclear polarization
-Gamma3 = 1 # transport coefficients for electron polarization
-Delta2 = 1 # constant spin densities in solid medium for nuclei
-Delta3 = 1 # onstant spin densities in solid medium for electrons
-Bd = 1 # maximum dipole-dipole magnetic field (Is this a constant?)
-B1p = 1 # (What is this and is it a constant?)
-B1e = 1 # (What is this and is it a constant?)
-T1p = 1 # (What is this and is it a constant?)
-T1e = 1 # (What is this and is it a constant?)
-T2p = 1 # (What is this and is it a constant?)
-T2e = 1 # (What is this and is it a constant?)
-rho20 = 1 # (What is this and is it a constant?)
-rho30 = 1 # (What is this and is it a constant?)
-mu2 = 1 # (What is this and is it a constant?)
-mu3 = 1 # (What is this and is it a constant?)
-kB = 100 # (What is this and is it a constant?)
-Temp = 1 # Temperature used in SS solution
+# Replace these constants with values from the physical or experimental constants files
+B1p = 1
+B1e = 1
+rho20 = 1
+rho30 = 1
 
 # Defining an invese hyperbolic tangent because fenics doesn't have one
 def atanh(x): # Only good for abs(x) < 1!
 	return ln((1 + x) / (1 - x)) / 2
 
 def simulate(
-	T = 3.0, # final time
-	num_steps = 100, # number of time steps
+	T = 0.1, # final time
+	num_steps = 50, # number of time steps
 	L = 1, # The lendth of the mesh
 	n = 50, # The number of cells in the mesh
 	DirichletBCleft = None, # The left Dirichlet BC values
@@ -84,25 +70,18 @@ def simulate(
 	# Use an expression to get r
 	r = Expression('x[0]', degree = 1)
 
-	# Simulation Constants
-	_dt = Constant(dt)
-	dr = dx
-	gamma = Constant(gamma3 / gamma2)
-	Gamma = Constant(Gamma3 / Gamma2)
-	Delta = Constant(Delta3 / Delta2)
-
 	# Initial Conditions
 	rho_ic = Expression(
 		(
 			'tanh(((1 + gamma * Delta) / (gamma * (1 + Delta))) * (mu3 * Bd / (kB * Temp)))',
 			'tanh(mu2 * ({}) / (kB * Temp))'.format(BSteadyState),
 			'tanh(mu3 * ({}) / (kB * Temp))'.format(BSteadyState)),
-		gamma = gamma,
-		Delta = Delta,
-		mu2 = mu2,
-		mu3 = mu3,
+		gamma = γb,
+		Delta = δb,
+		mu2 = μe,
+		mu3 = μp,
 		Bd = Bd,
-		Temp = Temp,
+		Temp = temp,
 		kB = kB,
 		degree = 1)
 
@@ -111,26 +90,29 @@ def simulate(
 	rho_n.assign(rho_ic)
 
 	# Functions
-	c = B * (1 + Delta) / (1 + gamma * Delta)
-	w1p = -gamma * Constant(B1p) # Is this gamma bar?
-	w1e = -gamma * Constant(B1e) # Is this gamma bar?
-	delta = gamma * Constant(Bd) * r # Is this really gamma bar?
-	tau_p = 1 / (1 / T1p + (T2p * w1p**2 / (1 + T2p**2 * delta**2))) # I don't think these should be the same
-	tau_e = 1 / (1 / T1e + (T2e * w1e**2 / (1 + T2e**2 * delta**2))) # I don't think these should be the same
+	w1p = -Γb * B1p
+	w1e = -Γb * B1e
+	delta = Γb * Bd * r
+	tau_p = 1 / (1 / T1p + (T2p * w1p**2 / (1 + T2p**2 * delta**2)))
+	tau_e = 1 / (1 / T1e + (T2e * w1e**2 / (1 + T2e**2 * delta**2)))
+
+	# Simulation Constants
+	_dt = Constant(dt)
+	dr = dx
 
 	# Define variational problem
 	F = ((rho1 - rho1_n) * v1 / _dt
-	  + (1 + Gamma) * grad(rho1)[0] * grad(v1)[0]
-	  - (c**2 / (1 + Delta)) * ((1 - rho2**2) + Gamma * Delta * gamma**2 * (1 - rho3**2)) * v1 * atanh(rho1)
-	  - (c / (1 + Delta) * (grad(rho2)[0] - Gamma * Delta * gamma * grad(rho3)[0]) * v1)) * dr \
+	  + (1 + Γb) * grad(rho1)[0] * grad(v1)[0]
+	  - (cb**2 / (1 + δb)) * ((1 - rho2**2) + Γb * δb * γb**2 * (1 - rho3**2)) * v1 * atanh(rho1)
+	  - (cb / (1 + δb) * (grad(rho2)[0] - Γb * δb * γb * grad(rho3)[0]) * v1)) * dr \
 	  + ((rho2 - rho2_n) * v2 / _dt
 	  + grad(rho2)[0] * grad(v2)[0]
-	  + (-c * ((1 - rho2**2) / (1 - rho1**2)) * grad(rho1)[0]
-	  + 2 * c * rho2 * atanh(rho1) * grad(rho2)[0] + rho2 / tau_p) * v2) * dr \
+	  + (-cb * ((1 - rho2**2) / (1 - rho1**2)) * grad(rho1)[0]
+	  + 2 * cb * rho2 * atanh(rho1) * grad(rho2)[0] + rho2 / tau_p) * v2) * dr \
 	  + ((rho3 - rho3_n) * v3 / _dt
-	  + Gamma * grad(rho3)[0] * grad(v3)[0]
-	  + (-c * ((1 - rho3**2) / (1 - rho1**2)) * grad(rho1)[0]
-	  + 2 * c * rho3 * atanh(rho1) * grad(rho3)[0]
+	  + Γb * grad(rho3)[0] * grad(v3)[0]
+	  + (-cb * ((1 - rho3**2) / (1 - rho1**2)) * grad(rho1)[0]
+	  + 2 * cb * rho3 * atanh(rho1) * grad(rho3)[0]
 	  + rho3 / tau_e) * v3) * dr \
 	  - (rho20 * v2 / T1p + rho30 * v3 / T1e) * dr
 
