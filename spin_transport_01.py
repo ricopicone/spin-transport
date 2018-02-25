@@ -11,13 +11,18 @@ Gamma3 = 1 # transport coefficients for electron polarization
 Delta2 = 1 # constant spin densities in solid medium for nuclei
 Delta3 = 1 # onstant spin densities in solid medium for electrons
 Bd = 1 # maximum dipole-dipole magnetic field (Is this a constant?)
-B1 = 1 # (What is this and is it a constant?)
-T1 = 1 # (What is this and is it a constant?)
-T2 = 1 # (What is this and is it a constant?)
+B1p = 1 # (What is this and is it a constant?)
+B1e = 1 # (What is this and is it a constant?)
 T1p = 1 # (What is this and is it a constant?)
 T1e = 1 # (What is this and is it a constant?)
+T2p = 1 # (What is this and is it a constant?)
+T2e = 1 # (What is this and is it a constant?)
 rho20 = 1 # (What is this and is it a constant?)
 rho30 = 1 # (What is this and is it a constant?)
+mu2 = 1 # (What is this and is it a constant?)
+mu3 = 1 # (What is this and is it a constant?)
+kB = 100 # (What is this and is it a constant?)
+Temp = 1 # Temperature used in SS solution
 
 # Defining an invese hyperbolic tangent because fenics doesn't have one
 def atanh(x): # Only good for abs(x) < 1!
@@ -25,12 +30,13 @@ def atanh(x): # Only good for abs(x) < 1!
 
 def simulate(
 	T = 3.0, # final time
-	num_steps = 150, # number of time steps
+	num_steps = 100, # number of time steps
 	L = 1, # The lendth of the mesh
 	n = 50, # The number of cells in the mesh
 	DirichletBCleft = None, # The left Dirichlet BC values
 	DirichletBCright = None, # The right Dirichlet BC values
 	NeumannBC = None, # The Nuemann BC values
+	BSteadyState = 'x[0]' # The steady state Magnetic field expression
 	):
 
 	dt = T / num_steps # time step size
@@ -42,9 +48,7 @@ def simulate(
 	_rho2 = np.ndarray([num_steps, n + 1])
 	_rho3 = np.ndarray([num_steps, n + 1])
 
-	# Initial Conditions
-	rho1_ic = Expression(('0.5 * sin(pi * x[0])', '0.15 * sin(pi * x[0])', '0.35 * sin(pi * x[0])'), degree = 1)
-
+	# Define the mesh
 	mesh = IntervalMesh(n, 0, L) # A 1d mesh with n cells from 0 to L
 
 	# Define function space for system of concentrations
@@ -74,12 +78,8 @@ def simulate(
 	rho1, rho2, rho3 = split(rho)
 	rho1_n, rho2_n, rho3_n = split(rho_n)
 
-	# Set initial conditions
-	rho.assign(rho1_ic)
-	rho_n.assign(rho1_ic)
-
 	# Set up Magnetic Field Function
-	B = Expression('0', degree = 1)
+	B = Expression('x[0]', degree = 1)
 
 	# Use an expression to get r
 	r = Expression('x[0]', degree = 1)
@@ -91,12 +91,32 @@ def simulate(
 	Gamma = Constant(Gamma3 / Gamma2)
 	Delta = Constant(Delta3 / Delta2)
 
+	# Initial Conditions
+	rho_ic = Expression(
+		(
+			'tanh(((1 + gamma * Delta) / (gamma * (1 + Delta))) * (mu3 * Bd / (kB * Temp)))',
+			'tanh(mu2 * ({}) / (kB * Temp))'.format(BSteadyState),
+			'tanh(mu3 * ({}) / (kB * Temp))'.format(BSteadyState)),
+		gamma = gamma,
+		Delta = Delta,
+		mu2 = mu2,
+		mu3 = mu3,
+		Bd = Bd,
+		Temp = Temp,
+		kB = kB,
+		degree = 1)
+
+	# Set initial conditions
+	rho.assign(rho_ic)
+	rho_n.assign(rho_ic)
+
 	# Functions
 	c = B * (1 + Delta) / (1 + gamma * Delta)
-	w1 = -gamma * Constant(B1) # Is this gamma bar, or something not defined and what is B1?
+	w1p = -gamma * Constant(B1p) # Is this gamma bar?
+	w1e = -gamma * Constant(B1e) # Is this gamma bar?
 	delta = gamma * Constant(Bd) * r # Is this really gamma bar?
-	tau_e = 1 / (1 / T1 + (T2 * w1**2 / (1 + T2**2 * delta**2))) # I don't think these should be the same
-	tau_p = 1 / (1 / T1 + (T2 * w1**2 / (1 + T2**2 * delta**2))) # I don't think these should be the same
+	tau_p = 1 / (1 / T1p + (T2p * w1p**2 / (1 + T2p**2 * delta**2))) # I don't think these should be the same
+	tau_e = 1 / (1 / T1e + (T2e * w1e**2 / (1 + T2e**2 * delta**2))) # I don't think these should be the same
 
 	# Define variational problem
 	F = ((rho1 - rho1_n) * v1 / _dt
