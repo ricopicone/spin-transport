@@ -8,7 +8,7 @@ below are the legacy Mathematica usage messages
 suf = "\nSee script: experimentalConstants.m"
 experimentalRules::usage = "List of replacement rules for experimental parameters." <> suf;
 B0::usage = "tesla ... Background field Dougherty2000." <> suf;
-grad::usage = "tesla/meter ... Field gradient Dougherty2000." <> suf;
+Grad::usage = "tesla/meter ... Field gradient Dougherty2000." <> suf;
 g1::usage = "dimensionless ... Nuclear spin g-factor." <> suf;
 Γ1::usage = "meter**2/sec ... Dipole energy transport coefficient." <> suf;
 Γ2::usage = "meter**2/sec ... Nuclear polarization transport coefficient." <> suf;
@@ -64,7 +64,7 @@ g1 = 2.79 # dimensionless nuclear spin g-factor
 
 # magnetic fields
 B0 = 0.0893 # T ... background field
-grad = 44e3 # T/m ... background field gradient
+Grad = 44e3 # T/m ... background field gradient
 Bd2 = μ/(4 * π)*hb*γ2*δ2 # T ... nuclear dipole field
 Bd3 = μ/(4 * π)*hb*γ3*δ3 # T ... electron dipole field Dougherty2000 
 Bd = Bd2 + Bd3 # T ... not the worst guess
@@ -93,8 +93,8 @@ T23 = T2e
 
 def nondimensionalize_time(time_variable):
     """returns dimensionless time"""
-    return Γ2*(grad/Bd)**2*time_variable
+    return Γ2*(Grad/Bd)**2*time_variable
 
 def nondimensionalize_space(space_variable):
     """returns dimensionless space"""
-    return grad/Bd*space_variable
+    return Grad/Bd*space_variable
