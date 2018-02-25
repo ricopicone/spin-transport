@@ -1,6 +1,8 @@
 # define experimental constants
 #   UW experiment parameters
 
+from physical_constants_etc import *
+
 """
 below are the legacy Mathematica usage messages
 suf = "\nSee script: experimentalConstants.m"
@@ -33,40 +35,6 @@ concDPPH::usage = "Concentration of DPPH in polystyrene solution." <> suf;
 # general
 temp = 10 # Kelvin ... physical temperature of sample 
 
-# magnetic fields
-B0 = 0.0893 # T ... background field
-grad = 44e3 # T/m ... background field gradient
-Bd2 = μ/(4 π)*hb*γ2*δ2 # T ... nuclear dipole field
-Bd3 = μ/(4 π)*hb*γ3*δ3 # T ... electron dipole field Dougherty2000 
-Bd = Bd2 + Bd3 # T ... not the worst guess
-Bb = 1 # dimensionless B ratio ... grad/Bd /(grad/Bd)
-
-# identifying spins
-γ2 = γp # species 2 is proton
-γ3 = γe # species 3 is electron
-γb = γ3/γ2 # dimensionless gyromagnetic ratio
-g1 = 2.79 # dimensionless nuclear spin g-factor 
-
-# transport rates
-Γp = μ/(4 π)*hb*γ2**2*δ2**(1/3)
-Γe = μ/(4 π)*hb*γ3**2*δ3**(1/3)
-Γ2 = Γp
-Γ3 = Γe
-Γb = Γ3/Γ2 # dimensionless transport coefficient ratio
-ΓOZ = Γ2 # used in case of single transport rate
-
-# nuclear spin concentration
-#MwPS = 14 # amu ... molecular mass of polystyrene 
-MwPS = # g/mol ... molar mass of polystyrene assuming C8H8 (Wikipedia)
-    12*0 +  # no spin-1/2 from C atoms  + 
-    1*8     # H atoms  
-dPS = 1.047 # g/mL ... density of polystyrene (from bottle) 
-nAMPS = 2 # number of **1H atoms per molecule for polystyrene 
-concPS = 1 - concDPPH           # concentration polystyrene 
-den2 = 1/MwPS*dPS*1e6*NA*nAMPS # 1/m**3 
-δ2 = concPS*den2 # 1/m**3 
-# δ2 = 1.34*10**26 1/m**3    # Dougherty2000  
-
 # electron spin concentration
 MwDPPH = 394.32 # g/mol ... molar mass of DPPH (wikipedia) 
 dDPPH = 1.4 # g/cm**3 ... density of DPPH (wikipedia) 
@@ -74,7 +42,41 @@ nAMDPPH = 1 # just one free radical per molecule
 concDPPH = .04 # concentration DPPH 
 den3 = 1/MwDPPH*dDPPH*1e6*NA*nAMDPPH # 1/m**3 
 δ3 = concDPPH*den3 # 1/m**3 
+
+# nuclear spin concentration
+#MwPS = 14 # amu ... molecular mass of polystyrene 
+MwPS = ( # g/mol ... molar mass of polystyrene assuming C8H8 (Wikipedia)
+    12*0 +  # no spin-1/2 from C atoms  + 
+    1*8)    # H atoms  
+dPS = 1.047 # g/mL ... density of polystyrene (from bottle) 
+nAMPS = 2 # number of **1H atoms per molecule for polystyrene 
+concPS = 1 - concDPPH           # concentration polystyrene 
+den2 = 1/MwPS*dPS*1e6*NA*nAMPS # 1/m**3 
+δ2 = concPS*den2 # 1/m**3 
+# δ2 = 1.34*10**26 1/m**3    # Dougherty2000  
 δb = δ3/δ2 # dimensionless spin concentration ratio
+
+# identifying spins
+γ2 = γp # species 2 is proton
+γ3 = γe # species 3 is electron
+γb = γ3/γ2 # dimensionless gyromagnetic ratio
+g1 = 2.79 # dimensionless nuclear spin g-factor 
+
+# magnetic fields
+B0 = 0.0893 # T ... background field
+grad = 44e3 # T/m ... background field gradient
+Bd2 = μ/(4 * π)*hb*γ2*δ2 # T ... nuclear dipole field
+Bd3 = μ/(4 * π)*hb*γ3*δ3 # T ... electron dipole field Dougherty2000 
+Bd = Bd2 + Bd3 # T ... not the worst guess
+Bb = 1 # dimensionless B ratio ... grad/Bd /(grad/Bd)
+
+# transport rates
+Γp = μ/(4 * π)*hb*γ2**2*δ2**(1/3)
+Γe = μ/(4 * π)*hb*γ3**2*δ3**(1/3)
+Γ2 = Γp
+Γ3 = Γe
+Γb = Γ3/Γ2 # dimensionless transport coefficient ratio
+ΓOZ = Γ2 # used in case of single transport rate
 
 # c ratio
 cb = Bb*(1+δb)/(1+γb*δb)
@@ -91,10 +93,8 @@ T23 = T2e
 
 def nondimensionalize_time(time_variable):
     """returns dimensionless time"""
-    global Γ2 grad Bd
     return Γ2*(grad/Bd)**2*time_variable
 
 def nondimensionalize_space(space_variable):
     """returns dimensionless space"""
-    global grad Bd
     return grad/Bd*space_variable
