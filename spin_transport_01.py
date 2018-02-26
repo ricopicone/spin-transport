@@ -4,11 +4,9 @@ from physical_constants_etc import *
 from experimental_constants import *
 import argparse
 
-# Replace these constants with values from the physical or experimental constants files
+# Other constants
+B1e = 0.05
 B1p = 1
-B1e = 1
-rho20 = 1
-rho30 = 1
 
 # Defining an invese hyperbolic tangent because fenics doesn't have one
 def atanh(x): # Only good for abs(x) < 1!
@@ -18,21 +16,21 @@ def simulate(
 	T = 0.1, # final time
 	num_steps = 50, # number of time steps
 	L = 1, # The lendth of the mesh
-	n = 50, # The number of cells in the mesh
+	n = 10, # The number of cells in the mesh
 	DirichletBCleft = None, # The left Dirichlet BC values
 	DirichletBCright = None, # The right Dirichlet BC values
 	NeumannBC = None, # The Nuemann BC values
-	BSteadyState = 'x[0]' # The steady state Magnetic field expression
+	quiet = False # Suppress log output
 	):
 
 	dt = T / num_steps # time step size
 
 	# Initialize data arrays
-	x = np.linspace(0, L, n + 1)
-	t = np.arange(dt, T + dt, dt)
-	_rho1 = np.ndarray([num_steps, n + 1])
-	_rho2 = np.ndarray([num_steps, n + 1])
-	_rho3 = np.ndarray([num_steps, n + 1])
+	x = np.linspace(L, 0, n + 1)
+	t = np.arange(0, T + dt, dt)
+	_rho1 = np.ndarray([num_steps + 1, n + 1])
+	_rho2 = np.ndarray([num_steps + 1, n + 1])
+	_rho3 = np.ndarray([num_steps + 1, n + 1])
 
 	# Define the mesh
 	mesh = IntervalMesh(n, 0, L) # A 1d mesh with n cells from 0 to L
@@ -65,7 +63,7 @@ def simulate(
 	rho1_n, rho2_n, rho3_n = split(rho_n)
 
 	# Set up Magnetic Field Function
-	B = Expression('x[0]', degree = 1)
+	B = Expression('grad * x[0]', grad = Grad, degree = 1)
 
 	# Use an expression to get r
 	r = Expression('x[0]', degree = 1)
@@ -74,8 +72,8 @@ def simulate(
 	rho_ic = Expression(
 		(
 			'tanh(((1 + gamma * Delta) / (gamma * (1 + Delta))) * (mu3 * Bd / (kB * Temp)))',
-			'tanh(mu2 * ({}) / (kB * Temp))'.format(BSteadyState),
-			'tanh(mu3 * ({}) / (kB * Temp))'.format(BSteadyState)),
+			'tanh(mu2 * (grad * x[0]) / (kB * Temp))',
+			'tanh(mu3 * (grad * x[0]) / (kB * Temp))'),
 		gamma = γb,
 		Delta = δb,
 		mu2 = μe,
@@ -83,7 +81,9 @@ def simulate(
 		Bd = Bd,
 		Temp = temp,
 		kB = kB,
+		grad = Grad,
 		degree = 1)
+	_, rho20, rho30 = split(rho_ic)
 
 	# Set initial conditions
 	rho.assign(rho_ic)
@@ -126,10 +126,17 @@ def simulate(
 	# Create progress bar
 	progress = Progress('Time-stepping')
 	set_log_level(PROGRESS)
+	set_log_active(not quiet)
+
+	# Add the data
+	_rho = rho.vector().get_local().reshape([x.shape[0], len(rho.split())])
+	_rho1[0,:] = _rho[:,0]
+	_rho2[0,:] = _rho[:,1]
+	_rho3[0,:] = _rho[:,2]
 
 	# Time-stepping
 	_t = 0
-	for n in range(num_steps):
+	for i in range(1, num_steps + 1):
 
 		# Update current time
 		_t += dt
@@ -139,9 +146,9 @@ def simulate(
 
 		# Add the data
 		_rho = rho.vector().get_local().reshape([x.shape[0], len(rho.split())])
-		_rho1[n,:] = _rho[:,0]
-		_rho2[n,:] = _rho[:,1]
-		_rho3[n,:] = _rho[:,2]
+		_rho1[i,:] = _rho[:,0]
+		_rho2[i,:] = _rho[:,1]
+		_rho3[i,:] = _rho[:,2]
 
 		# Update previous solution
 		rho_n.assign(rho)
