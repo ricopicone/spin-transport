@@ -170,8 +170,28 @@ if __name__ == '__main__':
 		type = str,
 		help = 'The file to save the solution to.',
 		default = 'spin_transport_soln/soln.npz')
+	parser.add_argument('-t',
+		type = float,
+		help = 'The duration of time to simulate.',
+		default = 0.1)
+	parser.add_argument('-T',
+		type = int,
+		help = 'The number of timesteps to take.',
+		default = 50)
+	parser.add_argument('-L',
+		type = float,
+		help = 'The length of the mesh.',
+		default = 1.0)
+	parser.add_argument('-n',
+		type = int,
+		help = 'The number of cells to use in the mesh.',
+		default = 10)
 	args = parser.parse_args()
 
-	data = simulate()
+	data = simulate(
+		T = args.t,
+		num_steps = args.T,
+		L = args.L,
+		n = args.n)
 
 	np.savez(args.s, **data)
