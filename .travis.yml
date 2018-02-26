@@ -5,4 +5,4 @@ services:
 before_install:
   - docker pull quay.io/fenicsproject/stable:current
 script:
-  - docker run -v $(pwd):/shared quay.io/fenicsproject/stable:current python3 test.py
+  - docker run -v $(pwd):/shared quay.io/fenicsproject/stable:current "cd /shared; python3 test.py"
