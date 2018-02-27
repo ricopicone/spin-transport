@@ -15,8 +15,8 @@ def atanh(x): # Only good for abs(x) < 1!
 def simulate(
 	T = 0.1, # final time
 	num_steps = 50, # number of time steps
-	L = 1, # The lendth of the mesh
-	n = 10, # The number of cells in the mesh
+	L = 2e-5, # The lendth of the mesh
+	n = 50, # The number of cells in the mesh
 	DirichletBCleft = None, # The left Dirichlet BC values
 	DirichletBCright = None, # The right Dirichlet BC values
 	NeumannBC = None, # The Nuemann BC values
@@ -26,14 +26,14 @@ def simulate(
 	dt = T / num_steps # time step size
 
 	# Initialize data arrays
-	x = np.linspace(L, 0, n + 1)
+	x = np.linspace(L/2, -L/2, n + 1)
 	t = np.arange(0, T + dt, dt)
 	_rho1 = np.ndarray([num_steps + 1, n + 1])
 	_rho2 = np.ndarray([num_steps + 1, n + 1])
 	_rho3 = np.ndarray([num_steps + 1, n + 1])
 
 	# Define the mesh
-	mesh = IntervalMesh(n, 0, L) # A 1d mesh with n cells from 0 to L
+	mesh = IntervalMesh(n, -L/2, L/2) # A 1d mesh with n cells from 0 to L
 
 	# Define function space for system of concentrations
 	V = VectorFunctionSpace(mesh, 'CG', 1, dim = 3)
@@ -181,11 +181,11 @@ if __name__ == '__main__':
 	parser.add_argument('-L',
 		type = float,
 		help = 'The length of the mesh.',
-		default = 1.0)
+		default = 2e-5)
 	parser.add_argument('-n',
 		type = int,
 		help = 'The number of cells to use in the mesh.',
-		default = 10)
+		default = 50)
 	args = parser.parse_args()
 
 	data = simulate(
