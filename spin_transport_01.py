@@ -20,6 +20,7 @@ def simulate(
 	DirichletBCleft = None, # The left Dirichlet BC values
 	DirichletBCright = None, # The right Dirichlet BC values
 	NeumannBC = None, # The Nuemann BC values
+	Bloch = True, # Enable the Bloch Dynamics
 	quiet = False # Suppress log output
 	):
 
@@ -39,8 +40,8 @@ def simulate(
 	V = VectorFunctionSpace(mesh, 'CG', 1, dim = 3)
 
 	# Setup the Dirichlet BC
-	left = lambda x, on_boundary: near(x[0], 0) and on_boundary
-	right = lambda x, on_boundary: near(x[0], L) and on_boundary
+	left = lambda x, on_boundary: near(x[0], -L / 2) and on_boundary
+	right = lambda x, on_boundary: near(x[0], L / 2) and on_boundary
 	bc = []
 	try:
 		bc.append(DirichletBC(V, Constant(DirichletBCleft), left))
@@ -115,14 +116,18 @@ def simulate(
 	  + Γb * grad(rho3)[0] * grad(v3)[0]
 	  + (-cb * ((1 - rho3**2) / (1 - rho1**2)) * grad(rho1)[0]
 	  + 2 * cb * rho3 * atanh(rho1) * grad(rho3)[0]
-	  + rho3 / tau_e) * v3) * dr \
-	  - (rho20 * v2 / T1p + rho30 * v3 / T1e) * dr
+	  + rho3 / tau_e) * v3) * dr
+
+	# Add the Bloch Dynamics
+	if Bloch:
+		F -= (rho20 * v2 / T1p + rho30 * v3 / T1e) * dr
 
 	# Add the Neumann BC
 	if NeumannBC is not None:
 		G1 = Constant(NeumannBC[0])
 		G2 = Constant(NeumannBC[1])
 		G3 = Constant(NeumannBC[2])
+
 		F += (v1 * G1 + v2 * G2 + v3 * G3) * ds
 
 	# Create progress bar
@@ -188,12 +193,16 @@ if __name__ == '__main__':
 		type = int,
 		help = 'The number of cells to use in the mesh.',
 		default = 50)
+	parser.add_argument('-b',
+		action = 'store_true',
+		help = 'Disable Bloch Dynamics.')
 	args = parser.parse_args()
-
+	
 	data = simulate(
 		T = args.t,
 		num_steps = args.T,
 		L = args.L,
-		n = args.n)
+		n = args.n,
+		Bloch = args.b)
 
 	np.savez(args.s, **data)
