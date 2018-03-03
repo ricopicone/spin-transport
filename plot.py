@@ -130,5 +130,5 @@ if __name__ == '__main__':
 		filename = args.s,
 		interval = args.i,
 		title = args.t,
-		frames = [args.start, args.end + 1],
+		frames = [args.start, args.end],
 		time_p = args.n)
