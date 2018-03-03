@@ -196,6 +196,24 @@ if __name__ == '__main__':
 	parser.add_argument('-b',
 		action = 'store_true',
 		help = 'Disable Bloch Dynamics.')
+	parser.add_argument('--NeumannBC',
+		type = float,
+		nargs = 3,
+		help = 'The Neumann Boundary Conditions to apply.',
+		metavar = ('grad(rho1)', 'grad(rho2)', 'grad(rho3)'),
+		default = None),
+	parser.add_argument('--DirichletBCleft',
+		type = float,
+		nargs = 3,
+		metavar = ('rho1', 'rho2', 'rho3'),
+		help = 'The Dirichlet Boundary Conditions to apply on the left side.',
+		default = None)
+	parser.add_argument('--DirichletBCright',
+		type = float,
+		nargs = 3,
+		metavar = ('rho1', 'rho2', 'rho3'),
+		help = 'The Dirichlet Boundary Conditions to apply on the right side.',
+		default = None)
 	args = parser.parse_args()
 	
 	data = simulate(
@@ -203,6 +221,9 @@ if __name__ == '__main__':
 		num_steps = args.T,
 		L = args.L,
 		n = args.n,
+		NeumannBC = args.NeumannBC,
+		DirichletBCleft = args.DirichletBCleft,
+		DirichletBCright = args.DirichletBCright,
 		Bloch = args.b)
 
 	np.savez(args.s, **data)
