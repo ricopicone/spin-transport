@@ -83,7 +83,9 @@ def simulate(
 		kB = kB,
 		grad = Grad,
 		degree = 1)
-	_, rho20, rho30 = split(rho_ic)
+	#_, rho20, rho30 = split(rho_ic)
+	rho20 = rho_ic[1]
+	rho30 = rho_ic[2]
 
 	# Set initial conditions
 	rho.assign(rho_ic)
