@@ -20,7 +20,10 @@ def simulate(
 	DirichletBCleft = None, # The left Dirichlet BC values
 	DirichletBCright = None, # The right Dirichlet BC values
 	NeumannBC = None, # The Nuemann BC values
+	Seperation = True, # Enable the Seperation
 	Bloch = True, # Enable the Bloch Dynamics
+	Diffusion = True, # Enable Diffusion
+	Pulse = True, # Enable Bloch Pulse Dynamics
 	quiet = False # Suppress log output
 	):
 
@@ -103,24 +106,34 @@ def simulate(
 	_dt = Constant(dt)
 	dr = dx
 
-	# Define variational problem
+	# Define the Base Variational Problem
 	F = ((rho1 - rho1_n) * v1 / _dt
-	  + (1 + Γb) * grad(rho1)[0] * grad(v1)[0]
-	  - (cb**2 / (1 + δb)) * ((1 - rho2**2) + Γb * δb * γb**2 * (1 - rho3**2)) * v1 * atanh(rho1)
-	  - (cb / (1 + δb) * (grad(rho2)[0] - Γb * δb * γb * grad(rho3)[0]) * v1)) * dr \
-	  + ((rho2 - rho2_n) * v2 / _dt
-	  + grad(rho2)[0] * grad(v2)[0]
-	  + (-cb * ((1 - rho2**2) / (1 - rho1**2)) * grad(rho1)[0]
-	  + 2 * cb * rho2 * atanh(rho1) * grad(rho2)[0] + rho2 / tau_p) * v2) * dr \
-	  + ((rho3 - rho3_n) * v3 / _dt
-	  + Γb * grad(rho3)[0] * grad(v3)[0]
-	  + (-cb * ((1 - rho3**2) / (1 - rho1**2)) * grad(rho1)[0]
-	  + 2 * cb * rho3 * atanh(rho1) * grad(rho3)[0]
-	  + rho3 / tau_e) * v3) * dr
+	  + (rho2 - rho2_n) * v2 / _dt
+	  + (rho3 - rho3_n) * v3 / _dt) * dr
 
-	# Add the Bloch Dynamics
+	# Add the Seperation
+	if Seperation:
+		F += -((cb**2 / (1 + δb)) * ((1 - rho2**2) + Γb * δb * γb**2 * (1 - rho3**2)) * v1 * atanh(rho1)
+		  - (cb / (1 + δb) * (grad(rho2)[0] - Γb * δb * γb * grad(rho3)[0]) * v1)) * dr \
+		  + ((-cb * ((1 - rho2**2) / (1 - rho1**2)) * grad(rho1)[0]
+		  + 2 * cb * rho2 * atanh(rho1) * grad(rho2)[0]) * v2) * dr \
+		  + ((-cb * ((1 - rho3**2) / (1 - rho1**2)) * grad(rho1)[0]
+		  + 2 * cb * rho3 * atanh(rho1) * grad(rho3)[0]) * v3) * dr
+
+	# Add the Diffusion
+	if Diffusion:
+		F += (1 + Γb) * grad(rho1)[0] * grad(v1)[0] * dr \
+		  + grad(rho2)[0] * grad(v2)[0] * dr \
+		  + Γb * grad(rho3)[0] * grad(v3)[0] * dr
+
+	# Add the Bloch Relaxation Dynamics
 	if Bloch:
-		F -= (rho20 * v2 / T1p + rho30 * v3 / T1e) * dr
+		F += -(rho20 * v2 / T1p + rho30 * v3 / T1e) * dr
+
+	# Add the Bloch Pulse Dynamics
+	if Pulse:
+		F += (rho2 / tau_p) * v2 * dr \
+		  + (rho3 / tau_e) * v3 * dr
 
 	# Add the Neumann BC
 	if NeumannBC is not None:
@@ -193,9 +206,18 @@ if __name__ == '__main__':
 		type = int,
 		help = 'The number of cells to use in the mesh.',
 		default = 50)
+	parser.add_argument('-S',
+		action = 'store_true',
+		help = 'Disable Seperation.')
 	parser.add_argument('-b',
 		action = 'store_true',
-		help = 'Disable Bloch Dynamics.')
+		help = 'Disable Bloch Relaxation Dynamics.')
+	parser.add_argument('-p',
+		action = 'store_true',
+		help = 'Disable Bloch Pulse Dynamics.')
+	parser.add_argument('-d',
+		action = 'store_true',
+		help = 'Disable Diffusion')
 	parser.add_argument('--NeumannBC',
 		type = float,
 		nargs = 3,
@@ -224,6 +246,9 @@ if __name__ == '__main__':
 		NeumannBC = args.NeumannBC,
 		DirichletBCleft = args.DirichletBCleft,
 		DirichletBCright = args.DirichletBCright,
-		Bloch = args.b)
+		Seperation = args.S,
+		Bloch = args.b,
+		Diffusion = args.d,
+		Pulse = args.p)
 
 	np.savez(args.s, **data)
