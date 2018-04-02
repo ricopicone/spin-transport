@@ -24,6 +24,8 @@ def simulate(
 	Bloch = True, # Enable the Bloch Dynamics
 	Diffusion = True, # Enable Diffusion
 	Pulse = True, # Enable Bloch Pulse Dynamics
+	ic = None, # The system initial conditions
+	fail = True, # Whether to throw an error when the solver fails
 	quiet = False # Suppress log output
 	):
 
@@ -72,12 +74,14 @@ def simulate(
 	# Use an expression to get r
 	r = Expression('x[0]', degree = 1)
 
-	# Initial Conditions
-	rho_ic = Expression(
-		(
+	if ic is None:
+		ic = (
 			'tanh(((1 + gamma * Delta) / (gamma * (1 + Delta))) * (mu3 * Bd / (kB * Temp)))',
 			'tanh(mu2 * (grad * x[0]) / (kB * Temp))',
-			'tanh(mu3 * (grad * x[0]) / (kB * Temp))'),
+			'tanh(mu3 * (grad * x[0]) / (kB * Temp))')
+
+	# Initial Conditions
+	rho_ic = Expression(ic,
 		gamma = γb,
 		Delta = δb,
 		mu2 = μe,
@@ -162,7 +166,15 @@ def simulate(
 		_t += dt
 
 		# Solve variational problem for time step
-		solve(F == 0, rho, bcs = bc)
+		try:
+			solve(F == 0, rho, bcs = bc)
+		except RuntimeError as e:
+			if fail:
+				raise e
+			else:
+				print(e)
+				print('At step {}: t = {}s'.format(i, _t))
+				break
 
 		# Add the data
 		_rho = rho.vector().get_local().reshape([x.shape[0], len(rho.split())])
@@ -207,17 +219,20 @@ if __name__ == '__main__':
 		help = 'The number of cells to use in the mesh.',
 		default = 50)
 	parser.add_argument('-S',
-		action = 'store_true',
+		action = 'store_false',
 		help = 'Disable Seperation.')
 	parser.add_argument('-b',
-		action = 'store_true',
+		action = 'store_false',
 		help = 'Disable Bloch Relaxation Dynamics.')
 	parser.add_argument('-p',
-		action = 'store_true',
+		action = 'store_false',
 		help = 'Disable Bloch Pulse Dynamics.')
 	parser.add_argument('-d',
-		action = 'store_true',
+		action = 'store_false',
 		help = 'Disable Diffusion')
+	parser.add_argument('-f',
+		action = 'store_false',
+		help = 'Don\'t raise exception on solver failure.')
 	parser.add_argument('--NeumannBC',
 		type = float,
 		nargs = 3,
@@ -236,6 +251,12 @@ if __name__ == '__main__':
 		metavar = ('rho1', 'rho2', 'rho3'),
 		help = 'The Dirichlet Boundary Conditions to apply on the right side.',
 		default = None)
+	parser.add_argument('-i',
+		type = str,
+		nargs = 3,
+		metavar = ('rho1_ic', 'rho2_ic', 'rho3_ic'),
+		help = 'The Initial Conditions to use for starting the simulation.',
+		default = None)
 	args = parser.parse_args()
 	
 	data = simulate(
@@ -249,6 +270,8 @@ if __name__ == '__main__':
 		Seperation = args.S,
 		Bloch = args.b,
 		Diffusion = args.d,
-		Pulse = args.p)
+		Pulse = args.p,
+		ic = args.i,
+		fail = args.f)
 
 	np.savez(args.s, **data)
