@@ -2,7 +2,7 @@ import unittest
 from spin_transport_01 import *
 import numpy as np
 
-class TestBaseSys(unittest.TestCase):
+class TestSSBaseSys(unittest.TestCase):
 
 	@classmethod
 	def setUpClass(self):
@@ -24,7 +24,7 @@ class TestBaseSys(unittest.TestCase):
 	def test_rho3(self):
 		self.assertEqual(self.data['rho3'][-1,:].tolist(), [self.ic[2]] * self.data['rho3'].shape[1])
 
-class TestWithoutBloch(unittest.TestCase):
+class TestSSWithoutBloch(unittest.TestCase):
 
 	@classmethod
 	def setUpClass(self):
@@ -43,6 +43,28 @@ class TestWithoutBloch(unittest.TestCase):
 
 	def test_rho3(self):
 		self.assertEqual(self.data['rho3'][-1,:].tolist(), [self.ic[2]] * self.data['rho3'].shape[1])
+
+class TestDiffusionWithoutBloch(unittest.TestCase):
+
+	@classmethod
+	def setUpClass(self):
+		self.data = simulate(
+			Bloch = False,
+			Pulse = False,
+			ic = [
+				'0',
+				'-0.1',
+				'0.1+0.1*cos(x[0]*3.14/7.512)'],
+			quiet = True)
+
+	def test_rho1(self):
+		self.assertAlmostEqual(np.trapz(self.data['rho1'][0,:]), np.trapz(self.data['rho1'][-1,:]))
+
+	def test_rho2(self):
+		self.assertAlmostEqual(np.trapz(self.data['rho2'][0,:]), np.trapz(self.data['rho2'][-1,:]))
+
+	def test_rho3(self):
+		self.assertAlmostEqual(np.trapz(self.data['rho3'][0,:]), np.trapz(self.data['rho3'][-1,:]))
 
 '''
 class TestSSSolution(unittest.TestCase):
