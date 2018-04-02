@@ -22,7 +22,8 @@ def plot(
 	interval = 100,
 	filename = None,
 	frames = [0, -1],
-	time_p = 3):
+	time_p = 3,
+	subplots = False):
 
 	if rho1 is None:
 		raise ValueError('rho1 not defined')
@@ -42,24 +43,46 @@ def plot(
 
 	fig1 = plt.figure()
 
+	axes = [plt] * 3
+	if subplots:
+		axes = [
+			plt.subplot(3, 1, 1),
+			plt.subplot(3, 1, 2),
+			plt.subplot(3, 1, 3)]
+
 	lines = [
-		plt.plot([], [], 'r-', label = r'$\rho_1$'),
-		plt.plot([], [], 'b-', label = r'$\rho_2$'),
-		plt.plot([], [], 'g-', label = r'$\rho_3$')
+		axes[0].plot([], [], 'r-', label = r'$\rho_1$'),
+		axes[1].plot([], [], 'b-', label = r'$\rho_2$'),
+		axes[2].plot([], [], 'g-', label = r'$\rho_3$')
 	]
 
-	plt.legend()
+	for axis in axes:
+		axis.legend()
 
-	plt.xlim(np.min(x), np.max(x))
-	plt.ylim(
-		np.min(np.hstack([rho1, rho2, rho3])),
-		np.max(np.hstack([rho1, rho2, rho3])))
+	xlim = [np.min(x), np.max(x)]
 
-	plt.xlabel('$x$')
+	if subplots:
+		axes[0].set_title(title)
+		for (axis, flow) in zip(axes, [rho1, rho2, rho3]):
+			axis.set_xlim(*xlim)
+			ylim = [np.min(flow), np.max(flow)]
+			if ylim[0] - ylim[1] == 0:
+				ylim = [ylim[0] - 1e-9, ylim[1] + 1e-9]
+			axis.set_ylim(*ylim)
+			axis.set_xlabel('$x$')
+	else:
+		plt.title(title)
+		plt.xlim(*xlim)
+		plt.ylim(
+			np.min(np.hstack([rho1, rho2, rho3])),
+			np.max(np.hstack([rho1, rho2, rho3])))
+		plt.xlabel('$x$')
 
-	plt.title(title)
+	text = [0.95, 0.05, 't=0 s']
+	if subplots:
+		text[1] = -2.35
 
-	time_label = plt.text(0.95, 0.05, 't=0 s',
+	time_label = axes[2].text(*text,
 		horizontalalignment='right',
 		verticalalignment='baseline',
 		transform=fig1.axes[0].transAxes)
@@ -119,6 +142,9 @@ if __name__ == '__main__':
 		type = int,
 		default = 3,
 		help = 'The time precision to use.')
+	parser.add_argument('-p',
+		action = 'store_true',
+		help = 'Enable subplots')
 	args = parser.parse_args()
 	data = np.load(args.f)
 	plot(
@@ -131,4 +157,5 @@ if __name__ == '__main__':
 		interval = args.i,
 		title = args.t,
 		frames = [args.start, args.end],
-		time_p = args.n)
+		time_p = args.n,
+		subplots = args.p)
