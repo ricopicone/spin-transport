@@ -79,8 +79,8 @@ def simulate(
 	if ic is None:
 		ic = (
 			'tanh(((1 + gamma * Delta) / (gamma * (1 + Delta))) * (mu3 * Bd / (kB * Temp)))',
-			'tanh(mu2 * (grad * x[0]) / (kB * Temp))',
-			'tanh(mu3 * (grad * x[0]) / (kB * Temp))')
+			'tanh(mu2 * Bt / (kB * Temp))',
+			'tanh(mu3 * Bt / (kB * Temp))')
 
 	# Initial Conditions
 	rho_ic = Expression(ic,
