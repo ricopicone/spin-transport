@@ -69,7 +69,7 @@ def simulate(
 	rho1_n, rho2_n, rho3_n = split(rho_n)
 
 	# Set up Magnetic Field Function
-	B = Expression('grad * x[0]', grad = Grad, degree = 1)
+	B = Expression('b0 + grad * x[0]', b0 = B0, grad = Grad, degree = 1)
 
 	# Use an expression to get r
 	r = Expression('x[0]', degree = 1)
