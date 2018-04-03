@@ -92,6 +92,7 @@ def simulate(
 		Temp = temp,
 		kB = kB,
 		grad = Grad,
+		Bt = Bt,
 		degree = 1)
 	#_, rho20, rho30 = split(rho_ic)
 	rho20 = rho_ic[1]
