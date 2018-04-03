@@ -232,7 +232,7 @@ if __name__ == '__main__':
 	parser.add_argument('-L',
 		type = float,
 		help = 'The length of the mesh.',
-		default = 2e-5)
+		default = 7.5)
 	parser.add_argument('-n',
 		type = int,
 		help = 'The number of cells to use in the mesh.',
