@@ -15,7 +15,7 @@ def atanh(x): # Only good for abs(x) < 1!
 def simulate(
 	T = 0.1, # final time
 	num_steps = 50, # number of time steps
-	L = 2e-5, # The lendth of the mesh
+	L = 7.5, # The length of the mesh
 	n = 50, # The number of cells in the mesh
 	DirichletBCleft = None, # The left Dirichlet BC values
 	DirichletBCright = None, # The right Dirichlet BC values
