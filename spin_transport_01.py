@@ -15,7 +15,7 @@ def atanh(x): # Only good for abs(x) < 1!
 def simulate(
 	T = 0.1, # final time
 	num_steps = 50, # number of time steps
-	L = 7.5, # The length of the mesh
+	L = 15, # The length of the mesh
 	n = 50, # The number of cells in the mesh
 	DirichletBCleft = None, # The left Dirichlet BC values
 	DirichletBCright = None, # The right Dirichlet BC values
@@ -232,7 +232,7 @@ if __name__ == '__main__':
 	parser.add_argument('-L',
 		type = float,
 		help = 'The length of the mesh.',
-		default = 7.5)
+		default = 15)
 	parser.add_argument('-n',
 		type = int,
 		help = 'The number of cells to use in the mesh.',
