@@ -2,6 +2,7 @@ from fenics import *
 import numpy as np
 from physical_constants_etc import *
 from experimental_constants import *
+from neumann_bc_generator import *
 import argparse
 
 # Other constants
