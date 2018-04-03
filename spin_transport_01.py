@@ -68,8 +68,10 @@ def simulate(
 	rho1, rho2, rho3 = split(rho)
 	rho1_n, rho2_n, rho3_n = split(rho_n)
 
-	# Set up Magnetic Field Function
-	B = Expression('b0 + grad * x[0]', b0 = B0, grad = Grad, degree = 1)
+	# Set up Magnetic Field Function -- tilde version!
+	Bt = Expression('b0 + bd * x[0]', b0 = B0, bd = Bd, degree = 1)
+	# ... because Bt(rb) = B(r) = B0 + g*r = B0 + g*(rb/(g/Bd)) = B0 + Bd*rb
+	# ... and, as I understand, rb = x[0]
 
 	# Use an expression to get r
 	r = Expression('x[0]', degree = 1)
