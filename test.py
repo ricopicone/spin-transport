@@ -51,6 +51,7 @@ class TestDiffusionWithoutBloch(unittest.TestCase):
 		self.data = simulate(
 			Bloch = False,
 			Pulse = False,
+			Seperation = False,
 			ic = [
 				'0',
 				'-0.1',
