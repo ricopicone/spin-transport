@@ -48,13 +48,13 @@ def simulate(
 	# Setup the Dirichlet BC
 	left = lambda x, on_boundary: near(x[0], -L / 2) and on_boundary
 	right = lambda x, on_boundary: near(x[0], L / 2) and on_boundary
-	bc = []
+	bcs = []
 	try:
-		bc.append(DirichletBC(V, Constant(DirichletBCleft), left))
+		bcs.append(DirichletBC(V, Constant(DirichletBCleft), left))
 	except:
 		pass
 	try:
-		bc.append(DirichletBC(V, Constant(DirichletBCright), right))
+		bcs.append(DirichletBC(V, Constant(DirichletBCright), right))
 	except:
 		pass
 
@@ -198,8 +198,12 @@ def simulate(
 	class NLP(NonlinearProblem):
 		def F(self, b, x):
 			assemble(F, tensor=b)
+			for bc in bcs:
+				bc.apply(b, x)
 		def J(self, A, x):
 			assemble(J, tensor=A)
+			for bc in bcs:
+				bc.apply(A)
 
 	solver = PETScSNESSolver()
 	PETScOptions.set("ksp_type", "preonly")
