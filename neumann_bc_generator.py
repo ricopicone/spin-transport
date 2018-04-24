@@ -12,5 +12,9 @@ def neumann_bc(rb):
   B_here = B0+Bd*rb
   d_rho_2 = Bd*c2/(np.cosh(c2*B_here))**2
   d_rho_3 = Bd*c3/(np.cosh(c3*B_here))**2
-  print("%e %e %e" % (d_rho_1,d_rho_2,d_rho_3))
+  #print("%e %e %e" % (d_rho_1,d_rho_2,d_rho_3))
   return [d_rho_1,d_rho_2,d_rho_3]
+
+if __name__ == '__main__':
+  rb = float(input('Enter r bar: '))
+  print(neumann_bc(rb))
