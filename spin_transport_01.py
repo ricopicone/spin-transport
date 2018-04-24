@@ -143,11 +143,34 @@ def simulate(
 		F += (rho2 / tau_p) * v2 * dr \
 		  + (rho3 / tau_e) * v3 * dr
 
-	class Edge(SubDomain):
-		def inside(self, x, on_boundary):
-			return on_boundary and (near(x[0], -L/2) or near(x[0], L/2))
+	
+	tol = 1e-5
 
-	Edge().mark(FacetFunction("size_t", mesh, 0), 1)
+	'''
+	class Edge(SubDomain):
+		def __init__(self, loc):
+			self.loc = loc
+		def inside(self, x, on_boundary):
+			return on_boundry and near(x[0], self.loc, tol)
+	'''
+
+	#Edge().mark(FacetFunction("size_t", mesh), 1)
+
+	class LeftEdge(SubDomain):
+		def inside(self, x, on_boundary):
+			return on_boundary and near(x[0], -L/2, tol)
+
+	class RightEdge(SubDomain):
+		def inside(self, x, on_boundary):
+			return on_boundary and near(x[0], L/2, tol)
+
+	boundaryLeft = LeftEdge()
+	boundaryRight = RightEdge()
+	
+	boundaries = FacetFunction("size_t", mesh)
+	boundaryLeft.mark(boundaries,1)
+	boundaryRight.mark(boundaries,2)
+	ds = Measure('ds')[boundaries]
 
 	# Add the Neumann BC
 	if NeumannBC is not None:
@@ -156,6 +179,7 @@ def simulate(
 		G3 = Constant(NeumannBC[2])
 
 		F += (v1 * G1 + v2 * G2 + v3 * G3) * ds(1)
+		F += (v1 * G1 - v2 * G2 + v3 * G3) * ds(2)
 
 	# Create progress bar
 	progress = Progress('Time-stepping')
