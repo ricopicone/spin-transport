@@ -192,26 +192,6 @@ def simulate(
 	_rho2[0,:] = _rho[:,1]
 	_rho3[0,:] = _rho[:,2]
 
-	# Define the solver
-	J = derivative(F, rho)
-
-	class NLP(NonlinearProblem):
-		def F(self, b, x):
-			assemble(F, tensor=b)
-			for bc in bcs:
-				bc.apply(b, x)
-		def J(self, A, x):
-			assemble(J, tensor=A)
-			for bc in bcs:
-				bc.apply(A)
-
-	solver = PETScSNESSolver()
-	PETScOptions.set("ksp_type", "preonly")
-	PETScOptions.set("pc_type", "lu")
-	PETScOptions.set("pc_factor_mat_solver_type", "mumps")
-	PETScOptions.set("snes_atol", 1e-8)
-	solver.set_from_options()
-
 	# Time-stepping
 	_t = 0
 	for i in range(1, num_steps + 1):
@@ -221,7 +201,7 @@ def simulate(
 
 		# Solve variational problem for time step
 		try:
-			solver.solve(NLP(), rho.vector())
+			solve(F == 0, rho, bcs)
 		except RuntimeError as e:
 			if fail:
 				raise e
