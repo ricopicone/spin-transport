@@ -11,12 +11,16 @@ with matplotlib.backends.backend_pdf.PdfPages("oscillation.pdf") as pdf:
 	plt.figure()
 
 	for cells in num_cells:
-		result = simulate(
-			Bloch = False,
-			Pulse = False,
-			DirichletBCleft = dirichlet_bc(-7.5),
-			DirichletBCright = dirichlet_bc(7.5),
-			n = int(cells))
+		try:
+			result = simulate(
+				Bloch = False,
+				Pulse = False,
+				DirichletBCleft = dirichlet_bc(-7.5),
+				DirichletBCright = dirichlet_bc(7.5),
+				n = int(cells))
+		except RuntimeError as e:
+			print('n = {}'.format(int(cells)))
+			raise e
 		rho1 = result['rho1'][-1,:]
 		x = result['x']
 		plt.plot(x, rho1, label = 'n = {}'.format(int(cells)))
@@ -33,13 +37,17 @@ with matplotlib.backends.backend_pdf.PdfPages("oscillation.pdf") as pdf:
 	plt.figure()
 
 	for steps in num_steps:
-		result = simulate(
-			Bloch = False,
-			Pulse = False,
-			DirichletBCleft = dirichlet_bc(-7.5),
-			DirichletBCright = dirichlet_bc(7.5),
-			num_steps = int(steps),
-			n = 500)
+		try:
+			result = simulate(
+				Bloch = False,
+				Pulse = False,
+				DirichletBCleft = dirichlet_bc(-7.5),
+				DirichletBCright = dirichlet_bc(7.5),
+				num_steps = int(steps),
+				n = 500)
+		except RuntimeError as e:
+			print('num_steps = {}'.format(int(steps)))
+			raise e
 		rho1 = result['rho1'][-1,:]
 		x = result['x']
 		plt.plot(x, rho1, label = 'n = {}'.format(int(steps)))
