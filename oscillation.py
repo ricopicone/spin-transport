@@ -6,7 +6,7 @@ import matplotlib.backends.backend_pdf
 
 with matplotlib.backends.backend_pdf.PdfPages("oscillation.pdf") as pdf:
 
-	num_cells = np.logspace(2.5, 4.5, 5)
+	num_cells = np.logspace(2.5, 3, 2)
 
 	plt.figure()
 
