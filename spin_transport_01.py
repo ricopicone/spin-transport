@@ -2,7 +2,7 @@ from fenics import *
 import numpy as np
 from physical_constants_etc import *
 from experimental_constants import *
-#from neumann_bc_generator import *
+from bc_generator import *
 import argparse
 
 # Other constants
@@ -79,7 +79,7 @@ def simulate(
 
 	if ic is None:
 		ic = (
-			'tanh(((1 + gamma * Delta) / (gamma * (1 + Delta))) * (mu3 * Bd / (kB * Temp)))',
+			'-tanh(((1 + gamma * Delta) / (gamma * (1 + Delta))) * (mu3 * Bd / (kB * Temp)))',
 			'tanh(mu2 * Bt / (kB * Temp))',
 			'tanh(mu3 * Bt / (kB * Temp))')
 
@@ -311,16 +311,35 @@ if __name__ == '__main__':
 		metavar = ('rho1_ic', 'rho2_ic', 'rho3_ic'),
 		help = 'The Initial Conditions to use for starting the simulation.',
 		default = None)
+	parser.add_argument('--DirichletSSBC',
+		action = 'store_true',
+		help = 'Set Dirichlet Boundary Conditions to the Steady State Initial Conditions.')
+	parser.add_argument('--NeumannSSBC',
+		action = 'store_true',
+		help = 'Set Neumann Boundary Conditions to the Steady State Initial Conditions.')
 	args = parser.parse_args()
+
+	dirichlet = [
+		args.DirichletBCleft,
+		args.DirichletBCright]
+	neumann = args.NeumannBC
+
+	if args.DirichletSSBC:
+		dirichlet = [
+			dirichlet_bc(-args.L / 2.),
+			dirichlet_bc(args.L / 2.)]
+
+	if args.NeumannSSBC:
+		neumann = neumann_bc(args.L / 2.)
 	
 	data = simulate(
 		T = args.t,
 		num_steps = args.T,
 		L = args.L,
 		n = args.n,
-		NeumannBC = args.NeumannBC,
-		DirichletBCleft = args.DirichletBCleft,
-		DirichletBCright = args.DirichletBCright,
+		NeumannBC = neumann,
+		DirichletBCleft = dirichlet[0],
+		DirichletBCright = dirichlet[1],
 		Seperation = args.S,
 		Bloch = args.b,
 		Diffusion = args.d,

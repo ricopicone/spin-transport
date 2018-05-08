@@ -24,7 +24,7 @@ def dirichlet_bc(rb):
   Ω_20 = -μp*B0/(kB*temp)
   Ω_30 = -δb*μe*B0/(kB*temp)
   # corresponding rhos
-  rho_1 = -np.tanh(Ω_10/(1+δb))
+  rho_1 = np.tanh(Ω_10/(1+δb))
   rho_2 = -np.tanh(Ω_20 - 1/(1+γb*δb) * (B_here - B0)/Bd * Ω_10)
   rho_3 = -np.tanh(Ω_30/δb + γb/(1+γb*δb) * (B_here - B0)/Bd * Ω_10)
   #print("%e %e %e" % (d_rho_1,d_rho_2,d_rho_3))
