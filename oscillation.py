@@ -59,4 +59,30 @@ with matplotlib.backends.backend_pdf.PdfPages("oscillation.pdf") as pdf:
 
 	pdf.savefig(plt.gcf())
 
-	pdf.close()
+	lengths = np.linspace(7, 8, 200)
+	mag = []
+
+	plt.figure()
+
+	for l in lengths:
+		try:
+			result = simulate(
+				Bloch = False,
+				Pulse = False,
+				DirichletBCleft = dirichlet_bc(-l / 2.),
+				DirichletBCright = dirichlet_bc(l / 2.),
+				n = 700,
+				L = l)
+		except RuntimeError as e:
+			print('length = {}'.format(l))
+			raise e
+		rho1 = result['rho1'][-1,:]
+		mag.append(np.max(rho1) - np.min(rho1))
+
+	plt.semilogy(lengths, mag)
+
+	plt.title('$\\rho_1$ Oscillation Magnitude vs Mesh Length')
+	plt.xlabel('$L$')
+	plt.ylabel('Osicllation Magnitude')
+
+	pdf.savefig(plt.gcf())
