@@ -30,6 +30,8 @@ def simulate(
 	quiet = False # Suppress log output
 	):
 
+	ds = globals()['ds']
+
 	dt = T / num_steps # time step size
 
 	# Initialize data arrays
@@ -46,8 +48,8 @@ def simulate(
 	V = VectorFunctionSpace(mesh, 'CG', 1, dim = 3)
 
 	# Setup the Dirichlet BC
-	left = lambda x, on_boundary: near(x[0], -L / 2) and on_boundary
-	right = lambda x, on_boundary: near(x[0], L / 2) and on_boundary
+	left = lambda x, on_boundary: near(x[0], -L / 2.) and on_boundary
+	right = lambda x, on_boundary: near(x[0], L / 2.) and on_boundary
 	bcs = []
 	try:
 		bcs.append(DirichletBC(V, Constant(DirichletBCleft), left))
@@ -121,48 +123,39 @@ def simulate(
 
 	# Add the Seperation
 	if Seperation:
+		print('Seperation Enabled')
 		F += -((cb**2 / (1 + δb)) * ((1 - rho2**2) + Γb * δb * γb**2 * (1 - rho3**2)) * v1 * atanh(rho1)
 		  - (cb / (1 + δb) * (grad(rho2)[0] - Γb * δb * γb * grad(rho3)[0]) * v1)) * dr \
 		  + ((-cb * ((1 - rho2**2) / (1 - rho1**2)) * grad(rho1)[0]
 		  + 2 * cb * rho2 * atanh(rho1) * grad(rho2)[0]) * v2) * dr \
 		  + ((-cb * ((1 - rho3**2) / (1 - rho1**2)) * grad(rho1)[0]
 		  + 2 * cb * rho3 * atanh(rho1) * grad(rho3)[0]) * v3) * dr
-
+		
 	# Add the Diffusion
 	if Diffusion:
+		print('Diffusion Enabled')
 		F += (1 + Γb) * grad(rho1)[0] * grad(v1)[0] * dr \
 		  + grad(rho2)[0] * grad(v2)[0] * dr \
 		  + Γb * grad(rho3)[0] * grad(v3)[0] * dr
 
 	# Add the Bloch Relaxation Dynamics
 	if Bloch:
+		print('Bloch Relaxation Enabled')
 		F += -(rho20 * v2 / T1p + rho30 * v3 / T1e) * dr
 
 	# Add the Bloch Pulse Dynamics
 	if Pulse:
+		print('Bloch Pulse Dynamics Enabled')
 		F += (rho2 / tau_p) * v2 * dr \
 		  + (rho3 / tau_e) * v3 * dr
 
-	
-	tol = 1e-5
-
-	'''
-	class Edge(SubDomain):
-		def __init__(self, loc):
-			self.loc = loc
-		def inside(self, x, on_boundary):
-			return on_boundry and near(x[0], self.loc, tol)
-	'''
-
-	#Edge().mark(FacetFunction("size_t", mesh), 1)
-
 	class LeftEdge(SubDomain):
 		def inside(self, x, on_boundary):
-			return on_boundary and near(x[0], -L/2, tol)
+			return on_boundary and near(x[0], -L/2.)
 
 	class RightEdge(SubDomain):
 		def inside(self, x, on_boundary):
-			return on_boundary and near(x[0], L/2, tol)
+			return on_boundary and near(x[0], L/2.)
 
 	boundaryLeft = LeftEdge()
 	boundaryRight = RightEdge()
@@ -170,7 +163,7 @@ def simulate(
 	boundaries = FacetFunction("size_t", mesh)
 	boundaryLeft.mark(boundaries,1)
 	boundaryRight.mark(boundaries,2)
-	ds = Measure('ds')[boundaries]
+	ds = ds(subdomain_data = boundaries)
 
 	# Add the Neumann BC
 	if NeumannBC is not None:
@@ -179,7 +172,7 @@ def simulate(
 		G3 = Constant(NeumannBC[2])
 
 		F += (v1 * G1 + v2 * G2 + v3 * G3) * ds(1)
-		F += (v1 * G1 - v2 * G2 + v3 * G3) * ds(2)
+		F += (v1 * G1 - v2 * G2 - v3 * G3) * ds(2)
 
 	# Create progress bar
 	progress = Progress('Time-stepping')
