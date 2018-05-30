@@ -40,6 +40,7 @@ def simulate(
 	_rho1 = np.ndarray([num_steps + 1, n + 1])
 	_rho2 = np.ndarray([num_steps + 1, n + 1])
 	_rho3 = np.ndarray([num_steps + 1, n + 1])
+	_dx = np.gradient(x)[0]
 
 	# Define the mesh
 	mesh = IntervalMesh(n, -L/2, L/2) # A 1d mesh with n cells from 0 to L
@@ -212,19 +213,39 @@ def simulate(
 		# Update current time
 		_t += dt
 
-		# Solve variational problem for time step
-		try:
-			solver.solve(NLP(), rho.vector())
-		except RuntimeError as e:
-			if fail:
-				raise e
+		j = 0
+		while True:
+			# Solve variational problem for time step
+			try:
+				solver.solve(NLP(), rho.vector())
+			except RuntimeError as e:
+				if fail:
+					raise e
+				else:
+					print(e)
+					print('At step {}: t = {}s'.format(i, _t))
+					break
+
+			# Add the data
+			_rho = rho.vector().get_local().reshape([x.shape[0], len(rho.split())])
+
+			# If using Neumann BC iteratively fix the BC
+			if NeumannBC is not None:
+				j += 1
+				d_rho = np.gradient(_rho, _dx, axis = 0)
+				if j >= 10 or np.max(np.abs(np.array(NeumannBC) - d_rho[0,:])) < 1e-10:
+					break
+				print('Iteration {}'.format(j))
+				print('Gradient rho1: {} rho2: {} rho3: {}'.format(d_rho[0,0], d_rho[0,1], d_rho[0,2]))
+				print('BC rho1: {} rho2: {} rho3: {}'.format(*NeumannBC))
+				print('Set BC rho1: {} rho2: {} rho3: {}'.format(G1.values()[0], G2.values()[0], G3.values()[0]))
+				G1.assign(G1.values()[0] * NeumannBC[0] / d_rho[0,0])
+				G2.assign(G2.values()[0] * NeumannBC[1] / d_rho[0,1])
+				G3.assign(G3.values()[0] * NeumannBC[2] / d_rho[0,2])
+				print('New set BC rho1: {} rho2: {} rho3: {}'.format(G1.values()[0], G2.values()[0], G3.values()[0]))
 			else:
-				print(e)
-				print('At step {}: t = {}s'.format(i, _t))
 				break
 
-		# Add the data
-		_rho = rho.vector().get_local().reshape([x.shape[0], len(rho.split())])
 		_rho1[i,:] = _rho[:,0]
 		_rho2[i,:] = _rho[:,1]
 		_rho3[i,:] = _rho[:,2]
