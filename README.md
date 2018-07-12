@@ -21,42 +21,24 @@ Then [clone](https://help.github.com/articles/cloning-a-repository/) this reposi
 
 ### Workflow
 
-text
+The FEniCS docs have a section on [workflow](http://fenics.readthedocs.io/projects/containers/en/latest/work_flows.html).
+There are many ways to instantiate these good practices, but we recommend using the following command, which opens a Docker container, executes the `<python script>`, and saves the results to a local file (outside the Docker container).
 
 ```console
 fenicsproject run stable python3 <python script> <options>
 ```
 
-Run the main script
-
-```console
-fenicsproject run stable python3 spin_transport_01.py
-```
-
-The default steady state IC is derived from a system with no Bloch relaxation or pulse dynamics. To disable these effects use the `-p` and `-b` command line arguments. The number of cells in the mesh can be changed using the `-n` argument followed by the number of cells to use. The full list of possible commands can be viewed by using the `-h` argument.
-
-To plot the results
-
-```console
-python plot.py
-```
-
-Here the `-p` argument can be used enable plotting with subplots. The `-i` argument is used to set the duration to wait between showing the next timestep in ms. The `--start` and `--end` arguments are used to specify the index of the first and last timesteps to show. Again the rest of the arguments can be viewed using the `-h` option.
-
-explain
-
-The FEniCS docs have a section on [workflow](http://fenics.readthedocs.io/projects/containers/en/latest/work_flows.html).
-There are many ways to instantiate these good practices, but if you're using a \*nix system, the following may be the easiest.
+<!-- if you're using a \*nix system, the following may be the easiest.
 
 With the cloned `spin-transport` repository as your working directory, create a link in your path to **spin-transport**'s `fenics` executable bash script.
 
 
 ```shell
 ln fenics /usr/local/bin
-```
+``` -->
 
-Now a FEniCS Python script `foo.py` can be started with the command `fenics foo.py` **from the host** instead of manually starting it from a Docker container.
-This has several advantages, including that there is no need to move scripts into the container and that the complicated syntax need not be remembered.
+<!-- Now a FEniCS Python script `foo.py` can be started with the command `fenics foo.py` **from the host** instead of manually starting it from a Docker container.
+This has several advantages, including that there is no need to move scripts into the container and that the complicated syntax need not be remembered. -->
 
 ### Testing the installation
 
@@ -93,6 +75,26 @@ error_max = 1.33226762955e-15
 
 The directory `spin-transport/poisson` should have been created and should contain two files: `solution.pvd` and `solution000000.vtu`.
 These files contain the solution data.
+
+### Running a spin transport simulation
+
+The `spin_transport_01.py` script can be executed with the following command.
+
+```console
+fenicsproject run stable python3 spin_transport_01.py -p -b
+```
+
+The default steady state IC is derived from a system with no Bloch relaxation or pulse dynamics, which are disabled with the `-p` and `-b` command line options. The number of cells in the mesh can be changed using the `-n` option followed by the number of cells to use. The full list of possible commands can be viewed by using the `-h` option.
+
+### Plotting the results of a spin transport simulation
+
+Use the `plot.py` script, as follows.
+
+```console
+python3 plot.py
+```
+
+Here the `-p` option can be used enable plotting with subplots. The `-i` option is used to set the duration to wait between showing the next timestep in ms. The `--start` and `--end` options are used to specify the index of the first and last timesteps to show. The rest of the options can be viewed using the `-h` option.
 
 ### Acknowledgement
 
