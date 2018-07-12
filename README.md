@@ -27,6 +27,22 @@ text
 fenicsproject run stable python3 <python script> <options>
 ```
 
+Run the main script
+
+```console
+fenicsproject run stable python3 spin_transport_01.py
+```
+
+The default steady state IC is derived from a system with no Bloch relaxation or pulse dynamics. To disable these effects use the `-p` and `-b` command line arguments. The number of cells in the mesh can be changed using the `-n` argument followed by the number of cells to use. The full list of possible commands can be viewed by using the `-h` argument.
+
+To plot the results
+
+```console
+python plot.py
+```
+
+Here the `-p` argument can be used enable plotting with subplots. The `-i` argument is used to set the duration to wait between showing the next timestep in ms. The `--start` and `--end` arguments are used to specify the index of the first and last timesteps to show. Again the rest of the arguments can be viewed using the `-h` option.
+
 explain
 
 The FEniCS docs have a section on [workflow](http://fenics.readthedocs.io/projects/containers/en/latest/work_flows.html).
