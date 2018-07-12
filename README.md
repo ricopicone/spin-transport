@@ -21,6 +21,14 @@ Then [clone](https://help.github.com/articles/cloning-a-repository/) this reposi
 
 ### Workflow
 
+text
+
+```console
+fenicsproject run stable python3 <python script> <options>
+```
+
+explain
+
 The FEniCS docs have a section on [workflow](http://fenics.readthedocs.io/projects/containers/en/latest/work_flows.html).
 There are many ways to instantiate these good practices, but if you're using a \*nix system, the following may be the easiest.
 
