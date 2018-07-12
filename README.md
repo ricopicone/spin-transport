@@ -44,18 +44,18 @@ This has several advantages, including that there is no need to move scripts int
 
 To verify that everything is installed correctly, run the Poisson equation demo `ft01_poisson.py` ([source](https://fenicsproject.org/pub/tutorial/html/._ftut1004.html)) in your container.
 
-If you installed the `fenics` bash script per the instructions above, you can use the following command (working directory: `spin-transport`).
+If you installed the `fenicsproject` script per the instructions above, you can use the following command (working directory: `spin-transport`).
 
 
 ```console
-$ fenics ft01_poisson.py
+$ fenicsproject run stable python3 ft01_poisson.py
 ```
 
 If everything is working fine, the output should look something like the following.
 
 
 ```console
-$ fenics ft01_poisson.py
+$ fenicsproject run stable python3 ft01_poisson.py
 Calling DOLFIN just-in-time (JIT) compiler, this may take some time.
 --- Instant: compiling ---
 Calling FFC just-in-time (JIT) compiler, this may take some time.
