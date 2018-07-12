@@ -105,15 +105,9 @@ with PI [John Marohn, PhD](http://marohn.chem.cornell.edu/).
 
 This project stems from a collaboration among three institutions:
 
-%s
-  :   
-  [Cornell University](http://www.cornell.edu/),
-%s
-  :   
-  [Saint Martin's University](https://www.stmartin.edu/), and the
-%s
-  :   
-  [University of Washington](http://www.washington.edu/).
+* [Cornell University](http://www.cornell.edu/),
+* [Saint Martin's University](https://www.stmartin.edu/), and the
+* [University of Washington](http://www.washington.edu/).
 
 The lead contributor to this project is [Rico Picone, PhD](http://ricopic.one) of Saint Martin's University, co-PI on the ARO grant.
-Other contributors include [John Marohn, PhD](http://marohn.chem.cornell.edu/) (Cornell, PI), John A. Sidles, PhD (Washington), Joseph L. Garbini, PhD (Washington), and Corinne Isaac (Cornell).
+Other contributors include [John Marohn, PhD](http://marohn.chem.cornell.edu/) (Cornell, PI), John A. Sidles, PhD (Washington), Joseph L. Garbini, PhD (Washington), and Cameron Devine (Washington).
