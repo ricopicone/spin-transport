@@ -11,6 +11,12 @@ End users of this project write Python code to interface with FEniCS.
 One must first have a working installation of FEniCS.
 This README assumes the use of [Docker](https://www.docker.com/) for installation, which is documented [here](http://fenics.readthedocs.io/projects/containers/en/latest/).
 
+Install `fenicsproject` command with the following command.
+
+```console
+curl -s https://get.fenicsproject.org | bash
+```
+
 Then [clone](https://help.github.com/articles/cloning-a-repository/) this repository to the host machine.
 
 ### Workflow
